@@ -19,9 +19,7 @@ body{background:var(--bg);color:var(--wh);font-family:'Rajdhani',sans-serif;over
 ::selection{background:rgba(255,107,0,0.4)}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#000}::-webkit-scrollbar-thumb{background:var(--or)}
 
-/* ── CURSOR ── */
-.cursor{position:fixed;width:8px;height:8px;background:var(--or);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform 0.1s;mix-blend-mode:screen}
-.cursor-ring{position:fixed;width:28px;height:28px;border:1px solid rgba(255,107,0,0.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:transform 0.15s,width 0.2s,height 0.2s}
+/* ── CURSOR (disabled) ── */
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:70px;background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,107,0,0.12)}
@@ -271,9 +269,6 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
 <!-- ── MODAL EQUIPO ── -->
 <div class="modal-overlay" id="teamModal">
   <div class="modal" id="modalBox">
@@ -318,7 +313,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
     <li><a href="#noticias">Noticias</a></li>
     <li><a href="#inscripcion">Inscripción</a></li>
   </ul>
-  <a href="https://discord.gg/Ap6EXMW3X5" target="_blank" class="nav-cta">🎮 UNIRSE</a>
+  <a href="#inscripcion" class="nav-cta">🎮 UNIRSE</a>
 </nav>
 
 <!-- ── HERO ── -->
@@ -365,7 +360,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
     <div class="hero-line"></div>
     <div class="hero-desc">La liga comunitaria de Valorant más competitiva del verano. Forma tu equipo, compite semana a semana y lucha por la cima.</div>
     <div class="hero-btns">
-      <a href="https://discord.gg/Ap6EXMW3X5" target="_blank" class="btn-main">🎮 INSCRIBIRSE AHORA</a>
+      <a href="#inscripcion" class="btn-main">🎮 INSCRIBIRSE AHORA</a>
       <a href="#clasificacion" class="btn-ghost">VER LA LIGA</a>
     </div>
     <div class="hero-stats">
@@ -464,6 +459,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
       <thead>
         <tr>
           <th style="width:50px">#</th>
+          <th style="width:50px">LOGO</th>
           <th>EQUIPO</th>
           <th>PJ</th><th>V</th><th>E</th><th>D</th>
           <th>GF</th><th>GC</th><th>DIF</th>
@@ -599,6 +595,28 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
           <input type="text" id="p6" class="form-input" placeholder="Nombre#TAG">
         </div>
       </div>
+      <div class="form-group" style="margin-top:8px">
+        <label class="form-label">LOGO DEL EQUIPO</label>
+        <label class="form-label-small" style="margin-bottom:12px">SUBE EL LOGO DE TU EQUIPO (PNG, JPG — MAX 2MB)</label>
+        <div id="logo-drop" style="border:1px dashed rgba(255,107,0,0.3);background:#0a0a0a;padding:28px;text-align:center;cursor:pointer;transition:border-color 0.2s;position:relative" onclick="document.getElementById('f-logo').click()">
+          <input type="file" id="f-logo" accept="image/*" style="display:none" onchange="handleLogoChange(event)">
+          <div id="logo-preview-wrap" style="display:none;margin-bottom:12px">
+            <img id="logo-preview" style="width:80px;height:80px;object-fit:contain;border-radius:50%;border:1px solid rgba(255,107,0,0.3)">
+          </div>
+          <div id="logo-placeholder">
+            <div style="font-size:32px;margin-bottom:8px">🖼️</div>
+            <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:#444">HAGA CLIC PARA SUBIR LOGO</div>
+            <div style="font-size:12px;color:#333;margin-top:6px">PNG, JPG · Máx 2MB</div>
+          </div>
+          <div id="logo-name" style="font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--or);margin-top:8px;display:none"></div>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:8px">
+        <label class="form-label">INFORMACIÓN DEL EQUIPO <span style="color:#333;font-size:8px;font-family:'Orbitron',monospace;letter-spacing:2px">(OPCIONAL)</span></label>
+        <label class="form-label-small">CUÉNTANOS ALGO SOBRE TU EQUIPO — HISTORIA, ESTILO DE JUEGO, OBJETIVOS...</label>
+        <textarea id="f-desc" class="form-input" placeholder="Ej: Somos un equipo de amigos con 2 años compitiendo juntos. Nuestro estilo es agresivo y siempre vamos a por el duelo..." maxlength="400" rows="4" style="resize:vertical;line-height:1.6;padding-top:12px"></textarea>
+        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:#333;text-align:right;margin-top:4px"><span id="desc-count">0</span>/400</div>
+      </div>
       <div id="form-msg" style="display:none;margin-top:16px;padding:14px 20px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;text-align:center"></div>
       <button onclick="submitTeam()" class="btn-main" style="width:100%;margin-top:24px;justify-content:center;font-size:13px;clip-path:none;padding:18px">
         ✅ ENVIAR INSCRIPCIÓN
@@ -608,7 +626,29 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 </div>
 </div>
 
-<!-- ── PANEL ADMIN ── -->
+<!-- ── EQUIPOS INSCRITOS TABLE ── -->
+<div id="registered-teams-section" class="sec" style="background:var(--bg);display:none;padding-top:0">
+<div class="sec-inner reveal">
+  <div class="sec-tag">INSCRITOS</div>
+  <h2 class="sec-title" style="font-size:clamp(32px,5vw,56px)">EQUIPOS REGISTRADOS</h2>
+  <p class="sec-sub">Equipos que ya han enviado su inscripción</p>
+  <div class="table-wrap">
+    <table class="liga-table">
+      <thead>
+        <tr>
+          <th style="width:50px">#</th>
+          <th style="width:56px">LOGO</th>
+          <th>EQUIPO</th>
+          <th>CAPITÁN</th>
+          <th>PLANTILLA</th>
+          <th>FECHA</th>
+        </tr>
+      </thead>
+      <tbody id="registered-tbody"></tbody>
+    </table>
+  </div>
+</div>
+</div>
 <div id="admin-panel" class="sec" style="background:var(--bg);display:none">
 <div class="sec-inner">
   <div class="sec-tag">ORGANIZADOR</div>
@@ -802,6 +842,7 @@ TEAMS.forEach((t, i) => {
   tr.className = t.tbd ? 'tbd-row' : '';
   tr.innerHTML = `
     <td class="pos"><span>${i + 1}</span></td>
+    <td style="text-align:center">${t.tbd ? '<div style="width:32px;height:32px;border-radius:50%;background:#1a1a1a;display:inline-flex;align-items:center;justify-content:center;font-size:14px">${t.emoji}</div>' : `<img src="${t.logoUrl||''}" onerror="this.style.display='none';this.nextSibling.style.display='inline-flex'" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,107,0,0.2);${t.logoUrl?'':'display:none'}"><div style="${t.logoUrl?'display:none':'display:inline-flex'};width:32px;height:32px;border-radius:50%;background:${t.color};align-items:center;justify-content:center;font-size:14px">${t.emoji}</div>`}</td>
     <td><div class="team-cell">
       <div class="team-dot" style="background:${t.tbd ? '#2a2a2a' : t.color.replace('0.2','0.8').replace('0.3','0.8')}"></div>
       <span>${t.name}</span>
@@ -854,18 +895,6 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => obs.observe(el));
 
-// Custom cursor
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; });
-function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing); }
-animRing();
-document.querySelectorAll('a,button,.team-card:not(.tbd)').forEach(el => {
-  el.addEventListener('mouseenter', () => { ring.style.width = '50px'; ring.style.height = '50px'; cur.style.transform = 'translate(-50%,-50%) scale(1.5)'; });
-  el.addEventListener('mouseleave', () => { ring.style.width = '28px'; ring.style.height = '28px'; cur.style.transform = 'translate(-50%,-50%) scale(1)'; });
-});
-
 // Smooth nav
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
@@ -887,6 +916,102 @@ window.addEventListener('scroll', () => {
 
 // ── INSCRIPCIÓN ──
 const ADMIN_PASSWORD = 'vcl2025'; // CAMBIA ESTA CONTRASEÑA
+
+// ── LOGO HANDLER ──
+let logoBase64 = null;
+
+function handleLogoChange(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) {
+    alert('El archivo es demasiado grande. Máximo 2MB.');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    logoBase64 = ev.target.result;
+    document.getElementById('logo-preview').src = logoBase64;
+    document.getElementById('logo-preview-wrap').style.display = 'block';
+    document.getElementById('logo-placeholder').style.display = 'none';
+    document.getElementById('logo-name').style.display = 'block';
+    document.getElementById('logo-name').textContent = '✓ ' + file.name;
+    document.getElementById('logo-drop').style.borderColor = 'rgba(255,107,0,0.6)';
+  };
+  reader.readAsDataURL(file);
+}
+
+document.getElementById('f-desc').addEventListener('input', function() {
+  document.getElementById('desc-count').textContent = this.value.length;
+});
+
+// ── DISCORD WEBHOOK ──
+const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1507728917190938624/Dxbjll59PVrL80AEZGIEQRrkf3hhApKAmfXNCs1juEWXEW4amon47Zi4SeEvZh8vVH4i';
+
+async function sendDiscordNotification(entry) {
+  if (!DISCORD_WEBHOOK || DISCORD_WEBHOOK === 'TU_WEBHOOK_AQUI') return;
+  try {
+    const playerList = entry.players.map((p, i) => `\`${i === 0 ? '⭐ CAP' : `J${i+1}`}\` ${p}`).join('\n');
+    const embed = {
+      embeds: [{
+        title: `🎮 NUEVO EQUIPO INSCRITO: ${entry.team}`,
+        color: 0xFF6B00,
+        fields: [
+          { name: '👑 Capitán', value: entry.captain, inline: true },
+          { name: '📅 Fecha', value: entry.date, inline: true },
+          { name: '👥 Jugadores', value: playerList || 'Sin datos', inline: false },
+          ...(entry.desc ? [{ name: '📝 Descripción del equipo', value: entry.desc, inline: false }] : [])
+        ],
+        footer: { text: 'VCL Summer Series · Inscripción automática' },
+        thumbnail: entry.logoBase64 ? undefined : undefined
+      }]
+    };
+
+    // If there's a logo, send it as a file with the embed
+    if (entry.logoBase64) {
+      const blob = await fetch(entry.logoBase64).then(r => r.blob());
+      const formData = new FormData();
+      formData.append('payload_json', JSON.stringify(embed));
+      formData.append('file', blob, 'logo.png');
+      await fetch(DISCORD_WEBHOOK, { method: 'POST', body: formData });
+    } else {
+      await fetch(DISCORD_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(embed)
+      });
+    }
+  } catch(err) {
+    console.warn('Discord webhook error:', err);
+  }
+}
+
+// ── INSCRIBED TEAMS TABLE ──
+function renderRegisteredTeams() {
+  const teams = JSON.parse(localStorage.getItem('vcl_teams') || '[]');
+  let section = document.getElementById('registered-teams-section');
+  if (!section) return;
+  if (teams.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = 'block';
+  const tbody = document.getElementById('registered-tbody');
+  tbody.innerHTML = teams.map((t, i) => `
+    <tr>
+      <td class="pos"><span>${i + 1}</span></td>
+      <td style="text-align:center">
+        ${t.logoBase64
+          ? `<img src="${t.logoBase64}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,107,0,0.3)">`
+          : `<div style="width:36px;height:36px;border-radius:50%;background:rgba(255,107,0,0.15);display:inline-flex;align-items:center;justify-content:center;font-size:18px">🎮</div>`
+        }
+      </td>
+      <td><div class="team-cell"><span style="font-weight:700">${t.team}</span></div></td>
+      <td style="font-family:'Orbitron',monospace;font-size:11px;color:var(--or)">${t.captain}</td>
+      <td style="font-size:13px;color:#555">${t.players.length} jugador${t.players.length !== 1 ? 'es' : ''}</td>
+      <td style="font-family:'Orbitron',monospace;font-size:9px;color:#333">${t.date}</td>
+    </tr>
+  `).join('');
+}
 
 function submitTeam() {
   const team = document.getElementById('f-team').value.trim();
@@ -922,11 +1047,16 @@ function submitTeam() {
   const entry = {
     team, captain,
     players: [p1, p2, p3, p4, p5, p6].filter(Boolean),
+    desc: document.getElementById('f-desc').value.trim(),
+    logoBase64: logoBase64 || null,
     date: new Date().toLocaleString('es-ES')
   };
 
   existing.push(entry);
   localStorage.setItem('vcl_teams', JSON.stringify(existing));
+
+  // Send Discord notification
+  sendDiscordNotification(entry);
 
   msg.style.display = 'block';
   msg.style.background = 'rgba(0,200,80,0.08)';
@@ -935,10 +1065,23 @@ function submitTeam() {
   msg.textContent = '✅ INSCRIPCIÓN ENVIADA CORRECTAMENTE — ¡BUENA SUERTE!';
 
   // Clear form
-  ['f-team','f-captain','p1','p2','p3','p4','p5','p6'].forEach(id => document.getElementById(id).value = '');
+  ['f-team','f-captain','p1','p2','p3','p4','p5','p6','f-desc'].forEach(id => document.getElementById(id).value = '');
+  logoBase64 = null;
+  document.getElementById('logo-preview-wrap').style.display = 'none';
+  document.getElementById('logo-placeholder').style.display = 'block';
+  document.getElementById('logo-name').style.display = 'none';
+  document.getElementById('logo-drop').style.borderColor = '';
+  document.getElementById('desc-count').textContent = '0';
+  document.getElementById('f-logo').value = '';
+
+  // Refresh registered teams table
+  renderRegisteredTeams();
 }
 
 // ── ADMIN ──
+// Initialize registered teams table on load
+renderRegisteredTeams();
+
 let adminOpen = false;
 
 function toggleAdmin() {
@@ -980,15 +1123,22 @@ function renderAdmin() {
   list.innerHTML = teams.map((t, i) => `
     <div class="admin-entry">
       <div class="admin-entry-header">
-        <div>
-          <div class="admin-team-name">${t.team}</div>
-          <div class="admin-captain">CAPITÁN: ${t.captain}</div>
+        <div style="display:flex;align-items:center;gap:16px">
+          ${t.logoBase64
+            ? `<img src="${t.logoBase64}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,107,0,0.3);flex-shrink:0">`
+            : `<div style="width:52px;height:52px;border-radius:50%;background:rgba(255,107,0,0.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🎮</div>`
+          }
+          <div>
+            <div class="admin-team-name">${t.team}</div>
+            <div class="admin-captain">CAPITÁN: ${t.captain}</div>
+          </div>
         </div>
         <button onclick="deleteTeam(${i})" style="background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.2);color:#e8192c;padding:8px 16px;font-family:Orbitron,monospace;font-size:9px;letter-spacing:1px;cursor:pointer">✕ ELIMINAR</button>
       </div>
       <div class="admin-players">
         ${t.players.map((p,j) => `<div class="admin-player-tag">${j===0?'⭐ ':''}${p}</div>`).join('')}
       </div>
+      ${t.desc ? `<div style="font-size:13px;color:#555;margin-top:10px;line-height:1.6;border-left:2px solid rgba(255,107,0,0.3);padding-left:12px">${t.desc}</div>` : ''}
       <div class="admin-date">Inscrito: ${t.date}</div>
     </div>
   `).join('');
@@ -999,12 +1149,14 @@ function deleteTeam(i) {
   teams.splice(i, 1);
   localStorage.setItem('vcl_teams', JSON.stringify(teams));
   renderAdmin();
+  renderRegisteredTeams();
 }
 
 function clearAll() {
   if (confirm('¿Borrar TODAS las inscripciones?')) {
     localStorage.removeItem('vcl_teams');
     renderAdmin();
+    renderRegisteredTeams();
   }
 }
 
