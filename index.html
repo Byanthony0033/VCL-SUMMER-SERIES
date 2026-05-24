@@ -267,11 +267,25 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 .partido-winner{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;text-align:center;margin-top:4px}
 
 
+/* ── HAMBURGER MENU ── */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:1px solid rgba(255,107,0,0.2);background:none;transition:border-color 0.2s}
+.nav-hamburger:hover{border-color:rgba(255,107,0,0.5)}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--or);transition:all 0.3s}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(8,8,8,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,107,0,0.2);z-index:499;padding:20px 0;flex-direction:column}
+.nav-mobile-menu.open{display:flex}
+.nav-mobile-menu a{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:3px;color:#555;text-decoration:none;text-transform:uppercase;padding:16px 28px;border-bottom:1px solid rgba(255,107,0,0.06);transition:color 0.2s,background 0.2s}
+.nav-mobile-menu a:hover{color:var(--or);background:rgba(255,107,0,0.04)}
+.nav-mobile-menu .mobile-cta{background:var(--grad);color:#fff;margin:20px 28px 8px;padding:14px 28px;text-align:center;border-bottom:none;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:900px){
   nav{padding:0 20px}
   .nav-links{display:none}
+  .nav-hamburger{display:flex}
   .wrap,.sec-inner{padding:0 20px}
   .footer-top{grid-template-columns:1fr 1fr;gap:40px}
   .liga-info-grid{grid-template-columns:1fr}
@@ -284,6 +298,22 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
   .modal-stats-row{flex-wrap:wrap}
   .modal-stat{min-width:50%}
 }
+
+/* ── ANIMACIONES ── */
+@keyframes vcl-ripple{0%{transform:scale(0);opacity:0.45}100%{transform:scale(5);opacity:0}}
+.vcl-ripple-span{position:absolute;border-radius:50%;width:60px;height:60px;margin-top:-30px;margin-left:-30px;background:rgba(255,255,255,0.2);animation:vcl-ripple 0.55s linear;pointer-events:none}
+.btn-main,.nav-cta{position:relative;overflow:hidden}
+.btn-main:hover,.nav-cta:hover{box-shadow:0 0 22px rgba(255,107,0,0.35)}
+.team-card:not(.tbd)::before{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,154,0,0.07) 50%,transparent 70%);transform:translateX(-110%);transition:transform 0.45s ease;pointer-events:none}
+.team-card:not(.tbd):hover::before{transform:translateX(110%)}
+.team-card:active{transform:scale(0.98)!important}
+.news-card{transition:transform 0.25s,box-shadow 0.25s}
+.news-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.5),0 0 0 1px rgba(255,107,0,0.15)}
+.player-row{transition:background 0.18s,transform 0.18s}
+.player-row:hover{background:rgba(255,107,0,0.07);transform:translateX(3px)}
+.modal{transition:transform 0.3s cubic-bezier(0.34,1.4,0.64,1)}
+.vcl-cnt-tick{transform:scale(1.1)!important}
+#cnt-dias,#cnt-horas,#cnt-minutos,#cnt-segs{display:inline-block;transition:transform 0.1s}
 </style>
 </head>
 <body>
@@ -311,6 +341,12 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
       <div class="modal-players" id="m-players"></div>
       <div class="modal-section-title">SOBRE EL EQUIPO</div>
       <div class="modal-desc" id="m-desc"></div>
+      <div id="m-history-block" style="display:none">
+        <div class="modal-section-title" style="margin-top:20px">FORMA RECIENTE</div>
+        <div id="m-form" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px"></div>
+        <div class="modal-section-title">ÚLTIMOS PARTIDOS</div>
+        <div id="m-matches" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -333,7 +369,20 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
     <li><a href="#inscripcion">Inscripción</a></li>
   </ul>
   <a href="#inscripcion" class="nav-cta">🎮 UNIRSE</a>
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<!-- MOBILE MENU -->
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="#inicio" onclick="closeMobileMenu()">Inicio</a>
+  <a href="#equipos" onclick="closeMobileMenu()">Equipos</a>
+  <a href="#clasificacion" onclick="closeMobileMenu()">Liga</a>
+  <a href="#premios" onclick="closeMobileMenu()">Premios</a>
+  <a href="#noticias" onclick="closeMobileMenu()">Noticias</a>
+  <a href="#inscripcion" onclick="closeMobileMenu()">Inscripción</a>
+  <a href="#inscripcion" class="mobile-cta" onclick="closeMobileMenu()">🎮 UNIRSE</a>
+</div>
 
 <!-- ── HERO ── -->
 <div id="inicio" class="hero">
@@ -375,7 +424,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
     <div class="hero-eyebrow">VALORANT COMMUNITY LEAGUE · ESPAÑA</div>
     <img class="hero-logo" src="https://media.discordapp.net/attachments/1506786249233530910/1507316701706846208/VCL_SUMMER_SERIES_2.png?ex=6a12c712&is=6a117592&hm=445a75d6f35719674b5fa8d587812b2c1b656112f4799b06e8a2340d23e387ca&=&format=webp&quality=lossless&width=960&height=960" alt="VCL Summer Series">
     <div class="hero-title">VCL SUMMER</div>
-    <div class="hero-title2">Series 2025</div>
+    <div class="hero-title2">Series 2026</div>
     <div class="hero-line"></div>
     <div class="hero-desc">La liga comunitaria de Valorant más competitiva del verano. Forma tu equipo, compite semana a semana y lucha por la cima.</div>
     <div class="hero-btns">
@@ -390,6 +439,28 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
       <div class="stat"><div class="stat-num">50€</div><div class="stat-label">PREMIO</div></div>
       <div class="stat-divider"></div>
       <div class="stat"><div class="stat-num">?</div><div class="stat-label">JORNADAS</div></div>
+    </div>
+    <!-- COUNTDOWN -->
+    <div id="hero-countdown" style="display:none;margin-top:48px;text-align:center;opacity:0;animation:fadeUp 0.8s ease 1.6s forwards">
+      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:rgba(255,107,0,0.7);margin-bottom:16px" id="cnt-hero-label">INICIO DE LA LIGA</div>
+      <div style="display:flex;gap:0;justify-content:center;border:1px solid rgba(255,107,0,0.15)">
+        <div style="padding:20px 28px;border-right:1px solid rgba(255,107,0,0.15);background:rgba(255,107,0,0.04)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="cnt-dias">00</div>
+          <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#444;margin-top:4px">DÍAS</div>
+        </div>
+        <div style="padding:20px 28px;border-right:1px solid rgba(255,107,0,0.15);background:rgba(255,107,0,0.04)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="cnt-horas">00</div>
+          <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#444;margin-top:4px">HORAS</div>
+        </div>
+        <div style="padding:20px 28px;border-right:1px solid rgba(255,107,0,0.15);background:rgba(255,107,0,0.04)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="cnt-minutos">00</div>
+          <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#444;margin-top:4px">MIN</div>
+        </div>
+        <div style="padding:20px 28px;background:rgba(255,107,0,0.04)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="cnt-segs">00</div>
+          <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#444;margin-top:4px">SEG</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -488,10 +559,12 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
       <tbody id="liga-tbody"></tbody>
     </table>
   </div>
+  <div id="mvp-section" style="display:none;margin-top:48px">
+    <div class="sec-tag" style="margin-bottom:20px">DESTACADOS</div>
+    <div id="mvp-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px"></div>
+  </div>
 </div>
-</div>
-
-<!-- ── PREMIOS ── -->
+</div> -->
 <div id="premios" class="sec">
 <div class="sec-inner reveal">
   <div class="sec-tag">RECOMPENSAS</div>
@@ -534,11 +607,12 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
   <div class="sec-tag">ACTUALIDAD</div>
   <h2 class="sec-title">ÚLTIMAS NOTICIAS</h2>
   <p class="sec-sub">Mantente al día con todo lo que pasa en la VCL</p>
-  <!-- EDITAR: Añade/cambia noticias aquí -->
-  <div class="news-grid">
+  <!-- NOTICIAS DINÁMICAS -->
+  <div class="news-grid" id="news-grid">
+    <!-- se rellena desde JS -->
     <div class="news-card">
       <span class="news-badge badge-orange">ANUNCIO</span>
-      <div class="news-date">MAYO 2025</div>
+      <div class="news-date">MAYO 2026</div>
       <div class="news-title">¡ARRANCA LA VCL SUMMER SERIES!</div>
       <p class="news-text">Abrimos inscripciones para la primera edición de la VCL Summer Series. Únete al Discord para registrar tu equipo antes de que se llenen las plazas.</p>
     </div>
@@ -678,6 +752,8 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
   <div style="display:flex;gap:0;margin-bottom:40px;border:1px solid rgba(255,107,0,0.2)">
     <button onclick="adminTab('inscripciones')" id="tab-inscripciones" class="admin-tab active-tab">📋 INSCRIPCIONES</button>
     <button onclick="adminTab('jornadas')" id="tab-jornadas" class="admin-tab">📅 JORNADAS</button>
+    <button onclick="adminTab('noticias')" id="tab-noticias" class="admin-tab">📰 NOTICIAS</button>
+    <button onclick="adminTab('contador')" id="tab-contador" class="admin-tab">⏱ CONTADOR</button>
   </div>
 
   <!-- Inscripciones panel -->
@@ -699,6 +775,55 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
       <button onclick="crearJornada()" class="btn-main" style="clip-path:none;padding:14px 28px;white-space:nowrap">+ CREAR JORNADA</button>
     </div>
     <div id="jornadas-list" style="display:flex;flex-direction:column;gap:24px"></div>
+  </div>
+
+  <!-- Noticias panel -->
+  <div id="admin-noticias" style="display:none">
+    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:32px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div>
+          <label class="form-label" style="margin-bottom:8px;display:block">TIPO DE BADGE</label>
+          <select id="n-badge" class="form-input" style="cursor:pointer">
+            <option value="badge-orange">ANUNCIO</option>
+            <option value="badge-blue">FORMATO</option>
+            <option value="badge-green">INSCRIPCIÓN</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label" style="margin-bottom:8px;display:block">FECHA</label>
+          <input type="text" id="n-date" class="form-input" placeholder="Ej: JUNIO 2026">
+        </div>
+      </div>
+      <div style="margin-bottom:16px">
+        <label class="form-label" style="margin-bottom:8px;display:block">TÍTULO</label>
+        <input type="text" id="n-title" class="form-input" placeholder="Título de la noticia" maxlength="60">
+      </div>
+      <div style="margin-bottom:20px">
+        <label class="form-label" style="margin-bottom:8px;display:block">TEXTO</label>
+        <textarea id="n-text" class="form-input" rows="3" placeholder="Texto de la noticia..." maxlength="300" style="resize:vertical;line-height:1.6;padding-top:12px"></textarea>
+      </div>
+      <button onclick="addNoticia()" class="btn-main" style="clip-path:none;padding:14px 28px">+ PUBLICAR NOTICIA</button>
+    </div>
+    <div id="noticias-admin-list" style="display:flex;flex-direction:column;gap:12px"></div>
+  </div>
+
+  <!-- Contador panel -->
+  <div id="admin-contador" style="display:none">
+    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;max-width:500px">
+      <div class="form-group">
+        <label class="form-label" style="margin-bottom:8px;display:block">TEXTO DEL CONTADOR</label>
+        <input type="text" id="cnt-label" class="form-input" placeholder="Ej: INICIO DE LA LIGA" maxlength="40">
+      </div>
+      <div class="form-group">
+        <label class="form-label" style="margin-bottom:8px;display:block">FECHA Y HORA DE INICIO</label>
+        <input type="datetime-local" id="cnt-date" class="form-input">
+      </div>
+      <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">
+        <button onclick="saveContador()" class="btn-main" style="clip-path:none;padding:14px 28px">💾 GUARDAR</button>
+        <button onclick="clearContador()" style="background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;padding:14px 24px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:1px;cursor:pointer">🗑 QUITAR</button>
+      </div>
+      <div id="cnt-msg" style="display:none;margin-top:16px;padding:12px;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-align:center;background:rgba(0,200,80,0.08);border:1px solid rgba(0,200,80,0.3);color:#00c850">✅ GUARDADO</div>
+    </div>
   </div>
 
 </div>
@@ -758,7 +883,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
   <div class="footer-divider"></div>
   <div class="footer-bottom">
     <!-- EDITAR: Tu nombre/organización -->
-    <div class="footer-copy">© 2025 VCL SUMMER SERIES · TODOS LOS DERECHOS RESERVADOS</div>
+    <div class="footer-copy">© 2026 VCL SUMMER SERIES · TODOS LOS DERECHOS RESERVADOS</div>
     <div class="footer-socials">
       <a href="https://discord.gg/Ap6EXMW3X5" target="_blank" class="social-btn" title="Discord">
         <svg width="16" height="16" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
@@ -768,24 +893,82 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 </div>
 </footer>
 
-<script>
+<script type="module">
+// ── FIREBASE ──
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, get, onValue, push, remove, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCsJPBoo6gqNBqYhu6rAIAt13VZP7gh0WY",
+  authDomain: "vcl-summer-series.firebaseapp.com",
+  databaseURL: "https://vcl-summer-series-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "vcl-summer-series",
+  storageBucket: "vcl-summer-series.firebasestorage.app",
+  messagingSenderId: "432858495293",
+  appId: "1:432858495293:web:4cc7edada59b6495d2ed54"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// ── HELPERS ──
+async function dbGet(path) {
+  const snap = await get(ref(db, path));
+  return snap.exists() ? snap.val() : null;
+}
+async function dbSet(path, val) { await set(ref(db, path), val); }
+async function dbPush(path, val) { await push(ref(db, path), val); }
+async function dbRemove(path) { await remove(ref(db, path)); }
+function dbListen(path, cb) { onValue(ref(db, path), snap => cb(snap.exists() ? snap.val() : null)); }
+
 // ──────────────────────────────────────
 // DATOS ESTÁTICOS DE EQUIPOS (hardcoded)
 // ──────────────────────────────────────
 const TEAMS_STATIC = [];
 
-// Colores para equipos inscritos
 const TEAM_COLORS = [
   'rgba(255,107,0,0.2)','rgba(232,25,44,0.2)','rgba(255,0,110,0.2)',
   'rgba(88,101,242,0.2)','rgba(0,200,80,0.2)','rgba(255,220,0,0.2)',
   'rgba(100,200,255,0.2)','rgba(180,0,255,0.2)'
 ];
 
-// ── GET ALL TEAMS (static + registered) ──
+// ── ESTADO GLOBAL (cargado desde Firebase) ──
+let ALL_TEAMS = [];    // equipos inscritos
+let ALL_STATS = {};    // stats por equipo
+let ALL_JORNADAS = []; // jornadas
+
+// ── ESCUCHAR CAMBIOS EN TIEMPO REAL ──
+dbListen('vcl_teams', val => {
+  ALL_TEAMS = val ? Object.values(val) : [];
+  buildTeamsGrid();
+  buildLigaTable();
+  renderRegisteredTeams();
+  if (document.getElementById('admin-panel').style.display !== 'none') renderAdmin();
+});
+dbListen('vcl_stats', val => {
+  ALL_STATS = val || {};
+  buildTeamsGrid();
+  buildLigaTable();
+});
+dbListen('vcl_jornadas', val => {
+  ALL_JORNADAS = val ? Object.values(val) : [];
+  // guardar keys para poder eliminar
+  ALL_JORNADAS_KEYS = val ? Object.keys(val) : [];
+  if (document.getElementById('admin-panel').style.display !== 'none') renderJornadas();
+  renderMVPs();
+});
+dbListen('vcl_noticias', val => {
+  renderNoticiasPublic(val ? Object.values(val).reverse() : null);
+});
+dbListen('vcl_contador', val => {
+  loadContador(val);
+});
+
+let ALL_JORNADAS_KEYS = [];
+
+// ── GET ALL TEAMS ──
 function getAllTeams() {
-  const registered = JSON.parse(localStorage.getItem('vcl_teams') || '[]');
-  const stats = JSON.parse(localStorage.getItem('vcl_stats') || '{}');
-  const regTeams = registered.map((t, i) => ({
+  const regTeams = ALL_TEAMS.map((t, i) => ({
     id: 'reg_' + i,
     tbd: false,
     emoji: '🎮',
@@ -793,16 +976,15 @@ function getAllTeams() {
     name: t.team,
     tag: 'INSCRITO',
     captain: t.captain,
-    wins: stats[t.team]?.wins ?? 0,
-    losses: stats[t.team]?.losses ?? 0,
-    pts: stats[t.team]?.pts ?? 0,
-    wr: stats[t.team]?.wins ? Math.round(stats[t.team].wins / (stats[t.team].wins + stats[t.team].losses) * 100) + '%' : '—',
+    wins: ALL_STATS[t.team]?.wins ?? 0,
+    losses: ALL_STATS[t.team]?.losses ?? 0,
+    pts: ALL_STATS[t.team]?.pts ?? 0,
+    wr: ALL_STATS[t.team]?.wins ? Math.round(ALL_STATS[t.team].wins / (ALL_STATS[t.team].wins + ALL_STATS[t.team].losses) * 100) + '%' : '—',
     desc: t.desc || 'Sin descripción.',
     logoBase64: t.logoBase64 || null,
-    players: t.players.map((p, j) => ({ name: p, role: j === 0 ? 'Capitán' : 'Jugador', rank: '—', rankClass: '' })),
+    players: (t.players || []).map((p, j) => ({ name: p, role: j === 0 ? 'Capitán' : 'Jugador', rank: '—', rankClass: '' })),
     date: t.date
   }));
-  // Sort by pts desc
   regTeams.sort((a, b) => (b.pts || 0) - (a.pts || 0));
   return [...regTeams, ...TEAMS_STATIC];
 }
@@ -822,14 +1004,12 @@ function buildTeamsGrid() {
     const logoHTML = t.logoBase64
       ? `<img src="${t.logoBase64}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,107,0,0.3)">`
       : `<div class="t-logo" style="background:${t.color}">${t.emoji}</div>`;
-    card.innerHTML = `
-      ${logoHTML}
+    card.innerHTML = `${logoHTML}
       <div class="t-info">
         <div class="t-name">${t.name}</div>
         <div class="t-meta">${t.tag}${t.captain ? ' · CAP: ' + t.captain : ''}</div>
       </div>
-      ${!t.tbd ? '<div class="t-badge">VER</div><div class="t-arrow">›</div>' : ''}
-    `;
+      ${!t.tbd ? '<div class="t-badge">VER</div><div class="t-arrow">›</div>' : ''}`;
     if (!t.tbd) card.addEventListener('click', () => openModal(t));
     grid.appendChild(card);
   });
@@ -857,17 +1037,13 @@ function buildLigaTable() {
     tr.innerHTML = `
       <td class="pos"><span>${i + 1}</span></td>
       <td style="text-align:center">${logoCell}</td>
-      <td><div class="team-cell">
-        <div class="team-dot" style="background:${dotColor}"></div>
-        <span>${t.name}</span>
-      </div></td>
+      <td><div class="team-cell"><div class="team-dot" style="background:${dotColor}"></div><span>${t.name}</span></div></td>
       <td>${t.tbd ? '—' : (t.wins + t.losses)}</td>
       <td>${t.tbd ? '—' : t.wins}</td>
       <td>—</td>
       <td>${t.tbd ? '—' : t.losses}</td>
       <td>—</td><td>—</td><td>—</td>
-      <td style="color:${t.tbd ? '#2a2a2a' : 'var(--or)'}">${t.tbd ? '—' : t.pts}</td>
-    `;
+      <td style="color:${t.tbd ? '#2a2a2a' : 'var(--or)'}">${t.tbd ? '—' : t.pts}</td>`;
     if (!t.tbd) tr.addEventListener('click', () => openModal(t));
     tbody.appendChild(tr);
   });
@@ -880,9 +1056,8 @@ function openModal(t) {
     logoEl.innerHTML = `<img src="${t.logoBase64}" style="width:64px;height:64px;border-radius:50%;object-fit:cover">`;
     logoEl.style.background = 'none';
   } else {
-    logoEl.textContent = t.emoji;
-    logoEl.style.background = t.color;
     logoEl.innerHTML = t.emoji;
+    logoEl.style.background = t.color;
   }
   document.getElementById('m-name').textContent = t.name;
   document.getElementById('m-tag').textContent = t.captain ? `CAPITÁN: ${t.captain}` : (t.tag || '');
@@ -899,13 +1074,30 @@ function openModal(t) {
     t.players.forEach((p, idx) => {
       const isCapt = idx === 0 || p.role === 'Capitán';
       pl.innerHTML += `<div class="player-row">
-        <div>
-          <div class="player-name">${isCapt ? '⭐ ' : ''}${p.name}</div>
-          <div class="player-role">${p.role || 'Jugador'}</div>
-        </div>
+        <div><div class="player-name">${isCapt ? '⭐ ' : ''}${p.name}</div><div class="player-role">${p.role || 'Jugador'}</div></div>
         ${p.rank && p.rank !== '—' ? `<div class="player-rank ${p.rankClass||''}">${p.rank}</div>` : ''}
       </div>`;
     });
+  }
+  // Historial
+  const history = getMatchHistory(t.name);
+  const histBlock = document.getElementById('m-history-block');
+  if (histBlock) {
+    if (history.length === 0) { histBlock.style.display = 'none'; }
+    else {
+      histBlock.style.display = 'block';
+      const recent = history.slice(-5);
+      document.getElementById('m-form').innerHTML = recent.map(m =>
+        `<div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;border:2px solid ${m.won?'rgba(0,200,80,0.5)':'rgba(232,25,44,0.4)'};background:${m.won?'rgba(0,200,80,0.1)':'rgba(232,25,44,0.08)'};color:${m.won?'#00c850':'#e8192c'}" title="${m.jornada} vs ${m.rival}">${m.won?'V':'D'}</div>`
+      ).join('');
+      document.getElementById('m-matches').innerHTML = history.slice().reverse().slice(0,5).map(m =>
+        `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,107,0,0.03);border:1px solid rgba(255,107,0,0.08)">
+          <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;color:#444">${m.jornada.toUpperCase()}</div>
+          <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;color:#aaa">VS ${m.rival}</div>
+          <div style="font-family:'Orbitron',monospace;font-size:9px;padding:3px 10px;border:1px solid ${m.won?'rgba(0,200,80,0.4)':'rgba(232,25,44,0.3)'};color:${m.won?'#00c850':'#e8192c'}">${m.won?'VICTORIA':'DERROTA'}</div>
+        </div>`
+      ).join('');
+    }
   }
   document.getElementById('teamModal').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -914,10 +1106,9 @@ function closeModal() {
   document.getElementById('teamModal').classList.remove('open');
   document.body.style.overflow = '';
 }
-document.getElementById('teamModal').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); } });
+document.getElementById('teamModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+window.closeModal = closeModal;
 
 // Initial render
 buildTeamsGrid();
@@ -937,29 +1128,26 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// Nav active state on scroll
+// Nav active state
 const sections = document.querySelectorAll('[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', () => {
   let cur = '';
   sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
-  navLinks.forEach(a => {
-    a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--or)' : '';
-  });
+  navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--or)' : ''; });
 });
 
-// ── INSCRIPCIÓN ──
-const ADMIN_PASSWORD = 'vcl2025';
+// ── CONTRASEÑA ADMIN ──
+const ADMIN_PASSWORD = 'vcl2026';
 
 // ── LOGO HANDLER ──
 let logoBase64 = null;
-
 function handleLogoChange(e) {
   const file = e.target.files[0];
   if (!file) return;
-  if (file.size > 2 * 1024 * 1024) { alert('El archivo es demasiado grande. Máximo 2MB.'); return; }
+  if (file.size > 2 * 1024 * 1024) { alert('Máximo 2MB.'); return; }
   const reader = new FileReader();
-  reader.onload = function(ev) {
+  reader.onload = ev => {
     logoBase64 = ev.target.result;
     document.getElementById('logo-preview').src = logoBase64;
     document.getElementById('logo-preview-wrap').style.display = 'block';
@@ -970,6 +1158,7 @@ function handleLogoChange(e) {
   };
   reader.readAsDataURL(file);
 }
+window.handleLogoChange = handleLogoChange;
 
 document.getElementById('f-desc').addEventListener('input', function() {
   document.getElementById('desc-count').textContent = this.value.length;
@@ -977,61 +1166,46 @@ document.getElementById('f-desc').addEventListener('input', function() {
 
 // ── DISCORD WEBHOOK ──
 const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1507728917190938624/Dxbjll59PVrL80AEZGIEQRrkf3hhApKAmfXNCs1juEWXEW4amon47Zi4SeEvZh8vVH4i';
-
 async function sendDiscordNotification(entry) {
-  if (!DISCORD_WEBHOOK || DISCORD_WEBHOOK === 'TU_WEBHOOK_AQUI') return;
+  if (!DISCORD_WEBHOOK) return;
   try {
     const playerList = entry.players.map((p, i) => `\`${i === 0 ? '⭐ CAP' : 'J'+(i+1)}\` ${p}`).join('\n');
-    const embed = {
-      embeds: [{
-        title: `🎮 NUEVO EQUIPO INSCRITO: ${entry.team}`,
-        color: 0xFF6B00,
-        fields: [
-          { name: '👑 Capitán', value: entry.captain, inline: true },
-          { name: '📅 Fecha', value: entry.date, inline: true },
-          { name: '👥 Jugadores', value: playerList || 'Sin datos', inline: false },
-          ...(entry.desc ? [{ name: '📝 Descripción', value: entry.desc, inline: false }] : [])
-        ],
-        footer: { text: 'VCL Summer Series · Inscripción automática' }
-      }]
-    };
-    if (entry.logoBase64) {
-      const blob = await fetch(entry.logoBase64).then(r => r.blob());
-      const formData = new FormData();
-      formData.append('payload_json', JSON.stringify(embed));
-      formData.append('file', blob, 'logo.png');
-      await fetch(DISCORD_WEBHOOK, { method: 'POST', body: formData });
-    } else {
-      await fetch(DISCORD_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(embed) });
-    }
-  } catch(err) { console.warn('Discord webhook error:', err); }
+    const embed = { embeds: [{ title: `🎮 NUEVO EQUIPO: ${entry.team}`, color: 0xFF6B00,
+      fields: [
+        { name: '👑 Capitán', value: entry.captain, inline: true },
+        { name: '📅 Fecha', value: entry.date, inline: true },
+        { name: '👥 Jugadores', value: playerList || 'Sin datos' },
+        ...(entry.desc ? [{ name: '📝 Descripción', value: entry.desc }] : [])
+      ], footer: { text: 'VCL Summer Series' }
+    }]};
+    await fetch(DISCORD_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(embed) });
+  } catch(e) { console.warn('Discord webhook:', e); }
 }
 
-// ── REGISTERED TEAMS TABLE (below form) ──
+// ── REGISTERED TEAMS TABLE ──
 function renderRegisteredTeams() {
-  const teams = JSON.parse(localStorage.getItem('vcl_teams') || '[]');
   const section = document.getElementById('registered-teams-section');
   if (!section) return;
-  if (teams.length === 0) { section.style.display = 'none'; return; }
+  if (ALL_TEAMS.length === 0) { section.style.display = 'none'; return; }
   section.style.display = 'block';
   const tbody = document.getElementById('registered-tbody');
-  tbody.innerHTML = teams.map((t, i) => `
-    <tr style="cursor:pointer" onclick="openModal(getAllTeams().find(x=>x.name==='${t.team.replace(/'/g,"\\'")}'))">
+  tbody.innerHTML = ALL_TEAMS.map((t, i) => `
+    <tr style="cursor:pointer">
       <td class="pos"><span>${i + 1}</span></td>
       <td style="text-align:center">
         ${t.logoBase64
           ? `<img src="${t.logoBase64}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,107,0,0.3)">`
           : `<div style="width:36px;height:36px;border-radius:50%;background:rgba(255,107,0,0.15);display:inline-flex;align-items:center;justify-content:center;font-size:18px">🎮</div>`}
       </td>
-      <td><div class="team-cell"><span style="font-weight:700">${t.team}</span></div></td>
+      <td><span style="font-weight:700">${t.team}</span></td>
       <td style="font-family:'Orbitron',monospace;font-size:11px;color:var(--or)">${t.captain}</td>
-      <td style="font-size:13px;color:#555">${t.players.length} jugador${t.players.length !== 1 ? 'es' : ''}</td>
+      <td style="font-size:13px;color:#555">${(t.players||[]).length} jugador${(t.players||[]).length!==1?'es':''}</td>
       <td style="font-family:'Orbitron',monospace;font-size:9px;color:#333">${t.date}</td>
-    </tr>
-  `).join('');
+    </tr>`).join('');
 }
 
-function submitTeam() {
+// ── SUBMIT INSCRIPCIÓN ──
+async function submitTeam() {
   const team = document.getElementById('f-team').value.trim();
   const captain = document.getElementById('f-captain').value.trim();
   const p1 = document.getElementById('p1').value.trim();
@@ -1043,72 +1217,55 @@ function submitTeam() {
   const msg = document.getElementById('form-msg');
 
   if (!team || !captain || !p1 || !p2 || !p3 || !p4 || !p5) {
-    msg.style.display = 'block';
-    msg.style.background = 'rgba(232,25,44,0.1)';
-    msg.style.border = '1px solid rgba(232,25,44,0.3)';
-    msg.style.color = '#e8192c';
+    msg.style.cssText = 'display:block;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
     msg.textContent = '⚠ RELLENA TODOS LOS CAMPOS OBLIGATORIOS';
     return;
   }
-
-  const existing = JSON.parse(localStorage.getItem('vcl_teams') || '[]');
-  if (existing.some(t => t.team.toLowerCase() === team.toLowerCase())) {
-    msg.style.display = 'block';
-    msg.style.background = 'rgba(232,25,44,0.1)';
-    msg.style.border = '1px solid rgba(232,25,44,0.3)';
-    msg.style.color = '#e8192c';
+  if (ALL_TEAMS.some(t => t.team.toLowerCase() === team.toLowerCase())) {
+    msg.style.cssText = 'display:block;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
     msg.textContent = '⚠ YA EXISTE UN EQUIPO CON ESE NOMBRE';
     return;
   }
 
   const entry = {
     team, captain,
-    players: [p1, p2, p3, p4, p5, p6].filter(Boolean),
+    players: [p1,p2,p3,p4,p5,p6].filter(Boolean),
     desc: document.getElementById('f-desc').value.trim(),
     logoBase64: logoBase64 || null,
     date: new Date().toLocaleString('es-ES')
   };
 
-  existing.push(entry);
-  localStorage.setItem('vcl_teams', JSON.stringify(existing));
-  sendDiscordNotification(entry);
-
-  msg.style.display = 'block';
-  msg.style.background = 'rgba(0,200,80,0.08)';
-  msg.style.border = '1px solid rgba(0,200,80,0.3)';
-  msg.style.color = '#00c850';
-  msg.textContent = '✅ INSCRIPCIÓN ENVIADA CORRECTAMENTE — ¡BUENA SUERTE!';
-
-  ['f-team','f-captain','p1','p2','p3','p4','p5','p6','f-desc'].forEach(id => document.getElementById(id).value = '');
-  logoBase64 = null;
-  document.getElementById('logo-preview-wrap').style.display = 'none';
-  document.getElementById('logo-placeholder').style.display = 'block';
-  document.getElementById('logo-name').style.display = 'none';
-  document.getElementById('logo-drop').style.borderColor = '';
-  document.getElementById('desc-count').textContent = '0';
-  document.getElementById('f-logo').value = '';
-
-  renderRegisteredTeams();
-  buildTeamsGrid();
-  buildLigaTable();
+  try {
+    await dbPush('vcl_teams', entry);
+    sendDiscordNotification(entry);
+    msg.style.cssText = 'display:block;background:rgba(0,200,80,0.08);border:1px solid rgba(0,200,80,0.3);color:#00c850;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
+    msg.textContent = '✅ INSCRIPCIÓN ENVIADA — ¡BUENA SUERTE!';
+    ['f-team','f-captain','p1','p2','p3','p4','p5','p6','f-desc'].forEach(id => document.getElementById(id).value = '');
+    logoBase64 = null;
+    document.getElementById('logo-preview-wrap').style.display = 'none';
+    document.getElementById('logo-placeholder').style.display = 'block';
+    document.getElementById('logo-name').style.display = 'none';
+    document.getElementById('logo-drop').style.borderColor = '';
+    document.getElementById('desc-count').textContent = '0';
+    document.getElementById('f-logo').value = '';
+  } catch(e) {
+    msg.style.cssText = 'display:block;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
+    msg.textContent = '❌ ERROR AL ENVIAR. INTÉNTALO DE NUEVO.';
+  }
 }
+window.submitTeam = submitTeam;
 
 // ── ADMIN ──
-renderRegisteredTeams();
-
 let adminOpen = false;
-
 function toggleAdmin() {
   const modal = document.getElementById('admin-modal');
   modal.style.display = adminOpen ? 'none' : 'flex';
   adminOpen = !adminOpen;
 }
-
 function closeAdminModal() {
   document.getElementById('admin-modal').style.display = 'none';
   adminOpen = false;
 }
-
 function checkAdmin() {
   const pass = document.getElementById('admin-pass').value;
   if (pass === ADMIN_PASSWORD) {
@@ -1123,77 +1280,80 @@ function checkAdmin() {
     setTimeout(() => document.getElementById('admin-pass').style.borderColor = '', 1000);
   }
 }
-
-document.getElementById('admin-pass').addEventListener('keydown', e => {
-  if (e.key === 'Enter') checkAdmin();
-});
+window.toggleAdmin = toggleAdmin;
+window.closeAdminModal = closeAdminModal;
+window.checkAdmin = checkAdmin;
+document.getElementById('admin-pass').addEventListener('keydown', e => { if (e.key === 'Enter') checkAdmin(); });
 
 function adminTab(tab) {
-  document.getElementById('admin-inscripciones').style.display = tab === 'inscripciones' ? 'block' : 'none';
-  document.getElementById('admin-jornadas').style.display = tab === 'jornadas' ? 'block' : 'none';
-  document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active-tab'));
-  document.getElementById('tab-' + tab).classList.add('active-tab');
+  ['inscripciones','jornadas','noticias','contador'].forEach(t => {
+    const el = document.getElementById('admin-' + t);
+    if (el) el.style.display = 'none';
+    const btn = document.getElementById('tab-' + t);
+    if (btn) btn.classList.remove('active-tab');
+  });
+  const panel = document.getElementById('admin-' + tab);
+  if (panel) panel.style.display = 'block';
+  const tabBtn = document.getElementById('tab-' + tab);
+  if (tabBtn) tabBtn.classList.add('active-tab');
   if (tab === 'jornadas') renderJornadas();
+  if (tab === 'noticias') renderNoticiasAdmin();
+  if (tab === 'contador') {
+    dbGet('vcl_contador').then(val => {
+      if (val) {
+        if (document.getElementById('cnt-label')) document.getElementById('cnt-label').value = val.label || '';
+        if (document.getElementById('cnt-date')) document.getElementById('cnt-date').value = val.date || '';
+      }
+    });
+  }
 }
+window.adminTab = adminTab;
 
 function renderAdmin() {
-  const teams = JSON.parse(localStorage.getItem('vcl_teams') || '[]');
   const list = document.getElementById('admin-list');
-  if (teams.length === 0) {
+  if (ALL_TEAMS.length === 0) {
     list.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:40px">SIN INSCRIPCIONES AÚN</div>';
     return;
   }
-  list.innerHTML = teams.map((t, i) => `
+  list.innerHTML = ALL_TEAMS.map((t, i) => `
     <div class="admin-entry">
       <div class="admin-entry-header">
         <div style="display:flex;align-items:center;gap:16px">
           ${t.logoBase64
             ? `<img src="${t.logoBase64}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,107,0,0.3);flex-shrink:0">`
-            : `<div style="width:52px;height:52px;border-radius:50%;background:rgba(255,107,0,0.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🎮</div>`
-          }
-          <div>
-            <div class="admin-team-name">${t.team}</div>
-            <div class="admin-captain">CAPITÁN: ${t.captain}</div>
-          </div>
+            : `<div style="width:52px;height:52px;border-radius:50%;background:rgba(255,107,0,0.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🎮</div>`}
+          <div><div class="admin-team-name">${t.team}</div><div class="admin-captain">CAPITÁN: ${t.captain}</div></div>
         </div>
         <button onclick="deleteTeam(${i})" style="background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.2);color:#e8192c;padding:8px 16px;font-family:Orbitron,monospace;font-size:9px;letter-spacing:1px;cursor:pointer">✕ ELIMINAR</button>
       </div>
-      <div class="admin-players">
-        ${t.players.map((p,j) => `<div class="admin-player-tag">${j===0?'⭐ ':''}${p}</div>`).join('')}
-      </div>
+      <div class="admin-players">${(t.players||[]).map((p,j) => `<div class="admin-player-tag">${j===0?'⭐ ':''}${p}</div>`).join('')}</div>
       ${t.desc ? `<div style="font-size:13px;color:#555;margin-top:10px;line-height:1.6;border-left:2px solid rgba(255,107,0,0.3);padding-left:12px">${t.desc}</div>` : ''}
       <div class="admin-date">Inscrito: ${t.date}</div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-function deleteTeam(i) {
-  const teams = JSON.parse(localStorage.getItem('vcl_teams') || '[]');
-  teams.splice(i, 1);
-  localStorage.setItem('vcl_teams', JSON.stringify(teams));
-  renderAdmin();
-  renderRegisteredTeams();
-  buildTeamsGrid();
-  buildLigaTable();
+async function deleteTeam(i) {
+  if (!confirm('¿Eliminar este equipo?')) return;
+  const snap = await get(ref(db, 'vcl_teams'));
+  if (!snap.exists()) return;
+  const keys = Object.keys(snap.val());
+  await dbRemove('vcl_teams/' + keys[i]);
 }
+window.deleteTeam = deleteTeam;
 
-function clearAll() {
-  if (confirm('¿Borrar TODAS las inscripciones?')) {
-    localStorage.removeItem('vcl_teams');
-    localStorage.removeItem('vcl_stats');
-    renderAdmin();
-    renderRegisteredTeams();
-    buildTeamsGrid();
-    buildLigaTable();
-  }
+async function clearAll() {
+  if (!confirm('¿Borrar TODOS los datos?')) return;
+  await dbRemove('vcl_teams');
+  await dbRemove('vcl_stats');
+  await dbRemove('vcl_jornadas');
 }
+window.clearAll = clearAll;
 
 function exportCSV() {
-  const teams = JSON.parse(localStorage.getItem('vcl_teams') || '[]');
-  if (!teams.length) return;
+  if (!ALL_TEAMS.length) return;
   let csv = 'Equipo,Capitán,J1,J2,J3,J4,J5,Suplente,Fecha\n';
-  teams.forEach(t => {
-    const ps = [...t.players, ...Array(6).fill('')].slice(0,6);
+  ALL_TEAMS.forEach(t => {
+    const ps = [...(t.players||[]), ...Array(6).fill('')].slice(0,6);
     csv += `"${t.team}","${t.captain}",${ps.map(p=>`"${p}"`).join(',')},"${t.date}"\n`;
   });
   const a = document.createElement('a');
@@ -1201,43 +1361,31 @@ function exportCSV() {
   a.download = 'VCL_inscripciones.csv';
   a.click();
 }
+window.exportCSV = exportCSV;
 
 // ── JORNADAS ──
-function getJornadas() { return JSON.parse(localStorage.getItem('vcl_jornadas') || '[]'); }
-function saveJornadas(j) { localStorage.setItem('vcl_jornadas', JSON.stringify(j)); }
-function getStats() { return JSON.parse(localStorage.getItem('vcl_stats') || '{}'); }
-function saveStats(s) { localStorage.setItem('vcl_stats', JSON.stringify(s)); }
-
-function crearJornada() {
+async function crearJornada() {
   const nombre = document.getElementById('jornada-nombre').value.trim();
   if (!nombre) { alert('Escribe un nombre para la jornada.'); return; }
-  const teams = JSON.parse(localStorage.getItem('vcl_teams') || '[]');
-  if (teams.length < 2) { alert('Necesitas al menos 2 equipos inscritos para crear jornadas.'); return; }
-  const jornadas = getJornadas();
-
-  // Generate round-robin matchups for all teams
-  const nombres = teams.map(t => t.team);
+  if (ALL_TEAMS.length < 2) { alert('Necesitas al menos 2 equipos.'); return; }
+  const nombres = ALL_TEAMS.map(t => t.team);
   const partidos = [];
-  for (let i = 0; i < nombres.length; i++) {
-    for (let j = i + 1; j < nombres.length; j++) {
-      partidos.push({ local: nombres[i], visitante: nombres[j], map1L: null, map1V: null, map2L: null, map2V: null, map3L: null, map3V: null, winner: null, played: false });
-    }
-  }
-
-  jornadas.push({ nombre, status: 'pendiente', partidos });
-  saveJornadas(jornadas);
+  for (let i = 0; i < nombres.length; i++)
+    for (let j = i + 1; j < nombres.length; j++)
+      partidos.push({ local: nombres[i], visitante: nombres[j], winner: null, mvp: null, played: false });
+  await dbPush('vcl_jornadas', { nombre, status: 'pendiente', partidos });
   document.getElementById('jornada-nombre').value = '';
-  renderJornadas();
 }
+window.crearJornada = crearJornada;
 
 function renderJornadas() {
-  const jornadas = getJornadas();
   const container = document.getElementById('jornadas-list');
-  if (jornadas.length === 0) {
-    container.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:40px">SIN JORNADAS AÚN — CREA LA PRIMERA</div>';
+  if (!container) return;
+  if (ALL_JORNADAS.length === 0) {
+    container.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:40px">SIN JORNADAS — CREA LA PRIMERA</div>';
     return;
   }
-  container.innerHTML = jornadas.map((j, ji) => `
+  container.innerHTML = ALL_JORNADAS.map((j, ji) => `
     <div class="jornada-card">
       <div class="jornada-header">
         <div class="jornada-title">📅 ${j.nombre}</div>
@@ -1252,104 +1400,239 @@ function renderJornadas() {
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        ${j.partidos.map((p, pi) => `
+        ${(j.partidos||[]).map((p, pi) => `
           <div class="partido-row">
-            <div class="partido-equipo local">
-              ${p.local}
-              ${p.winner === p.local ? '<span style="color:#00c850;font-family:Orbitron,monospace;font-size:8px;margin-left:6px">✓ WIN</span>' : ''}
-            </div>
+            <div class="partido-equipo local" style="color:${p.winner===p.local?'var(--or)':p.winner?'#333':'var(--wh)'}">${p.local}</div>
             <div style="text-align:center">
-              <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#444;margin-bottom:6px">BO3 · MAP1 &nbsp; MAP2 &nbsp; MAP3</div>
-              <div style="display:flex;align-items:center;gap:6px;justify-content:center">
-                <input type="number" min="0" max="13" value="${p.map1L??''}" placeholder="—" onchange="updatePartido(${ji},${pi},'map1L',this.value)" style="width:38px;background:#111;border:1px solid rgba(255,107,0,0.2);color:var(--or);font-family:'Bebas Neue',sans-serif;font-size:20px;text-align:center;padding:4px;outline:none">
-                <span style="color:#333;font-size:16px">·</span>
-                <input type="number" min="0" max="13" value="${p.map1V??''}" placeholder="—" onchange="updatePartido(${ji},${pi},'map1V',this.value)" style="width:38px;background:#111;border:1px solid rgba(255,107,0,0.2);color:var(--or);font-family:'Bebas Neue',sans-serif;font-size:20px;text-align:center;padding:4px;outline:none">
-                &nbsp;
-                <input type="number" min="0" max="13" value="${p.map2L??''}" placeholder="—" onchange="updatePartido(${ji},${pi},'map2L',this.value)" style="width:38px;background:#111;border:1px solid rgba(255,107,0,0.2);color:var(--or);font-family:'Bebas Neue',sans-serif;font-size:20px;text-align:center;padding:4px;outline:none">
-                <span style="color:#333;font-size:16px">·</span>
-                <input type="number" min="0" max="13" value="${p.map2V??''}" placeholder="—" onchange="updatePartido(${ji},${pi},'map2V',this.value)" style="width:38px;background:#111;border:1px solid rgba(255,107,0,0.2);color:var(--or);font-family:'Bebas Neue',sans-serif;font-size:20px;text-align:center;padding:4px;outline:none">
-                &nbsp;
-                <input type="number" min="0" max="13" value="${p.map3L??''}" placeholder="—" onchange="updatePartido(${ji},${pi},'map3L',this.value)" style="width:38px;background:#111;border:1px solid rgba(255,107,0,0.3);color:#555;font-family:'Bebas Neue',sans-serif;font-size:20px;text-align:center;padding:4px;outline:none">
-                <span style="color:#333;font-size:16px">·</span>
-                <input type="number" min="0" max="13" value="${p.map3V??''}" placeholder="—" onchange="updatePartido(${ji},${pi},'map3V',this.value)" style="width:38px;background:#111;border:1px solid rgba(255,107,0,0.3);color:#555;font-family:'Bebas Neue',sans-serif;font-size:20px;text-align:center;padding:4px;outline:none">
+              <div class="partido-score">
+                <input type="number" min="0" max="99" value="${p.scoreL??''}" placeholder="0" onchange="guardarResultado(${ji},${pi},'scoreL',this.value)">
+                <span style="color:#444;font-size:20px;padding:0 4px">—</span>
+                <input type="number" min="0" max="99" value="${p.scoreV??''}" placeholder="0" onchange="guardarResultado(${ji},${pi},'scoreV',this.value)">
               </div>
-              ${p.winner ? `<div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:#00c850;margin-top:6px">GANADOR: ${p.winner}</div>` : ''}
+              ${p.winner ? `<div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:#00c850;margin-top:4px">✓ ${p.winner}</div>` : ''}
+              <div style="margin-top:8px;display:flex;align-items:center;gap:6px;justify-content:center">
+                <span style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#555">⭐ MVP</span>
+                <input type="text" value="${p.mvp||''}" placeholder="Riot ID" onchange="updateMVP(${ji},${pi},this.value)" style="background:#111;border:1px solid rgba(255,220,0,0.2);color:#ffdc00;font-family:'Orbitron',monospace;font-size:9px;padding:4px 8px;outline:none;width:130px">
+              </div>
             </div>
-            <div class="partido-equipo visitante">
-              ${p.visitante}
-              ${p.winner === p.visitante ? '<span style="color:#00c850;font-family:Orbitron,monospace;font-size:8px;margin-left:6px">✓ WIN</span>' : ''}
-            </div>
-          </div>
-        `).join('')}
+            <div class="partido-equipo visitante" style="color:${p.winner===p.visitante?'var(--or)':p.winner?'#333':'var(--wh)'}">${p.visitante}</div>
+          </div>`).join('')}
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-function updatePartido(ji, pi, field, val) {
-  const jornadas = getJornadas();
-  const p = jornadas[ji].partidos[pi];
-  p[field] = val === '' ? null : parseInt(val);
-
-  // Determine BO3 winner (first to win 2 maps)
-  let winsL = 0, winsV = 0;
-  if (p.map1L !== null && p.map1V !== null) { if (p.map1L > p.map1V) winsL++; else if (p.map1V > p.map1L) winsV++; }
-  if (p.map2L !== null && p.map2V !== null) { if (p.map2L > p.map2V) winsL++; else if (p.map2V > p.map2L) winsV++; }
-  if (p.map3L !== null && p.map3V !== null) { if (p.map3L > p.map3V) winsL++; else if (p.map3V > p.map3L) winsV++; }
-
-  const prevWinner = p.winner;
-  if (winsL >= 2) { p.winner = p.local; p.played = true; }
-  else if (winsV >= 2) { p.winner = p.visitante; p.played = true; }
-  else { p.winner = null; p.played = false; }
-
-  saveJornadas(jornadas);
-
-  // Update stats
-  const stats = getStats();
-  // Remove previous result if changed
-  if (prevWinner && prevWinner !== p.winner) {
-    const prevLoser = prevWinner === p.local ? p.visitante : p.local;
-    if (stats[prevWinner]) { stats[prevWinner].wins = Math.max(0, (stats[prevWinner].wins||0) - 1); stats[prevWinner].pts = Math.max(0, (stats[prevWinner].pts||0) - 3); }
-    if (stats[prevLoser]) { stats[prevLoser].losses = Math.max(0, (stats[prevLoser].losses||0) - 1); }
-  }
-  if (p.winner && p.winner !== prevWinner) {
-    const loser = p.winner === p.local ? p.visitante : p.local;
-    if (!stats[p.winner]) stats[p.winner] = { wins: 0, losses: 0, pts: 0 };
-    if (!stats[loser]) stats[loser] = { wins: 0, losses: 0, pts: 0 };
-    stats[p.winner].wins = (stats[p.winner].wins || 0) + 1;
-    stats[p.winner].pts = (stats[p.winner].pts || 0) + 3;
-    stats[loser].losses = (stats[loser].losses || 0) + 1;
-  }
-  saveStats(stats);
-  buildLigaTable();
-  renderJornadas();
-}
-
-function cambiarStatusJornada(ji, status) {
-  const jornadas = getJornadas();
-  jornadas[ji].status = status;
-  saveJornadas(jornadas);
-  renderJornadas();
-}
-
-function eliminarJornada(ji) {
-  if (!confirm('¿Eliminar esta jornada y sus resultados?')) return;
-  const jornadas = getJornadas();
-  // Revert stats for this jornada
-  const stats = getStats();
-  jornadas[ji].partidos.forEach(p => {
-    if (p.winner) {
-      const loser = p.winner === p.local ? p.visitante : p.local;
-      if (stats[p.winner]) { stats[p.winner].wins = Math.max(0,(stats[p.winner].wins||0)-1); stats[p.winner].pts = Math.max(0,(stats[p.winner].pts||0)-3); }
-      if (stats[loser]) { stats[loser].losses = Math.max(0,(stats[loser].losses||0)-1); }
+async function guardarResultado(ji, pi, field, val) {
+  const key = ALL_JORNADAS_KEYS[ji];
+  if (!key) return;
+  const snap = await get(ref(db, `vcl_jornadas/${key}/partidos/${pi}`));
+  if (!snap.exists()) return;
+  const partido = snap.val();
+  partido[field] = parseInt(val) || 0;
+  const sL = parseInt(partido.scoreL) || 0;
+  const sV = parseInt(partido.scoreV) || 0;
+  if (partido.scoreL !== undefined && partido.scoreV !== undefined && partido.scoreL !== null && partido.scoreV !== null) {
+    if (sL > sV) partido.winner = partido.local;
+    else if (sV > sL) partido.winner = partido.visitante;
+    else partido.winner = null;
+    partido.played = sL > 0 || sV > 0;
+    // Actualizar stats
+    if (partido.winner) {
+      const statsSnap = await get(ref(db, 'vcl_stats'));
+      const stats = statsSnap.exists() ? statsSnap.val() : {};
+      const loser = partido.winner === partido.local ? partido.visitante : partido.local;
+      if (!stats[partido.winner]) stats[partido.winner] = { wins:0, losses:0, pts:0 };
+      if (!stats[loser]) stats[loser] = { wins:0, losses:0, pts:0 };
+      stats[partido.winner].wins = (stats[partido.winner].wins||0) + 1;
+      stats[partido.winner].pts = (stats[partido.winner].pts||0) + 3;
+      stats[loser].losses = (stats[loser].losses||0) + 1;
+      await dbSet('vcl_stats', stats);
     }
-  });
-  saveStats(stats);
-  jornadas.splice(ji, 1);
-  saveJornadas(jornadas);
-  renderJornadas();
-  buildLigaTable();
+  }
+  await dbSet(`vcl_jornadas/${key}/partidos/${pi}`, partido);
 }
+window.guardarResultado = guardarResultado;
+
+async function cambiarStatusJornada(ji, status) {
+  const key = ALL_JORNADAS_KEYS[ji];
+  if (key) await dbSet(`vcl_jornadas/${key}/status`, status);
+}
+window.cambiarStatusJornada = cambiarStatusJornada;
+
+async function eliminarJornada(ji) {
+  if (!confirm('¿Eliminar esta jornada?')) return;
+  const key = ALL_JORNADAS_KEYS[ji];
+  if (key) await dbRemove(`vcl_jornadas/${key}`);
+}
+window.eliminarJornada = eliminarJornada;
+
+async function updateMVP(ji, pi, val) {
+  const key = ALL_JORNADAS_KEYS[ji];
+  if (key) await dbSet(`vcl_jornadas/${key}/partidos/${pi}/mvp`, val.trim());
+}
+window.updateMVP = updateMVP;
+
+// ── HISTORIAL POR EQUIPO ──
+function getMatchHistory(teamName) {
+  const matches = [];
+  ALL_JORNADAS.forEach(j => {
+    (j.partidos||[]).forEach(p => {
+      if ((p.local === teamName || p.visitante === teamName) && p.winner) {
+        matches.push({ jornada: j.nombre, rival: p.local === teamName ? p.visitante : p.local, won: p.winner === teamName });
+      }
+    });
+  });
+  return matches;
+}
+
+// ── MVP PÚBLICO ──
+function renderMVPs() {
+  const section = document.getElementById('mvp-section');
+  const list = document.getElementById('mvp-list');
+  if (!section || !list) return;
+  const mvps = [];
+  ALL_JORNADAS.forEach(j => {
+    (j.partidos||[]).forEach(p => {
+      if (p.mvp && p.winner) mvps.push({ jornada: j.nombre, player: p.mvp, winner: p.winner });
+    });
+  });
+  if (mvps.length === 0) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+  list.innerHTML = mvps.slice().reverse().slice(0,6).map(m => `
+    <div style="background:var(--card2);border:1px solid rgba(255,220,0,0.2);padding:20px 24px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);position:relative">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,rgba(255,220,0,0.6),transparent)"></div>
+      <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:rgba(255,220,0,0.6);margin-bottom:8px">⭐ MVP · ${m.jornada.toUpperCase()}</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:#fff">${m.player}</div>
+      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;color:#555;margin-top:4px">${m.winner} <span style="color:rgba(0,200,80,0.7)">WIN</span></div>
+    </div>`).join('');
+}
+
+// ── NOTICIAS ──
+const BADGE_LABELS = { 'badge-orange':'ANUNCIO','badge-blue':'FORMATO','badge-green':'INSCRIPCIÓN' };
+
+function renderNoticiasPublic(noticias) {
+  if (!noticias) return;
+  const grid = document.getElementById('news-grid');
+  if (!grid) return;
+  grid.innerHTML = noticias.map(n => `
+    <div class="news-card">
+      <span class="news-badge ${n.badge}">${BADGE_LABELS[n.badge]||'NOTICIA'}</span>
+      <div class="news-date">${n.date}</div>
+      <div class="news-title">${n.title}</div>
+      <p class="news-text">${n.text}</p>
+    </div>`).join('');
+}
+
+function renderNoticiasAdmin() {
+  const snap_noticias = [];
+  dbGet('vcl_noticias').then(val => {
+    const list = document.getElementById('noticias-admin-list');
+    if (!list) return;
+    const noticias = val ? Object.entries(val) : [];
+    if (noticias.length === 0) {
+      list.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:40px">SIN NOTICIAS AÚN</div>';
+      return;
+    }
+    list.innerHTML = noticias.reverse().map(([key, n]) => `
+      <div style="background:var(--card2);border:1px solid rgba(255,107,0,0.1);padding:20px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+        <div>
+          <span class="news-badge ${n.badge}" style="display:inline-block;margin-bottom:8px">${BADGE_LABELS[n.badge]}</span>
+          <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#555;margin-bottom:4px">${n.date}</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px">${n.title}</div>
+          <div style="font-size:13px;color:#555;margin-top:4px">${n.text}</div>
+        </div>
+        <button onclick="deleteNoticia('${key}')" style="background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.2);color:#e8192c;padding:6px 14px;font-family:Orbitron,monospace;font-size:9px;letter-spacing:1px;cursor:pointer;flex-shrink:0">✕</button>
+      </div>`).join('');
+  });
+}
+
+async function addNoticia() {
+  const badge = document.getElementById('n-badge').value;
+  const date = document.getElementById('n-date').value.trim();
+  const title = document.getElementById('n-title').value.trim();
+  const text = document.getElementById('n-text').value.trim();
+  if (!title || !text) { alert('Rellena título y texto.'); return; }
+  await dbPush('vcl_noticias', { badge, date: date || new Date().toLocaleDateString('es-ES',{month:'long',year:'numeric'}).toUpperCase(), title, text, ts: Date.now() });
+  document.getElementById('n-title').value = '';
+  document.getElementById('n-text').value = '';
+  document.getElementById('n-date').value = '';
+  renderNoticiasAdmin();
+}
+window.addNoticia = addNoticia;
+
+async function deleteNoticia(key) {
+  await dbRemove('vcl_noticias/' + key);
+  renderNoticiasAdmin();
+}
+window.deleteNoticia = deleteNoticia;
+
+// ── CONTADOR ──
+function loadContador(data) {
+  if (!data || !data.date) return;
+  if (new Date(data.date).getTime() <= Date.now()) return;
+  const el = document.getElementById('hero-countdown');
+  const lbl = document.getElementById('cnt-hero-label');
+  if (!el || !lbl) return;
+  lbl.textContent = data.label || 'INICIO DE LA LIGA';
+  el.style.display = 'block';
+  if (window._cntI) clearInterval(window._cntI);
+  let prevS = -1;
+  window._cntI = setInterval(() => {
+    const diff = new Date(data.date).getTime() - Date.now();
+    if (diff <= 0) { clearInterval(window._cntI); el.style.display = 'none'; return; }
+    const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000),
+          m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+    const segsEl = document.getElementById('cnt-segs');
+    if (segsEl && s !== prevS) { prevS=s; segsEl.classList.add('vcl-cnt-tick'); setTimeout(()=>segsEl.classList.remove('vcl-cnt-tick'),130); }
+    const d1=document.getElementById('cnt-dias'),h1=document.getElementById('cnt-horas'),m1=document.getElementById('cnt-minutos');
+    if(d1)d1.textContent=String(d).padStart(2,'0');
+    if(h1)h1.textContent=String(h).padStart(2,'0');
+    if(m1)m1.textContent=String(m).padStart(2,'0');
+    if(segsEl)segsEl.textContent=String(s).padStart(2,'0');
+  }, 1000);
+}
+
+async function saveContador() {
+  const label = document.getElementById('cnt-label').value.trim();
+  const date = document.getElementById('cnt-date').value;
+  if (!date) { alert('Elige una fecha.'); return; }
+  await dbSet('vcl_contador', { label, date });
+  const msg = document.getElementById('cnt-msg');
+  if (msg) { msg.style.display='block'; setTimeout(()=>msg.style.display='none',2000); }
+}
+window.saveContador = saveContador;
+
+async function clearContador() {
+  await dbRemove('vcl_contador');
+  if (window._cntI) clearInterval(window._cntI);
+  const el = document.getElementById('hero-countdown');
+  if (el) el.style.display = 'none';
+}
+window.clearContador = clearContador;
+
+// ── MOBILE MENU ──
+function toggleMobileMenu() {
+  document.getElementById('nav-mobile-menu').classList.toggle('open');
+  document.getElementById('nav-hamburger').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('nav-mobile-menu').classList.remove('open');
+  document.getElementById('nav-hamburger').classList.remove('open');
+}
+window.toggleMobileMenu = toggleMobileMenu;
+window.closeMobileMenu = closeMobileMenu;
+
+// ── ANIMACIONES ──
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.btn-main, .nav-cta');
+  if (!btn) return;
+  const span = document.createElement('span');
+  span.className = 'vcl-ripple-span';
+  const rect = btn.getBoundingClientRect();
+  span.style.left = (e.clientX - rect.left) + 'px';
+  span.style.top  = (e.clientY - rect.top)  + 'px';
+  btn.appendChild(span);
+  setTimeout(() => span.remove(), 580);
+});
 
 </script>
 </body>
