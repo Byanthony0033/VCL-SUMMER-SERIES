@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6GZBE3C61P"></script>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -21,25 +21,29 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --or:#FF6B00;--or2:#FF9A00;--red:#E8192C;--mg:#FF006E;--pk:#FF4D8D;
-  --bg:#080808;--bg2:#0e0e0e;--card:#121212;--card2:#181818;
-  --wh:#FFFFFF;--off:#ccc;--gr:#555;
+  --bg:#050506;--bg2:#0b0c10;--card:#101116;--card2:#171821;
+  --wh:#f5eee6;--off:#b5a89e;--gr:#2f2823;--muted:#b8aca3;--muted2:#8f8279;
   --grad:linear-gradient(135deg,#FF9A00 0%,#FF6B00 40%,#E8192C 70%,#FF006E 100%);
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--wh);font-family:'Rajdhani',sans-serif;overflow-x:hidden}
+body{background:
+  radial-gradient(circle at top,rgba(255,107,0,0.16) 0%,transparent 28%),
+  radial-gradient(circle at 85% 12%,rgba(232,25,44,0.12) 0%,transparent 20%),
+  linear-gradient(180deg,#08080a 0%,#050506 55%,#020203 100%);
+  color:var(--wh);font-family:'Rajdhani',sans-serif;overflow-x:hidden}
 ::selection{background:rgba(255,107,0,0.4)}
-::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#000}::-webkit-scrollbar-thumb{background:var(--or)}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#121217}::-webkit-scrollbar-thumb{background:var(--or)}
 
 /* ── CURSOR (disabled) ── */
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:70px;background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,107,0,0.12)}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:70px;background:rgba(7,8,11,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,107,0,0.16)}
 .nav-brand{display:flex;align-items:center;gap:14px}
 .nav-brand img{display:none}
 .nav-brand-text{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
-.nav-brand-sub{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#444;margin-top:1px}
+.nav-brand-sub{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:var(--muted2);margin-top:1px}
 .nav-links{display:flex;gap:36px;list-style:none}
-.nav-links a{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:#555;text-decoration:none;text-transform:uppercase;transition:color 0.2s;position:relative}
+.nav-links a{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--or);transform:scaleX(0);transition:transform 0.2s}
 .nav-links a:hover{color:var(--or)}
 .nav-links a:hover::after{transform:scaleX(1)}
@@ -53,7 +57,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .hero-horizon{position:absolute;bottom:30%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,154,0,0.6),rgba(255,107,0,0.8),rgba(232,25,44,0.6),transparent)}
 .hero-grid{position:absolute;bottom:0;left:0;right:0;height:35%;overflow:hidden}
 .hero-grid svg{width:100%;height:100%}
-.hero-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 20%,rgba(8,8,8,0.7) 80%)}
+.hero-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,0) 20%,rgba(5,5,6,0.72) 82%)}
 .hero-vignette2{position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(transparent,var(--bg))}
 .hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
 .hero-eyebrow{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:6px;color:rgba(255,107,0,0.8);margin-bottom:24px;opacity:0;animation:fadeUp 1s ease 0.2s forwards}
@@ -62,7 +66,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,12vw,140px);line-height:0.9;letter-spacing:6px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:fadeUp 1s ease 0.4s forwards}
 .hero-title2{font-family:'Permanent Marker',cursive;font-size:clamp(32px,5vw,60px);color:var(--wh);letter-spacing:3px;margin-top:4px;opacity:0;animation:fadeUp 1s ease 0.6s forwards}
 .hero-line{width:180px;height:1px;background:var(--grad);margin:28px auto;opacity:0;animation:fadeUp 0.8s ease 0.8s forwards}
-.hero-desc{font-size:18px;color:#777;letter-spacing:1px;max-width:520px;line-height:1.7;opacity:0;animation:fadeUp 0.8s ease 1s forwards}
+.hero-desc{font-size:18px;color:var(--muted);letter-spacing:1px;max-width:520px;line-height:1.7;opacity:0;animation:fadeUp 0.8s ease 1s forwards}
 .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px;opacity:0;animation:fadeUp 0.8s ease 1.2s forwards}
 .btn-main{background:var(--grad);border:none;color:#fff;padding:16px 44px;font-family:'Orbitron',monospace;font-size:12px;font-weight:700;letter-spacing:2px;cursor:pointer;clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
 .btn-main:hover{opacity:0.85;transform:translateY(-2px);filter:brightness(1.1)}
@@ -71,7 +75,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .hero-stats{display:flex;gap:56px;justify-content:center;margin-top:60px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s ease 1.4s forwards}
 .stat{text-align:center}
 .stat-num{font-family:'Bebas Neue',sans-serif;font-size:52px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
-.stat-label{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:#444;margin-top:4px}
+.stat-label{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--muted2);margin-top:4px}
 .stat-divider{width:1px;background:rgba(255,107,0,0.15);align-self:stretch;margin:8px 0}
 
 /* ── SECTIONS ── */
@@ -81,7 +85,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .sec-tag{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:14px;display:flex;align-items:center;gap:14px;justify-content:center}
 .sec-tag::before,.sec-tag::after{content:'';flex:0 0 40px;height:1px;background:rgba(255,107,0,0.4)}
 .sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,80px);letter-spacing:3px;line-height:1;text-align:center;margin-bottom:16px}
-.sec-sub{text-align:center;color:#555;font-size:16px;letter-spacing:1px;margin-bottom:64px;max-width:560px;margin-left:auto;margin-right:auto}
+.sec-sub{text-align:center;color:var(--muted);font-size:16px;letter-spacing:1px;margin-bottom:64px;max-width:560px;margin-left:auto;margin-right:auto}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease}
@@ -171,6 +175,32 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .liga-info-label{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:4px;color:var(--or);margin-bottom:8px}
 .liga-info-val{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--wh)}
 .liga-info-desc{font-size:14px;color:#555;margin-top:4px;line-height:1.5}
+.bracket-empty{padding:56px 40px;border:1px dashed rgba(255,107,0,0.18);text-align:center;background:linear-gradient(180deg,rgba(255,107,0,0.04),rgba(0,0,0,0.08))}
+.bracket-empty-kicker{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:4px;color:var(--or);margin-bottom:12px}
+.bracket-empty-title{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:3px;line-height:1;margin-bottom:10px}
+.bracket-empty-text{font-size:15px;color:#555;max-width:620px;margin:0 auto;line-height:1.7}
+.bracket-board{display:flex;gap:18px;overflow-x:auto;padding-bottom:8px}
+.bracket-board::-webkit-scrollbar{height:4px}
+.bracket-round{min-width:280px;display:flex;flex-direction:column;gap:14px}
+.bracket-round-head{padding:18px 20px;background:linear-gradient(135deg,rgba(255,107,0,0.12),rgba(232,25,44,0.04));border:1px solid rgba(255,107,0,0.18)}
+.bracket-round-tag{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:4px;color:var(--or);margin-bottom:6px}
+.bracket-round-name{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:2px;line-height:1}
+.bracket-match-stack{display:flex;flex-direction:column;gap:14px}
+.bracket-match{background:var(--card2);border:1px solid rgba(255,107,0,0.1);padding:14px;position:relative;overflow:hidden}
+.bracket-match::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,107,0,0.04),transparent 60%);pointer-events:none}
+.bracket-match-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#444}
+.bracket-match-badge{padding:4px 10px;border:1px solid rgba(255,107,0,0.2);color:var(--or);clip-path:polygon(4px 0,100% 0,calc(100% - 4px) 100%,0 100%)}
+.bracket-seed{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,107,0,0.03);border:1px solid rgba(255,107,0,0.08);margin-bottom:8px;position:relative}
+.bracket-seed:last-child{margin-bottom:0}
+.bracket-seed.win{border-color:rgba(255,107,0,0.4);background:linear-gradient(90deg,rgba(255,107,0,0.1),rgba(232,25,44,0.04))}
+.bracket-seed.pending{opacity:0.65}
+.bracket-team-logo{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,107,0,0.3);flex-shrink:0;background:#fff4e8}
+.bracket-team-fallback{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,107,0,0.18);background:rgba(255,107,0,0.08);font-size:14px;flex-shrink:0}
+.bracket-team-copy{flex:1;min-width:0}
+.bracket-team-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bracket-team-sub{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#555;margin-top:3px}
+.bracket-score{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;color:#fff;min-width:22px;text-align:right}
+.bracket-advance{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,107,0,0.08);font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#555}
 
 /* ── PREMIO ── */
 .prize-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 40px;background:linear-gradient(180deg,rgba(255,107,0,0.06) 0%,transparent 100%);border:1px solid rgba(255,107,0,0.12);position:relative;overflow:hidden;text-align:center}
@@ -207,7 +237,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .badge-green{background:rgba(0,200,80,0.12);color:#00c850;border:1px solid rgba(0,200,80,0.25)}
 
 /* ── FOOTER ── */
-footer{background:#000;border-top:1px solid rgba(255,107,0,0.08);padding:70px 48px 40px}
+footer{background:#f0e3d3;border-top:1px solid rgba(255,107,0,0.12);padding:70px 48px 40px}
 .footer-inner{max-width:1300px;margin:0 auto}
 .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px}
 .footer-brand img{height:60px;mix-blend-mode:screen;filter:drop-shadow(0 0 16px rgba(255,107,0,0.5));margin-bottom:16px}
@@ -245,7 +275,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 .form-group{margin-bottom:20px}
 .form-label{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:4px;color:var(--or);display:block;margin-bottom:10px}
 .form-label-small{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#555;display:block;margin-bottom:8px}
-.form-input{width:100%;background:#0a0a0a;border:1px solid rgba(255,107,0,0.15);color:var(--wh);padding:14px 18px;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;outline:none;transition:border-color 0.2s;box-sizing:border-box}
+.form-input{width:100%;background:#fffdf9;border:1px solid rgba(255,107,0,0.18);color:var(--wh);padding:14px 18px;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;outline:none;transition:border-color 0.2s;box-sizing:border-box}
 .form-input:focus{border-color:rgba(255,107,0,0.5)}
 .form-input::placeholder{color:#333}
 .players-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -274,7 +304,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 .partido-equipo.local{text-align:right}
 .partido-equipo.visitante{text-align:left}
 .partido-score{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;color:var(--or);text-align:center;white-space:nowrap}
-.partido-score input{width:36px;background:#111;border:1px solid rgba(255,107,0,0.3);color:var(--or);font-family:'Bebas Neue',sans-serif;font-size:24px;text-align:center;padding:4px;outline:none}
+.partido-score input{width:36px;background:#fff8ee;border:1px solid rgba(255,107,0,0.3);color:var(--or);font-family:'Bebas Neue',sans-serif;font-size:24px;text-align:center;padding:4px;outline:none}
 .partido-winner{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;text-align:center;margin-top:4px}
 
 
@@ -285,7 +315,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.nav-mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(8,8,8,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,107,0,0.2);z-index:499;padding:20px 0;flex-direction:column}
+.nav-mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(250,244,235,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,107,0,0.2);z-index:499;padding:20px 0;flex-direction:column}
 .nav-mobile-menu.open{display:flex}
 .nav-mobile-menu a{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:3px;color:#555;text-decoration:none;text-transform:uppercase;padding:16px 28px;border-bottom:1px solid rgba(255,107,0,0.06);transition:color 0.2s,background 0.2s}
 .nav-mobile-menu a:hover{color:var(--or);background:rgba(255,107,0,0.04)}
@@ -301,6 +331,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
   .footer-top{grid-template-columns:1fr 1fr;gap:40px}
   .liga-info-grid{grid-template-columns:1fr}
   .hero-stats{gap:28px}
+  .player-card-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:600px){
   .footer-top{grid-template-columns:1fr}
@@ -308,6 +339,9 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
   .modal-header{flex-direction:column}
   .modal-stats-row{flex-wrap:wrap}
   .modal-stat{min-width:50%}
+  .player-card-grid{grid-template-columns:1fr}
+  .player-team-head{align-items:flex-start}
+  .admin-manual-grid,.admin-manual-bottom{grid-template-columns:1fr !important}
 }
 
 /* ── PREDICCIONES ── */
@@ -366,11 +400,89 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 .clip-card:hover .clip-play-icon{opacity:1}
 /* ── CARNETS DE JUGADOR ── */
 .carnets-sec{background:var(--bg2);border-top:1px solid rgba(255,107,0,0.08)}
-.carnet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
-.carnet-wrap{display:flex;flex-direction:column;gap:10px;align-items:center}
-.player-card-canvas{width:280px;height:168px;display:block;border:1px solid rgba(255,107,0,0.2)}
-.carnet-dl-btn{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;padding:8px 18px;background:rgba(255,107,0,0.1);border:1px solid rgba(255,107,0,0.3);color:var(--or);cursor:pointer;transition:all 0.2s;width:100%;text-align:center;max-width:280px}
-.carnet-dl-btn:hover{background:rgba(255,107,0,0.2);border-color:rgba(255,107,0,0.6)}
+.player-team-group{margin-top:26px}
+.player-team-group:first-child{margin-top:0}
+.player-team-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.player-team-title-wrap{display:flex;align-items:center;gap:14px}
+.player-team-title-wrap img,.player-team-title-wrap .player-team-badge{width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,107,0,0.3);object-fit:cover;background:rgba(255,107,0,0.1);display:flex;align-items:center;justify-content:center}
+.player-team-kicker{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:4px;color:var(--or);margin-bottom:6px}
+.player-team-name{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;line-height:1}
+.player-team-count{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:#555}
+.player-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.player-card-shell{position:relative;min-height:320px;background:linear-gradient(180deg,#121212 0%,#0a0a0a 100%);border:1px solid rgba(255,107,0,0.18);overflow:hidden}
+.player-card-shell::before{content:'';position:absolute;inset:-20% -10% auto auto;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,0,0.16),transparent 70%);filter:blur(10px)}
+.player-card-shell::after{content:'';position:absolute;left:-30px;bottom:-30px;width:160px;height:160px;background:linear-gradient(135deg,rgba(232,25,44,0.18),transparent 70%);transform:rotate(24deg)}
+.player-card-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:18px 18px 12px}
+.player-card-chip{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;padding:5px 10px;border:1px solid rgba(255,107,0,0.25);color:var(--or);background:rgba(255,107,0,0.08)}
+.player-card-league-logo{width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 0 16px rgba(255,107,0,0.45))}
+.player-card-watermark{position:absolute;right:-8px;bottom:44px;width:150px;height:150px;object-fit:contain;opacity:0.08;filter:grayscale(1) contrast(1.1)}
+.player-card-main{position:relative;z-index:1;padding:0 18px 18px}
+.player-card-role{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#888;margin-bottom:10px}
+.player-card-player{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;line-height:0.92;color:#fff;word-break:break-word}
+.player-card-teamline{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:#888;margin-top:14px}
+.player-card-bottom{position:relative;z-index:1;margin-top:24px;padding:0 18px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
+.player-card-teamlogo{width:72px;height:72px;border-radius:18px;object-fit:cover;border:1px solid rgba(255,107,0,0.28);background:rgba(255,107,0,0.1)}
+.player-card-footer{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.player-card-index{font-family:'Bebas Neue',sans-serif;font-size:54px;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.player-card-meta{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#555;text-align:right}
+
+/* dark restored + browser de tarjetas */
+.player-launch-card{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:34px 36px;background:linear-gradient(135deg,rgba(255,107,0,0.12) 0%,rgba(232,25,44,0.08) 42%,rgba(8,8,10,0.94) 100%);border:1px solid rgba(255,107,0,0.18);box-shadow:0 18px 45px rgba(0,0,0,0.35)}
+.player-launch-copy{max-width:620px}
+.player-launch-kicker{display:inline-block;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:12px}
+.player-launch-title{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:3px;line-height:0.96}
+.player-launch-text{font-size:16px;color:var(--muted);line-height:1.7;margin-top:10px}
+.btn-main:disabled,.btn-ghost:disabled{opacity:0.42;cursor:not-allowed;transform:none!important;filter:none!important}
+.player-browser-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(10px);z-index:820;display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity 0.24s ease}
+.player-browser-overlay.open{opacity:1;pointer-events:auto}
+.player-browser-modal{width:min(1320px,100%);max-height:92vh;overflow:hidden;background:linear-gradient(180deg,#0d0d11 0%,#09090c 100%);border:1px solid rgba(255,107,0,0.22);box-shadow:0 25px 80px rgba(0,0,0,0.55);display:flex;flex-direction:column;position:relative}
+.player-browser-head{padding:34px 36px 28px;border-bottom:1px solid rgba(255,107,0,0.1);background:linear-gradient(135deg,rgba(255,107,0,0.1) 0%,rgba(232,25,44,0.05) 50%,transparent 100%);display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.player-browser-headline{max-width:700px}
+.player-browser-headline h3{font-family:'Bebas Neue',sans-serif;font-size:56px;letter-spacing:3px;line-height:0.95}
+.player-browser-headline p{font-size:15px;color:var(--muted);line-height:1.7;margin-top:10px}
+.player-browser-top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.player-browser-body{padding:28px 36px 36px;overflow:auto}
+.player-browser-intro{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+.player-browser-intro-text{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--muted)}
+.player-browser-team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.player-browser-team{width:100%;border:1px solid rgba(255,107,0,0.14);background:linear-gradient(180deg,rgba(18,18,22,0.98) 0%,rgba(10,10,13,0.98) 100%);padding:22px;display:flex;align-items:center;gap:16px;cursor:pointer;text-align:left;color:inherit;transition:transform 0.22s,border-color 0.22s,box-shadow 0.22s;appearance:none}
+.player-browser-team:hover{transform:translateY(-3px);border-color:rgba(255,107,0,0.38);box-shadow:0 14px 34px rgba(0,0,0,0.35)}
+.player-browser-team-logo,.player-browser-team-badge{width:58px;height:58px;border-radius:18px;border:1px solid rgba(255,107,0,0.28);background:rgba(255,107,0,0.08);display:flex;align-items:center;justify-content:center;object-fit:cover;flex-shrink:0}
+.player-browser-team-copy{flex:1;min-width:0}
+.player-browser-team-kicker{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:var(--or);margin-bottom:6px}
+.player-browser-team-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player-browser-team-meta{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;color:var(--muted2);margin-top:6px}
+.player-browser-team-cta{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;padding:6px 10px;border:1px solid rgba(255,107,0,0.25);color:var(--or);white-space:nowrap}
+.player-browser-toolbar{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.player-browser-breadcrumb{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--or);margin-bottom:8px}
+.player-browser-team-title{font-family:'Bebas Neue',sans-serif;font-size:54px;letter-spacing:3px;line-height:0.94}
+.player-browser-team-copyline{font-size:15px;color:var(--muted);margin-top:8px}
+.player-browser-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.player-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.player-card-shell{position:relative;min-height:390px;background:linear-gradient(180deg,rgba(14,14,18,0.96) 0%,rgba(8,8,11,0.98) 100%);border:1px solid rgba(255,107,0,0.18);overflow:hidden;box-shadow:0 18px 36px rgba(0,0,0,0.28)}
+.player-card-shell::before{content:'';position:absolute;inset:-18% auto auto -10%;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,154,0,0.22),transparent 70%);filter:blur(12px)}
+.player-card-shell::after{content:'';position:absolute;right:-55px;bottom:-50px;width:220px;height:220px;background:radial-gradient(circle,rgba(232,25,44,0.22),transparent 72%)}
+.player-card-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:18px 18px 12px}
+.player-card-chip{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;padding:6px 10px;border:1px solid rgba(255,107,0,0.28);color:var(--or);background:rgba(255,107,0,0.08)}
+.player-card-league-logo{width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 0 14px rgba(255,107,0,0.42))}
+.player-card-watermark{position:absolute;right:-6px;top:76px;width:160px;height:160px;object-fit:contain;opacity:0.09;filter:grayscale(1) contrast(1.1)}
+.player-card-main{position:relative;z-index:1;padding:12px 18px 0}
+.player-card-role{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:4px;color:#d5c6bc;margin-bottom:14px}
+.player-card-player{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:2px;line-height:0.9;color:#fff;word-break:break-word;max-width:78%}
+.player-card-teamline{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--muted2);margin-top:18px}
+.player-card-divider{position:relative;z-index:1;width:calc(100% - 36px);height:1px;background:linear-gradient(90deg,rgba(255,107,0,0.65),rgba(255,107,0,0));margin:22px 18px 0}
+.player-card-bottom{position:relative;z-index:1;margin-top:18px;padding:0 18px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
+.player-card-teamlogo{width:78px;height:78px;border-radius:20px;object-fit:cover;border:1px solid rgba(255,107,0,0.28);background:rgba(255,107,0,0.1);display:flex;align-items:center;justify-content:center;font-size:30px}
+.player-card-footer{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.player-card-index{font-family:'Bebas Neue',sans-serif;font-size:62px;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.player-card-meta{color:var(--muted2)}
+.player-card-actions{position:relative;z-index:1;padding:0 18px 18px}
+.player-download-btn{width:100%;padding:12px 16px;background:linear-gradient(90deg,rgba(255,107,0,0.18),rgba(232,25,44,0.12));border:1px solid rgba(255,107,0,0.28);color:#fff;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;cursor:pointer;transition:transform 0.2s,border-color 0.2s,background 0.2s}
+.player-download-btn:hover{transform:translateY(-2px);border-color:rgba(255,107,0,0.52);background:linear-gradient(90deg,rgba(255,107,0,0.28),rgba(232,25,44,0.18))}
+.player-download-btn:disabled{opacity:0.45;cursor:progress;transform:none}
+.player-browser-empty{padding:42px 26px;border:1px dashed rgba(255,107,0,0.18);text-align:center;color:var(--muted)}
+.player-card-shell.capture-shot{box-shadow:none}
+.player-card-shell.capture-shot .player-card-actions{display:none}
 /* ── ANIMACIONES ── */
 @keyframes vcl-ripple{0%{transform:scale(0);opacity:0.45}100%{transform:scale(5);opacity:0}}
 .vcl-ripple-span{position:absolute;border-radius:50%;width:60px;height:60px;margin-top:-30px;margin-left:-30px;background:rgba(255,255,255,0.2);animation:vcl-ripple 0.55s linear;pointer-events:none}
@@ -386,6 +498,50 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 .modal{transition:transform 0.3s cubic-bezier(0.34,1.4,0.64,1)}
 .vcl-cnt-tick{transform:scale(1.1)!important}
 #cnt-dias,#cnt-horas,#cnt-minutos,#cnt-segs{display:inline-block;transition:transform 0.1s}
+
+/* dark theme restore */
+.teams-sec,.vote-sec,.carnets-sec,#bracket,.clips-sec{background:var(--bg2)!important}
+.info-card,.liga-info-cell,.player-browser-modal,.player-browser-team,.team-card,.modal,.form-card,.admin-entry,.jornada-card,.news-card,.clip-card,.prize-extra-item,.liga-table th,.liga-table td,.vote-row,.pred-card,.bracket-match,.bracket-seed{box-shadow:none}
+.info-card,.liga-info-cell,.prize-extra-item,.table-wrap,.form-card,.admin-entry,.jornada-card,.news-card,.clip-card,.vote-row,.pred-card,.bracket-match,.bracket-round-head,.modal,.player-browser-modal{background-color:rgba(12,12,16,0.96)}
+.nav-brand-sub,.nav-links a,.stat-label,.sec-sub,.info-card-text,.t-meta,.modal-tag,.modal-stat-label,.modal-desc,.liga-table th,.liga-table td:not(:first-child),.liga-info-desc,.bracket-empty-text,.bracket-team-sub,.bracket-advance,.prize-desc,.prize-extra-desc,.discord-desc,.news-text,.footer-brand-desc,.footer-links a,.footer-copy,.form-label-small,.admin-date,.admin-player-tag,.admin-tab,.pred-vs,.pred-btn,.pred-info,.vote-jbtn,.vote-action,.clip-meta,.player-browser-intro-text,.player-browser-team-meta,.player-browser-team-copyline{color:var(--muted)}
+.hero-desc,.player-launch-text,.player-browser-headline p{color:var(--muted)}
+.nav-mobile-menu{background:rgba(7,8,11,0.97);border-bottom:1px solid rgba(255,107,0,0.2)}
+.nav-mobile-menu a{color:var(--muted)}
+.info-card{background:rgba(13,13,18,0.94)}
+.info-card:hover,.liga-table tr:hover td,.team-card:hover,.vote-row:hover,.pred-btn:hover{background-color:rgba(255,107,0,0.06)}
+.team-card{background:linear-gradient(180deg,rgba(16,17,22,0.98) 0%,rgba(11,12,16,0.98) 100%)}
+.modal-header,.bracket-round-head,.prize-hero,.discord-sec{background:linear-gradient(135deg,rgba(255,107,0,0.1) 0%,rgba(232,25,44,0.05) 100%)}
+.modal-logo{background:rgba(255,255,255,0.03)}
+.modal-close{color:var(--muted)}
+.modal-close:hover{color:var(--or)}
+.liga-table th{background:rgba(255,107,0,0.05)}
+.liga-table .tbd-row td,.liga-table .tbd-row .pos span{color:var(--muted2);-webkit-text-fill-color:var(--muted2)}
+.bracket-empty{background:linear-gradient(180deg,rgba(255,107,0,0.05),rgba(255,255,255,0.02))}
+.bracket-team-logo,.player-browser-team-logo,.player-card-teamlogo,.vote-logo{background:#0f1014}
+footer{background:#08090b;border-top:1px solid rgba(255,107,0,0.12)}
+.footer-brand-desc,.footer-links a,.footer-copy,.social-btn{color:var(--muted)}
+.social-btn{border-color:rgba(255,107,0,0.15)}
+.social-btn:hover{background:rgba(255,107,0,0.08)}
+.form-card,.admin-entry,.jornada-card{border-color:rgba(255,107,0,0.16)}
+.form-input,.partido-score input{background:#0d0e12;border-color:rgba(255,107,0,0.24);color:var(--wh)}
+.form-input::placeholder{color:var(--muted2)}
+.admin-tab{color:var(--muted)}
+.admin-tab:hover{background:rgba(255,107,0,0.05)}
+.clip-thumb-placeholder{color:#2b2c30}
+.clip-card{background:rgba(14,14,18,0.96)}
+.player-card-meta,.vote-action,.pred-info,.clip-meta{color:var(--muted2)}
+.btn-main,.btn-ghost,.nav-cta,.btn-discord{box-shadow:0 10px 24px rgba(0,0,0,0.2)}
+@media(max-width:900px){
+  .player-browser-head{padding:28px 24px 22px}
+  .player-browser-body{padding:22px 24px 26px}
+}
+@media(max-width:700px){
+  .player-launch-card{padding:26px 22px}
+  .player-launch-title{font-size:40px}
+  .player-browser-team-title{font-size:40px}
+  .player-browser-headline h3{font-size:42px}
+  .player-card-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -406,7 +562,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
       <div class="modal-stats-row">
         <div class="modal-stat"><div class="modal-stat-num" id="m-wins">—</div><div class="modal-stat-label">VICTORIAS</div></div>
         <div class="modal-stat"><div class="modal-stat-num" id="m-losses">—</div><div class="modal-stat-label">DERROTAS</div></div>
-        <div class="modal-stat"><div class="modal-stat-num" id="m-pts">—</div><div class="modal-stat-label">PUNTOS</div></div>
+        <div class="modal-stat"><div class="modal-stat-num" id="m-pts">—</div><div class="modal-stat-label">RUN</div></div>
         <div class="modal-stat"><div class="modal-stat-num" id="m-wr">—</div><div class="modal-stat-label">WINRATE</div></div>
       </div>
       <div class="modal-section-title">ROSTER</div>
@@ -416,8 +572,44 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
       <div id="m-history-block" style="display:none">
         <div class="modal-section-title" style="margin-top:20px">FORMA RECIENTE</div>
         <div id="m-form" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px"></div>
-        <div class="modal-section-title">ÚLTIMOS PARTIDOS</div>
+        <div class="modal-section-title">ÚLTIMOS CRUCES</div>
         <div id="m-matches" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="player-browser-overlay" id="playerBrowser">
+  <div class="player-browser-modal">
+    <button class="modal-close" onclick="closePlayerBrowser()">X</button>
+    <div class="player-browser-head">
+      <div class="player-browser-headline">
+        <div class="player-launch-kicker">PLAYER CARDS</div>
+        <h3>TARJETAS DE JUGADOR</h3>
+        <p id="player-browser-head-desc">Abre el roster, elige equipo y descarga cada tarjeta con un clic.</p>
+      </div>
+      <div class="player-browser-top-actions">
+        <button class="btn-ghost" id="player-browser-back-btn" onclick="backToPlayerTeams()" style="display:none">VOLVER A EQUIPOS</button>
+        <button class="btn-main" id="player-browser-download-all-btn" onclick="downloadCurrentTeamCards()" style="display:none">DESCARGAR EQUIPO</button>
+      </div>
+    </div>
+    <div class="player-browser-body">
+      <div id="player-browser-team-view">
+        <div class="player-browser-intro">
+          <div class="player-browser-intro-text">ELIGE UN EQUIPO Y DESPUES ABRE SUS TARJETAS</div>
+        </div>
+        <div class="player-browser-team-grid" id="player-browser-teams"></div>
+      </div>
+      <div id="player-browser-card-view" style="display:none">
+        <div class="player-browser-toolbar">
+          <div>
+            <div class="player-browser-breadcrumb">TARJETAS / EQUIPO SELECCIONADO</div>
+            <div class="player-browser-team-title" id="player-browser-team-title">TEAM</div>
+            <div class="player-browser-team-copyline" id="player-browser-team-copyline"></div>
+          </div>
+          <div class="player-browser-actions" id="player-browser-team-actions"></div>
+        </div>
+        <div class="player-card-grid" id="player-browser-cards"></div>
       </div>
     </div>
   </div>
@@ -429,13 +621,13 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
     <img src="https://media.discordapp.net/attachments/1506786249233530910/1507316701706846208/VCL_SUMMER_SERIES_2.png?ex=6a12c712&is=6a117592&hm=445a75d6f35719674b5fa8d587812b2c1b656112f4799b06e8a2340d23e387ca&=&format=webp&quality=lossless&width=960&height=960" alt="VCL">
     <div>
       <div class="nav-brand-text">VCL SUMMER SERIES</div>
-      <div class="nav-brand-sub">VALORANT COMMUNITY LEAGUE</div>
+      <div class="nav-brand-sub">VALORANT COMMUNITY TOURNAMENT</div>
     </div>
   </div>
   <ul class="nav-links">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#equipos">Equipos</a></li>
-    <li><a href="#clasificacion">Liga</a></li>
+    <li><a href="#bracket">Bracket</a></li>
     <li><a href="#premios">Premios</a></li>
     <li><a href="#noticias">Noticias</a></li>
     <li><a href="#predicciones">Predicciones</a></li>
@@ -451,7 +643,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 <div class="nav-mobile-menu" id="nav-mobile-menu">
   <a href="#inicio" onclick="closeMobileMenu()">Inicio</a>
   <a href="#equipos" onclick="closeMobileMenu()">Equipos</a>
-  <a href="#clasificacion" onclick="closeMobileMenu()">Liga</a>
+  <a href="#bracket" onclick="closeMobileMenu()">Bracket</a>
   <a href="#premios" onclick="closeMobileMenu()">Premios</a>
   <a href="#noticias" onclick="closeMobileMenu()">Noticias</a>
   <a href="#predicciones" onclick="closeMobileMenu()">Predicciones</a>
@@ -497,7 +689,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
     <div class="hero-vignette2"></div>
   </div>
   <div class="hero-content">
-    <div class="hero-eyebrow">VALORANT COMMUNITY LEAGUE · ESPAÑA</div>
+    <div class="hero-eyebrow">VALORANT COMMUNITY TOURNAMENT · ESPAÑA</div>
     <div style="margin-bottom:20px;opacity:0;animation:fadeUp 0.8s ease 0.3s forwards">
       <span id="torneo-status-badge" style="display:none;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:4px;padding:6px 20px;border:1px solid;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)"></span>
     </div>
@@ -505,23 +697,23 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
     <div class="hero-title">VCL SUMMER</div>
     <div class="hero-title2">Series 2026</div>
     <div class="hero-line"></div>
-    <div class="hero-desc">La liga comunitaria de Valorant más competitiva del verano. Forma tu equipo, compite semana a semana y lucha por la cima.</div>
+    <div class="hero-desc">El torneo comunitario de Valorant más competitivo del verano. Forma tu equipo, entra al cuadro final y pelea ronda a ronda hasta la gran final.</div>
     <div class="hero-btns">
       <a href="#inscripcion" class="btn-main">🎮 INSCRIBIRSE AHORA</a>
-      <a href="#clasificacion" class="btn-ghost">VER LA LIGA</a>
+      <a href="#bracket" class="btn-ghost">VER EL BRACKET</a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><div class="stat-num">?</div><div class="stat-label">EQUIPOS</div></div>
+      <div class="stat"><div class="stat-num" id="hero-stat-teams">0</div><div class="stat-label">EQUIPOS</div></div>
       <div class="stat-divider"></div>
-      <div class="stat"><div class="stat-num">5v5</div><div class="stat-label">FORMATO</div></div>
+      <div class="stat"><div class="stat-num">KO</div><div class="stat-label">FORMATO</div></div>
       <div class="stat-divider"></div>
       <div class="stat"><div class="stat-num">50€</div><div class="stat-label">PREMIO</div></div>
       <div class="stat-divider"></div>
-      <div class="stat"><div class="stat-num">?</div><div class="stat-label">JORNADAS</div></div>
+      <div class="stat"><div class="stat-num" id="hero-stat-rounds">0</div><div class="stat-label">RONDAS</div></div>
     </div>
     <!-- COUNTDOWN -->
     <div id="hero-countdown" style="display:none;margin-top:48px;text-align:center;opacity:0;animation:fadeUp 0.8s ease 1.6s forwards">
-      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:rgba(255,107,0,0.7);margin-bottom:16px" id="cnt-hero-label">INICIO DE LA LIGA</div>
+      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:rgba(255,107,0,0.7);margin-bottom:16px" id="cnt-hero-label">INICIO DEL TORNEO</div>
       <div style="display:flex;gap:0;justify-content:center;border:1px solid rgba(255,107,0,0.15)">
         <div style="padding:20px 28px;border-right:1px solid rgba(255,107,0,0.15);background:rgba(255,107,0,0.04)">
           <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="cnt-dias">00</div>
@@ -556,7 +748,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
       <div class="info-card-label">FECHAS</div>
       <div class="info-card-title">POR CONFIRMAR</div>
       <!-- EDITAR: Cambia las fechas cuando las tengas -->
-      <p class="info-card-text">Las fechas de inicio y jornadas se anunciarán pronto en nuestro Discord. Mantente atento a los anuncios.</p>
+      <p class="info-card-text">Las fechas de inicio y las rondas clave se anunciarán pronto en nuestro Discord. Mantente atento a los anuncios.</p>
     </div>
     <div class="info-card">
       <span class="info-card-icon">🎮</span>
@@ -573,8 +765,8 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
     <div class="info-card">
       <span class="info-card-icon">🏆</span>
       <div class="info-card-label">COMPETICIÓN</div>
-      <div class="info-card-title">LIGA</div>
-      <p class="info-card-text">Formato liga con jornadas semanales. Todos los equipos se enfrentan entre sí. El primero de la tabla gana.</p>
+      <div class="info-card-title">TORNEO</div>
+      <p class="info-card-text">Formato eliminatorio con bracket dinámico. El cuadro se genera con los equipos inscritos y cada cruce decide quién sigue con vida.</p>
     </div>
   </div>
 </div>
@@ -593,57 +785,68 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 </div>
 
 <!-- ── CLASIFICACIÓN ── -->
-<div id="clasificacion" class="sec" style="background:var(--bg2)">
+<div id="bracket" class="sec" style="background:var(--bg2)">
 <div class="sec-inner reveal">
-  <div class="sec-tag">COMPETICIÓN</div>
-  <h2 class="sec-title">CLASIFICACIÓN DE LA LIGA</h2>
-  <p class="sec-sub">La tabla se actualizará tras cada jornada</p>
+  <div class="sec-tag">CUADRO FINAL</div>
+  <h2 class="sec-title">BRACKET DEL TORNEO</h2>
+  <p class="sec-sub">Se genera desde el panel admin según los equipos inscritos y se actualiza conforme avances resultados</p>
 
   <div class="liga-info-grid">
     <div class="liga-info-cell">
-      <div class="liga-info-label">SISTEMA DE PUNTOS</div>
-      <div class="liga-info-val">3 · 1 · 0</div>
-      <div class="liga-info-desc">Victoria = 3 pts &nbsp;·&nbsp; Empate = 1 pt &nbsp;·&nbsp; Derrota = 0 pts</div>
+      <div class="liga-info-label">FORMATO</div>
+      <div class="liga-info-val" id="bracket-format">ELIM. SIMPLE</div>
+      <div class="liga-info-desc">Cruces directos. El ganador avanza y el perdedor queda fuera del torneo.</div>
     </div>
     <div class="liga-info-cell">
-      <div class="liga-info-label">CLASIFICADOS A PLAYOFF</div>
-      <div class="liga-info-val">? EQUIPOS</div>
-      <div class="liga-info-desc">Los primeros de la tabla acceden a la fase final por el título</div>
+      <div class="liga-info-label">HUECOS ABIERTOS</div>
+      <div class="liga-info-val" id="bracket-size">?</div>
+      <div class="liga-info-desc">Los huecos libres se quedan con un signo de interrogacion hasta cerrar el cuadro definitivo.</div>
     </div>
     <div class="liga-info-cell">
-      <div class="liga-info-label">JORNADAS</div>
-      <div class="liga-info-val">POR DEFINIR</div>
-      <div class="liga-info-desc">Dependiente del número final de equipos inscritos</div>
+      <div class="liga-info-label">RONDAS</div>
+      <div class="liga-info-val" id="bracket-rounds">0</div>
+      <div class="liga-info-desc">Cuartos, semis, final o las rondas que hagan falta según el número de equipos.</div>
     </div>
     <div class="liga-info-cell">
-      <div class="liga-info-label">DÍA DE PARTIDOS</div>
-      <div class="liga-info-val">POR CONFIRMAR</div>
-      <!-- EDITAR: Cambia el día cuando lo sepas -->
-      <div class="liga-info-desc">Se anunciará próximamente en Discord</div>
+      <div class="liga-info-label">ESTADO</div>
+      <div class="liga-info-val" id="bracket-status">PENDIENTE</div>
+      <div class="liga-info-desc" id="bracket-status-desc">Cuando generes el bracket desde admin aparecerá aquí para todo el mundo.</div>
     </div>
   </div>
 
-  <div class="table-wrap">
-    <table class="liga-table">
-      <thead>
-        <tr>
-          <th style="width:50px">#</th>
-          <th style="width:50px">LOGO</th>
-          <th>EQUIPO</th>
-          <th>PJ</th><th>V</th><th>E</th><th>D</th>
-          <th>GF</th><th>GC</th><th>DIF</th>
-          <th>PTS</th>
-        </tr>
-      </thead>
-      <tbody id="liga-tbody"></tbody>
-    </table>
+  <div id="bracket-empty" class="bracket-empty">
+    <div class="bracket-empty-kicker">AÚN NO HAY CUADRO</div>
+    <div class="bracket-empty-title">Genera el bracket desde admin</div>
+    <div class="bracket-empty-text">En cuanto cierres inscripciones o tengas los equipos listos, entra al panel admin y pulsa crear bracket.</div>
   </div>
+  <div class="bracket-board" id="bracket-board"></div>
   <div id="mvp-section" style="display:none;margin-top:48px">
     <div class="sec-tag" style="margin-bottom:20px">DESTACADOS</div>
     <div id="mvp-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px"></div>
   </div>
 </div>
-</div> -->
+</div>
+
+<div id="carnets" class="sec carnets-sec">
+<div class="sec-inner reveal">
+  <div class="sec-tag">ROSTER</div>
+  <h2 class="sec-title">TARJETAS DE JUGADOR</h2>
+  <p class="sec-sub">Abre la galeria, elige equipo y entra solo a las tarjetas que quieras ver o descargar</p>
+  <div class="player-launch-card">
+    <div class="player-launch-copy">
+      <div class="player-launch-kicker">ABRIR GALERIA</div>
+      <div class="player-launch-title">SELECCIONA EQUIPO Y ABRE SUS TARJETAS</div>
+      <div class="player-launch-text">Las tarjetas ya no salen todas de golpe. Ahora primero se abre el selector de equipos y dentro veras el roster del equipo que elijas.</div>
+    </div>
+    <button class="btn-main" id="open-player-browser" onclick="openPlayerBrowser()">ABRIR TARJETAS</button>
+  </div>
+  <div id="player-cards-empty" class="bracket-empty">
+    <div class="bracket-empty-kicker">SIN ROSTERS TODAVIA</div>
+    <div class="bracket-empty-title">Cuando entren equipos se abrira la galeria</div>
+    <div class="bracket-empty-text">En cuanto haya jugadores registrados podras abrir el selector y entrar a las tarjetas de cada equipo.</div>
+  </div>
+</div>
+</div>
 <div id="premios" class="sec">
 <div class="sec-inner reveal">
   <div class="sec-tag">RECOMPENSAS</div>
@@ -674,7 +877,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
     <div class="prize-extra-item">
       <div class="prize-extra-icon">⭐</div>
       <div class="prize-extra-name">ROL EXCLUSIVO</div>
-      <div class="prize-extra-desc">Rol de campeón permanente en el Discord de la liga</div>
+      <div class="prize-extra-desc">Rol de campeón permanente en el Discord del torneo</div>
     </div>
   </div>
 </div>
@@ -699,7 +902,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
       <span class="news-badge badge-blue">FORMATO</span>
       <div class="news-date">PRÓXIMAMENTE</div>
       <div class="news-title">REGLAS Y FORMATO OFICIAL</div>
-      <p class="news-text">El reglamento completo y el formato detallado de la liga se publicarán en el Discord una vez se cierre el período de inscripción.</p>
+      <p class="news-text">El reglamento completo y el formato detallado del torneo se publicarán en el Discord una vez se cierre el período de inscripción.</p>
     </div>
     <div class="news-card">
       <span class="news-badge badge-green">INSCRIPCIÓN</span>
@@ -723,12 +926,12 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 </div>
 </div>
 
-<!-- ── VOTACIÓN MEJOR EQUIPO DE LA JORNADA ── -->
+<!-- ── VOTACIÓN MEJOR EQUIPO DE LA RONDA ── -->
 <div id="votacion" class="sec vote-sec">
 <div class="sec-inner reveal">
   <div class="sec-tag">COMUNIDAD</div>
-  <h2 class="sec-title">MEJOR EQUIPO DE LA JORNADA</h2>
-  <p class="sec-sub">Vota al equipo más destacado — los resultados se revelan al cerrar la votación</p>
+  <h2 class="sec-title">MEJOR EQUIPO DE LA RONDA</h2>
+  <p class="sec-sub">Vota al equipo más destacado de cada ronda y descubre el ganador cuando cierres la votación</p>
   <div id="vote-jornada-btns" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;justify-content:center"></div>
   <div id="vote-container">
     <div style="font-family:'Orbitron',monospace;font-size:11px;letter-spacing:3px;color:#333;text-align:center;padding:60px">SIN VOTACIONES ACTIVAS AÚN</div>
@@ -818,7 +1021,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
         <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:#333;text-align:right;margin-top:4px"><span id="desc-count">0</span>/400</div>
       </div>
       <div id="form-msg" style="display:none;margin-top:16px;padding:14px 20px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;text-align:center"></div>
-      <button onclick="submitTeam()" class="btn-main" style="width:100%;margin-top:24px;justify-content:center;font-size:13px;clip-path:none;padding:18px">
+      <button onclick="submitTeam()" id="submit-insc-btn" class="btn-main" style="width:100%;margin-top:24px;justify-content:center;font-size:13px;clip-path:none;padding:18px">
         ✅ ENVIAR INSCRIPCIÓN
       </button>
     </div>
@@ -857,7 +1060,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
   <div style="display:flex;gap:0;margin-bottom:40px;border:1px solid rgba(255,107,0,0.2)">
     <button onclick="adminTab('control')" id="tab-control" class="admin-tab active-tab">⚙️ CONTROL</button>
     <button onclick="adminTab('inscripciones')" id="tab-inscripciones" class="admin-tab">📋 INSCRIPCIONES</button>
-    <button onclick="adminTab('jornadas')" id="tab-jornadas" class="admin-tab">📅 JORNADAS</button>
+    <button onclick="adminTab('jornadas')" id="tab-jornadas" class="admin-tab">🏁 BRACKET</button>
     <button onclick="adminTab('noticias')" id="tab-noticias" class="admin-tab">📰 NOTICIAS</button>
     <button onclick="adminTab('votacion')" id="tab-votacion" class="admin-tab">🗳️ VOTACIÓN</button>
     <button onclick="adminTab('contador')" id="tab-contador" class="admin-tab">⏱ CONTADOR</button>
@@ -867,16 +1070,16 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
   <div id="admin-votacion" style="display:none">
     <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:24px">
       <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:14px">🗳️ VOTACIÓN MEJOR EQUIPO</div>
-      <div style="font-size:13px;color:#555;margin-bottom:20px;line-height:1.7">Activa la votación de una jornada para que el público vote al mejor equipo. Cuando cierres la votación, los porcentajes quedan visibles para todos.</div>
+      <div style="font-size:13px;color:#555;margin-bottom:20px;line-height:1.7">Activa la votación de una ronda para que el público vote al mejor equipo. Cuando cierres la votación, los porcentajes quedan visibles para todos.</div>
       <div id="admin-vote-list" style="display:flex;flex-direction:column;gap:12px">
-        <div style="font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:32px">SIN JORNADAS AÚN</div>
+        <div style="font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:32px">SIN RONDAS AÚN</div>
       </div>
     </div>
     <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px">
       <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:14px">🎯 PREDICCIONES POR PARTIDO</div>
-      <div style="font-size:13px;color:#555;margin-bottom:20px;line-height:1.7">Activa las predicciones de una jornada para que los visitantes voten quién ganará cada partido. Ciérralas una vez jugada para mostrar los resultados.</div>
+      <div style="font-size:13px;color:#555;margin-bottom:20px;line-height:1.7">Activa las predicciones de una ronda para que los visitantes voten quién ganará cada cruce. Ciérralas cuando se juegue para mostrar los resultados.</div>
       <div id="admin-pred-list" style="display:flex;flex-direction:column;gap:12px">
-        <div style="font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:32px">SIN JORNADAS AÚN</div>
+        <div style="font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:32px">SIN RONDAS AÚN</div>
       </div>
     </div>
   </div>
@@ -918,7 +1121,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
       </div>
       <div style="background:var(--card2);padding:24px;text-align:center">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--or)" id="ctrl-num-jornadas">0</div>
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#444">JORNADAS CREADAS</div>
+        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#444">RONDAS CREADAS</div>
       </div>
       <div style="background:var(--card2);padding:24px;text-align:center">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:#00c850" id="ctrl-num-jugados">0</div>
@@ -933,6 +1136,50 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 
   <!-- Inscripciones panel -->
   <div id="admin-inscripciones" style="display:none">
+    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:28px">
+      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:14px">ALTA MANUAL</div>
+      <div style="font-size:13px;color:#555;margin-bottom:20px;line-height:1.7">Desde aquí puedes inscribir equipos manualmente si a alguno no le deja entrar por el formulario público.</div>
+      <div class="admin-manual-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:16px">
+        <div>
+          <label class="form-label" style="margin-bottom:8px;display:block">NOMBRE DEL EQUIPO</label>
+          <input type="text" id="admin-f-team" class="form-input" placeholder="Ej: Phoenix Rising" maxlength="30">
+        </div>
+        <div>
+          <label class="form-label" style="margin-bottom:8px;display:block">CAPITÁN</label>
+          <input type="text" id="admin-f-captain" class="form-input" placeholder="Usuario del capitán" maxlength="30">
+        </div>
+      </div>
+      <div class="players-grid" style="margin-bottom:16px">
+        <div class="form-group"><label class="form-label-small">JUGADOR 1</label><input type="text" id="admin-p1" class="form-input" placeholder="Nombre#TAG"></div>
+        <div class="form-group"><label class="form-label-small">JUGADOR 2</label><input type="text" id="admin-p2" class="form-input" placeholder="Nombre#TAG"></div>
+        <div class="form-group"><label class="form-label-small">JUGADOR 3</label><input type="text" id="admin-p3" class="form-input" placeholder="Nombre#TAG"></div>
+        <div class="form-group"><label class="form-label-small">JUGADOR 4</label><input type="text" id="admin-p4" class="form-input" placeholder="Nombre#TAG"></div>
+        <div class="form-group"><label class="form-label-small">JUGADOR 5</label><input type="text" id="admin-p5" class="form-input" placeholder="Nombre#TAG"></div>
+        <div class="form-group"><label class="form-label-small">SUPLENTE</label><input type="text" id="admin-p6" class="form-input" placeholder="Nombre#TAG"></div>
+      </div>
+      <div class="admin-manual-bottom" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:16px;align-items:start">
+        <div>
+          <label class="form-label" style="margin-bottom:8px;display:block">DESCRIPCIÓN</label>
+          <textarea id="admin-f-desc" class="form-input" rows="4" maxlength="400" placeholder="Historia breve, estilo de juego o cualquier detalle útil..." style="resize:vertical;line-height:1.6;padding-top:12px"></textarea>
+        </div>
+        <div>
+          <label class="form-label" style="margin-bottom:8px;display:block">LOGO DEL EQUIPO</label>
+          <div id="admin-logo-drop" style="border:1px dashed rgba(255,107,0,0.3);background:#0a0a0a;padding:20px;text-align:center;cursor:pointer;transition:border-color 0.2s" onclick="document.getElementById('admin-f-logo').click()">
+            <input type="file" id="admin-f-logo" accept="image/*" style="display:none" onchange="handleAdminLogoChange(event)">
+            <div id="admin-logo-preview-wrap" style="display:none;margin-bottom:10px">
+              <img id="admin-logo-preview" style="width:64px;height:64px;object-fit:contain;border-radius:50%;border:1px solid rgba(255,107,0,0.3)">
+            </div>
+            <div id="admin-logo-placeholder">
+              <div style="font-size:26px;margin-bottom:6px">🖼️</div>
+              <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#444">SUBIR LOGO</div>
+            </div>
+            <div id="admin-logo-name" style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--or);margin-top:8px;display:none"></div>
+          </div>
+        </div>
+      </div>
+      <div id="admin-form-msg" style="display:none;margin-top:16px;padding:14px 20px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;text-align:center"></div>
+      <button onclick="adminAddTeam()" class="btn-main" style="margin-top:20px;clip-path:none;padding:14px 28px">+ INSCRIBIR EQUIPO MANUALMENTE</button>
+    </div>
     <div id="admin-list" style="display:flex;flex-direction:column;gap:16px"></div>
     <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap">
       <button onclick="exportCSV()" class="btn-ghost" style="clip-path:none">📥 EXPORTAR CSV</button>
@@ -942,12 +1189,19 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 
   <!-- Jornadas panel -->
   <div id="admin-jornadas" style="display:none">
-    <div style="display:flex;gap:16px;margin-bottom:32px;align-items:flex-end;flex-wrap:wrap">
-      <div style="flex:1;min-width:200px">
-        <label class="form-label" style="margin-bottom:8px;display:block">NUEVA JORNADA</label>
-        <input type="text" id="jornada-nombre" class="form-input" placeholder="Ej: Jornada 1" style="margin-bottom:0">
+    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:28px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
+        <div style="max-width:720px">
+          <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:10px">GESTIÓN DEL BRACKET</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:2px;color:#fff;line-height:1">CREA EL CUADRO DEL TORNEO</div>
+          <div style="font-size:13px;color:#555;margin-top:10px;line-height:1.7">Pulsa crear bracket y se montara un cuadro clasico con los equipos actuales. Los huecos sin cerrar saldran con un signo de interrogacion para que no se repartan byes raros antes de tiempo.</div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button onclick="crearBracket()" class="btn-main" style="clip-path:none;padding:14px 28px;white-space:nowrap">🏁 CREAR BRACKET</button>
+          <button onclick="borrarBracket()" style="background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;padding:14px 24px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;cursor:pointer">🗑 BORRAR BRACKET</button>
+        </div>
       </div>
-      <button onclick="crearJornada()" class="btn-main" style="clip-path:none;padding:14px 28px;white-space:nowrap">+ CREAR JORNADA</button>
+      <div id="admin-bracket-meta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px"></div>
     </div>
     <div id="jornadas-list" style="display:flex;flex-direction:column;gap:24px"></div>
   </div>
@@ -987,7 +1241,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
     <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;max-width:500px">
       <div class="form-group">
         <label class="form-label" style="margin-bottom:8px;display:block">TEXTO DEL CONTADOR</label>
-        <input type="text" id="cnt-label" class="form-input" placeholder="Ej: INICIO DE LA LIGA" maxlength="40">
+        <input type="text" id="cnt-label" class="form-input" placeholder="Ej: INICIO DEL TORNEO" maxlength="40">
       </div>
       <div class="form-group">
         <label class="form-label" style="margin-bottom:8px;display:block">FECHA Y HORA DE INICIO</label>
@@ -1024,14 +1278,14 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
       <img src="https://media.discordapp.net/attachments/1506786249233530910/1507316701706846208/VCL_SUMMER_SERIES_2.png?ex=6a12c712&is=6a117592&hm=445a75d6f35719674b5fa8d587812b2c1b656112f4799b06e8a2340d23e387ca&=&format=webp&quality=lossless&width=960&height=960" alt="VCL">
       <div class="footer-brand-name">VCL SUMMER SERIES</div>
       <!-- EDITAR: Tu descripción -->
-      <p class="footer-brand-desc">Torneo comunitario de Valorant organizado con pasión. Competición, comunidad y diversión en una sola liga.</p>
+      <p class="footer-brand-desc">Torneo comunitario de Valorant organizado con pasión. Competición, comunidad y un bracket final para decidir al campeón.</p>
     </div>
     <div>
       <div class="footer-col-title">NAVEGACIÓN</div>
       <ul class="footer-links">
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#equipos">Equipos</a></li>
-        <li><a href="#clasificacion">Liga</a></li>
+        <li><a href="#bracket">Bracket</a></li>
         <li><a href="#premios">Premios</a></li>
         <li><a href="#noticias">Noticias</a></li>
     <li><a href="#inscripcion">Inscripción</a></li>
@@ -1068,6 +1322,7 @@ body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xm
 </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script type="module">
 // ── FIREBASE ──
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -1094,7 +1349,17 @@ async function dbGet(path) {
 async function dbSet(path, val) { await set(ref(db, path), val); }
 async function dbPush(path, val) { await push(ref(db, path), val); }
 async function dbRemove(path) { await remove(ref(db, path)); }
-function dbListen(path, cb) { onValue(ref(db, path), snap => cb(snap.exists() ? snap.val() : null)); }
+function dbListen(path, cb) {
+  onValue(ref(db, path), snap => {
+    try {
+      cb(snap.exists() ? snap.val() : null);
+    } catch (error) {
+      window.__vclErrors = window.__vclErrors || [];
+      window.__vclErrors.push({ path, message: error?.message || String(error) });
+      console.error(error);
+    }
+  });
+}
 
 // ──────────────────────────────────────
 // DATOS ESTÁTICOS DE EQUIPOS (hardcoded)
@@ -1106,6 +1371,7 @@ const TEAM_COLORS = [
   'rgba(88,101,242,0.2)','rgba(0,200,80,0.2)','rgba(255,220,0,0.2)',
   'rgba(100,200,255,0.2)','rgba(180,0,255,0.2)'
 ];
+const LEAGUE_LOGO_URL = 'https://media.discordapp.net/attachments/1506786249233530910/1507316701706846208/VCL_SUMMER_SERIES_2.png?ex=6a12c712&is=6a117592&hm=445a75d6f35719674b5fa8d587812b2c1b656112f4799b06e8a2340d23e387ca&=&format=webp&quality=lossless&width=960&height=960';
 
 // ── ESTADO GLOBAL (cargado desde Firebase) ──
 let ALL_TEAMS = [];    // equipos inscritos
@@ -1117,23 +1383,181 @@ let ALL_PRED_CONFIG = {};
 let ALL_VOTOS_JORNADA = {};
 let ALL_VOTE_CONFIG = {};
 let currentVoteJKey = null;
+let currentPlayerTeamName = null;
+let currentPlayerDownloadBusy = false;
+let LEAGUE_LOGO_EMBED = LEAGUE_LOGO_URL;
+let leagueLogoDataPromise = null;
+
+function escapeHtml(value = '') {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[ch]));
+}
+
+function cloneData(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+function slugifyFilePart(value) {
+  return String(value || 'card')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .toLowerCase() || 'card';
+}
+
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function blobToDataURL(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function preloadLeagueLogo() {
+  if (leagueLogoDataPromise) return leagueLogoDataPromise;
+  leagueLogoDataPromise = fetch(LEAGUE_LOGO_URL)
+    .then(res => res.blob())
+    .then(blobToDataURL)
+    .then(dataURL => {
+      LEAGUE_LOGO_EMBED = dataURL || LEAGUE_LOGO_URL;
+      return LEAGUE_LOGO_EMBED;
+    })
+    .catch(() => LEAGUE_LOGO_URL);
+  return leagueLogoDataPromise;
+}
+
+function nextPowerOfTwo(value) {
+  let size = 1;
+  const target = Math.max(2, value || 0);
+  while (size < target) size *= 2;
+  return size;
+}
+
+function buildSeedOrder(size) {
+  let order = [1, 2];
+  while (order.length < size) {
+    const sum = order.length * 2 + 1;
+    const next = [];
+    order.forEach(seed => {
+      next.push(seed, sum - seed);
+    });
+    order = next;
+  }
+  return order;
+}
+
+function getRoundName(matchCount, roundIndex) {
+  if (matchCount === 1) return 'Gran final';
+  if (matchCount === 2) return 'Semifinales';
+  if (matchCount === 4) return 'Cuartos de final';
+  if (matchCount === 8) return 'Octavos de final';
+  if (matchCount === 16) return 'Dieciseisavos';
+  return `Ronda ${roundIndex + 1}`;
+}
+
+function getStageShort(roundName) {
+  const map = {
+    'Gran final': 'FINAL',
+    'Semifinales': 'SEMIS',
+    'Cuartos de final': 'CUARTOS',
+    'Octavos de final': 'OCTAVOS',
+    'Dieciseisavos': 'TOP 32'
+  };
+  return map[roundName] || (roundName ? roundName.toUpperCase() : 'INSCRITO');
+}
+
+function getTeamRaw(teamName) {
+  return ALL_TEAMS.find(t => t.team === teamName) || null;
+}
+
+function getTournamentStats() {
+  const stats = {};
+  ALL_TEAMS.forEach(t => {
+    stats[t.team] = {
+      wins: 0,
+      losses: 0,
+      played: 0,
+      bestRound: -1,
+      stage: 'Inscrito',
+      stageShort: 'INSCRITO',
+      rankingScore: 0,
+      wr: '—'
+    };
+  });
+
+  ALL_JORNADAS.forEach((round, roundIndex) => {
+    (round.partidos || []).forEach(match => {
+      [match.local, match.visitante].filter(Boolean).forEach(name => {
+        if (!stats[name]) {
+          stats[name] = { wins: 0, losses: 0, played: 0, bestRound: -1, stage: 'Inscrito', stageShort: 'INSCRITO', rankingScore: 0, wr: '—' };
+        }
+        stats[name].bestRound = Math.max(stats[name].bestRound, roundIndex);
+        stats[name].stage = round.nombre;
+        stats[name].stageShort = getStageShort(round.nombre);
+      });
+
+      if (match.winner && match.local && match.visitante) {
+        const loser = match.winner === match.local ? match.visitante : match.local;
+        if (!stats[match.winner]) stats[match.winner] = { wins: 0, losses: 0, played: 0, bestRound: roundIndex, stage: round.nombre, stageShort: getStageShort(round.nombre), rankingScore: 0, wr: '—' };
+        if (!stats[loser]) stats[loser] = { wins: 0, losses: 0, played: 0, bestRound: roundIndex, stage: round.nombre, stageShort: getStageShort(round.nombre), rankingScore: 0, wr: '—' };
+        stats[match.winner].wins++;
+        stats[match.winner].played++;
+        stats[loser].losses++;
+        stats[loser].played++;
+      }
+    });
+  });
+
+  const finalRound = ALL_JORNADAS[ALL_JORNADAS.length - 1];
+  const finalMatch = finalRound?.partidos?.[0];
+  Object.entries(stats).forEach(([teamName, info]) => {
+    info.wr = info.played ? Math.round((info.wins / info.played) * 100) + '%' : '—';
+    info.rankingScore = Math.max(0, info.bestRound + 1) * 100 + info.wins * 10 - info.losses;
+    if (finalMatch?.winner === teamName) {
+      info.stage = 'Campeón';
+      info.stageShort = 'CAMPEÓN';
+      info.rankingScore += 1000;
+    } else if (finalMatch && finalMatch.winner && (finalMatch.local === teamName || finalMatch.visitante === teamName)) {
+      info.stage = 'Finalista';
+      info.stageShort = 'FINAL';
+      info.rankingScore += 500;
+    }
+  });
+
+  return stats;
+}
 
 // ── ESCUCHAR CAMBIOS EN TIEMPO REAL ──
+if (false) {
 dbListen('vcl_teams', val => {
   ALL_TEAMS = val ? Object.values(val) : [];
   buildTeamsGrid();
   buildLigaTable();
   renderRegisteredTeams();
-  if (document.getElementById('admin-panel').style.display !== 'none') renderAdmin();
+  renderPlayerCards();
+  renderBracket();
+  updateDynamicStats();
+  if (document.getElementById('admin-panel').style.display !== 'none') {
+    renderAdmin();
+    renderJornadas();
+  }
 });
 dbListen('vcl_stats', val => {
   ALL_STATS = val || {};
-  buildTeamsGrid();
-  buildLigaTable();
 });
 dbListen('vcl_jornadas', val => {
-  ALL_JORNADAS = val ? Object.values(val) : [];
-  ALL_JORNADAS_KEYS = val ? Object.keys(val) : [];
+  const entries = val ? Object.entries(val).sort(([a], [b]) => a.localeCompare(b)) : [];
+  ALL_JORNADAS = entries.map(([, round]) => round);
+  ALL_JORNADAS_KEYS = entries.map(([key]) => key);
+  renderBracket();
+  updateDynamicStats();
   if (document.getElementById('admin-panel').style.display !== 'none') renderJornadas();
   renderMVPs();
   renderPredicciones();
@@ -1161,9 +1585,11 @@ dbListen('vcl_vote_config', val => {
   ALL_VOTE_CONFIG = val || {};
   renderVotacion();
 });
+}
 
 // ── GET ALL TEAMS ──
 function getAllTeams() {
+  const tournamentStats = getTournamentStats();
   const regTeams = ALL_TEAMS.map((t, i) => ({
     id: 'reg_' + i,
     tbd: false,
@@ -1172,16 +1598,17 @@ function getAllTeams() {
     name: t.team,
     tag: 'INSCRITO',
     captain: t.captain,
-    wins: ALL_STATS[t.team]?.wins ?? 0,
-    losses: ALL_STATS[t.team]?.losses ?? 0,
-    pts: ALL_STATS[t.team]?.pts ?? 0,
-    wr: ALL_STATS[t.team]?.wins ? Math.round(ALL_STATS[t.team].wins / (ALL_STATS[t.team].wins + ALL_STATS[t.team].losses) * 100) + '%' : '—',
+    wins: tournamentStats[t.team]?.wins ?? 0,
+    losses: tournamentStats[t.team]?.losses ?? 0,
+    pts: tournamentStats[t.team]?.stageShort ?? 'INSCRITO',
+    wr: tournamentStats[t.team]?.wr ?? '—',
+    rankingScore: tournamentStats[t.team]?.rankingScore ?? 0,
     desc: t.desc || 'Sin descripción.',
     logoBase64: t.logoBase64 || null,
     players: (t.players || []).map((p, j) => ({ name: p, role: j === 0 ? 'Capitán' : 'Jugador', rank: '—', rankClass: '' })),
     date: t.date
   }));
-  regTeams.sort((a, b) => (b.pts || 0) - (a.pts || 0));
+  regTeams.sort((a, b) => (b.rankingScore || 0) - (a.rankingScore || 0));
   return [...regTeams, ...TEAMS_STATIC];
 }
 
@@ -1211,9 +1638,446 @@ function buildTeamsGrid() {
   });
 }
 
+function openTeamByName(teamName) {
+  const team = getAllTeams().find(t => t.name === teamName);
+  if (team) openModal(team);
+}
+window.openTeamByName = openTeamByName;
+
+function updateDynamicStats() {
+  const heroTeams = document.getElementById('hero-stat-teams');
+  const heroRounds = document.getElementById('hero-stat-rounds');
+  if (heroTeams) heroTeams.textContent = String(ALL_TEAMS.length || 0);
+  if (heroRounds) heroRounds.textContent = String(ALL_JORNADAS.length || 0);
+
+  const bracketSizeEl = document.getElementById('bracket-size');
+  const bracketRoundsEl = document.getElementById('bracket-rounds');
+  const bracketStatusEl = document.getElementById('bracket-status');
+  const bracketStatusDescEl = document.getElementById('bracket-status-desc');
+  const allMatches = ALL_JORNADAS.flatMap(round => round.partidos || []);
+  const realMatches = allMatches.filter(match => match.local && match.visitante);
+  const hasOpenSlots = allMatches.some(match => (match.local && !match.visitante) || (!match.local && match.visitante) || (!match.local && !match.visitante));
+  const allRealMatchesClosed = realMatches.length > 0 && realMatches.every(match => match.winner);
+  if (bracketSizeEl) {
+    bracketSizeEl.textContent = '?';
+  }
+  if (bracketRoundsEl) bracketRoundsEl.textContent = String(ALL_JORNADAS.length || 0);
+  if (bracketStatusEl) {
+    if (!ALL_JORNADAS.length) bracketStatusEl.textContent = 'PENDIENTE';
+    else if (allRealMatchesClosed && !hasOpenSlots) bracketStatusEl.textContent = 'CUADRO CERRADO';
+    else if (realMatches.some(match => !match.winner)) bracketStatusEl.textContent = 'EN JUEGO';
+    else bracketStatusEl.textContent = 'EN ESPERA';
+  }
+  if (bracketStatusDescEl) {
+    if (!ALL_JORNADAS.length) bracketStatusDescEl.textContent = 'Cuando generes el bracket desde admin aparecera aqui para todo el mundo.';
+    else if (allRealMatchesClosed && !hasOpenSlots) bracketStatusDescEl.textContent = 'Todas las rondas con cruces reales tienen ganador. Ya puedes anunciar campeon.';
+    else if (hasOpenSlots) bracketStatusDescEl.textContent = 'El cuadro esta en formato clasico. Los huecos que falten por cerrar se muestran con un signo de interrogacion.';
+    else bracketStatusDescEl.textContent = 'El cuadro ya esta creado. Introduce resultados en admin para que los equipos avancen normalmente.';
+  }
+}
+
+function renderBracketLegacy() {
+  const empty = document.getElementById('bracket-empty');
+  const board = document.getElementById('bracket-board');
+  if (!empty || !board) return;
+  if (!ALL_JORNADAS.length) {
+    empty.style.display = 'block';
+    board.innerHTML = '';
+    return;
+  }
+
+  empty.style.display = 'none';
+  board.innerHTML = ALL_JORNADAS.map((round, roundIndex) => `
+    <div class="bracket-round">
+      <div class="bracket-round-head">
+        <div class="bracket-round-tag">RONDA ${roundIndex + 1}</div>
+        <div class="bracket-round-name">${escapeHtml(round.nombre || `Ronda ${roundIndex + 1}`)}</div>
+      </div>
+      <div class="bracket-match-stack">
+        ${(round.partidos || []).map((match, matchIndex) => {
+          const renderSeed = (teamName, side) => {
+            const team = teamName ? getAllTeams().find(t => t.name === teamName) : null;
+            const isWinner = match.winner === teamName;
+            const otherSide = side === 'local' ? 'visitante' : 'local';
+            const isBye = teamName && !match[otherSide];
+            const score = match.local && match.visitante ? (match[side === 'local' ? 'scoreL' : 'scoreV'] ?? '—') : '—';
+            const logo = team?.logoBase64
+              ? `<img class="bracket-team-logo" src="${team.logoBase64}" alt="${escapeHtml(team.name)}">`
+              : `<div class="bracket-team-fallback">${teamName ? '🎮' : '—'}</div>`;
+            const name = teamName ? escapeHtml(teamName) : 'POR DEFINIR';
+            const sub = isBye ? 'PASA POR BYE' : teamName ? (team?.captain ? `CAP: ${escapeHtml(team.captain)}` : 'LISTO PARA JUGAR') : 'ESPERANDO RESULTADO';
+            return `<div class="bracket-seed${isWinner ? ' win' : ''}${teamName ? '' : ' pending'}"${teamName ? ` onclick="openTeamByName('${teamName.replace(/'/g, "\\'")}')"` : ''} style="${teamName ? 'cursor:pointer' : ''}">
+              ${logo}
+              <div class="bracket-team-copy">
+                <div class="bracket-team-name">${name}</div>
+                <div class="bracket-team-sub">${sub}</div>
+              </div>
+              <div class="bracket-score">${score}</div>
+            </div>`;
+          };
+
+          return `<div class="bracket-match">
+            <div class="bracket-match-meta">
+              <span>CRUCE ${matchIndex + 1}</span>
+              <span class="bracket-match-badge">${match.winner ? 'RESUELTO' : (match.local && match.visitante ? 'PENDIENTE' : 'EN ESPERA')}</span>
+            </div>
+            ${renderSeed(match.local, 'local')}
+            ${renderSeed(match.visitante, 'visitante')}
+            <div class="bracket-advance">${match.winner ? `AVANZA: ${escapeHtml(match.winner)}` : 'SIN GANADOR TODAVÍA'}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderPlayerCardsLegacy() {
+  const container = document.getElementById('player-team-groups');
+  const empty = document.getElementById('player-cards-empty');
+  if (!container || !empty) return;
+  const teams = getAllTeams().filter(t => !t.tbd && (t.players || []).length);
+  if (!teams.length) {
+    container.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+
+  empty.style.display = 'none';
+  container.innerHTML = teams.map(team => `
+    <div class="player-team-group">
+      <div class="player-team-head">
+        <div class="player-team-title-wrap">
+          ${team.logoBase64
+            ? `<img src="${team.logoBase64}" alt="${escapeHtml(team.name)}">`
+            : `<div class="player-team-badge">🎮</div>`}
+          <div>
+            <div class="player-team-kicker">TEAM IDENTITY</div>
+            <div class="player-team-name">${escapeHtml(team.name)}</div>
+          </div>
+        </div>
+        <div class="player-team-count">${(team.players || []).length} JUGADORES</div>
+      </div>
+      <div class="player-card-grid">
+        ${(team.players || []).map((player, index) => `
+          <article class="player-card-shell">
+            <div class="player-card-top">
+              <div class="player-card-chip">${index === 0 ? 'CAPITÁN' : `ROSTER ${index + 1}`}</div>
+              <img class="player-card-league-logo" src="${LEAGUE_LOGO_URL}" alt="VCL">
+            </div>
+            ${team.logoBase64 ? `<img class="player-card-watermark" src="${team.logoBase64}" alt="">` : ''}
+            <div class="player-card-main">
+              <div class="player-card-role">${escapeHtml(player.role || 'Jugador')}</div>
+              <div class="player-card-player">${escapeHtml(player.name)}</div>
+              <div class="player-card-teamline">${escapeHtml(team.name)} · VCL SUMMER SERIES</div>
+            </div>
+            <div class="player-card-bottom">
+              ${team.logoBase64
+                ? `<img class="player-card-teamlogo" src="${team.logoBase64}" alt="${escapeHtml(team.name)}">`
+                : `<div class="player-card-teamlogo" style="display:flex;align-items:center;justify-content:center">🎮</div>`}
+              <div class="player-card-footer">
+                <div class="player-card-index">${String(index + 1).padStart(2, '0')}</div>
+                <div class="player-card-meta">${index === 0 ? 'LÍDER DEL ROSTER' : 'JUGADOR REGISTRADO'}</div>
+              </div>
+            </div>
+          </article>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderBracket() {
+  const empty = document.getElementById('bracket-empty');
+  const board = document.getElementById('bracket-board');
+  if (!empty || !board) return;
+  if (!ALL_JORNADAS.length) {
+    empty.style.display = 'block';
+    board.innerHTML = '';
+    return;
+  }
+
+  empty.style.display = 'none';
+  board.innerHTML = ALL_JORNADAS.map((round, roundIndex) => `
+    <div class="bracket-round">
+      <div class="bracket-round-head">
+        <div class="bracket-round-tag">RONDA ${roundIndex + 1}</div>
+        <div class="bracket-round-name">${escapeHtml(round.nombre || `Ronda ${roundIndex + 1}`)}</div>
+      </div>
+      <div class="bracket-match-stack">
+        ${(round.partidos || []).map((match, matchIndex) => {
+          const renderSeed = (teamName, side) => {
+            const team = teamName ? getAllTeams().find(t => t.name === teamName) : null;
+            const isWinner = match.winner === teamName;
+            const score = match.local && match.visitante ? (match[side === 'local' ? 'scoreL' : 'scoreV'] ?? '?') : '?';
+            const logo = team?.logoBase64
+              ? `<img class="bracket-team-logo" src="${team.logoBase64}" alt="${escapeHtml(team.name)}">`
+              : `<div class="bracket-team-fallback">${teamName ? 'TV' : '?'}</div>`;
+            const name = teamName ? escapeHtml(teamName) : '?';
+            const sub = teamName ? (team?.captain ? `CAP: ${escapeHtml(team.captain)}` : 'LISTO PARA JUGAR') : (roundIndex === 0 ? 'HUECO PENDIENTE' : 'GANADOR POR DEFINIR');
+            return `<div class="bracket-seed${isWinner ? ' win' : ''}${teamName ? '' : ' pending'}"${teamName ? ` onclick="openTeamByName('${teamName.replace(/'/g, "\\'")}')"` : ''} style="${teamName ? 'cursor:pointer' : ''}">
+              ${logo}
+              <div class="bracket-team-copy">
+                <div class="bracket-team-name">${name}</div>
+                <div class="bracket-team-sub">${sub}</div>
+              </div>
+              <div class="bracket-score">${score}</div>
+            </div>`;
+          };
+
+          return `<div class="bracket-match">
+            <div class="bracket-match-meta">
+              <span>CRUCE ${matchIndex + 1}</span>
+              <span class="bracket-match-badge">${match.winner ? 'RESUELTO' : (match.local && match.visitante ? 'PENDIENTE' : 'EN ESPERA')}</span>
+            </div>
+            ${renderSeed(match.local, 'local')}
+            ${renderSeed(match.visitante, 'visitante')}
+            <div class="bracket-advance">${match.winner ? `AVANZA: ${escapeHtml(match.winner)}` : 'SIN GANADOR TODAVIA'}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function getPlayerCardTeams() {
+  return getAllTeams().filter(t => !t.tbd && (t.players || []).length);
+}
+
+function getSelectedPlayerTeam() {
+  return getPlayerCardTeams().find(team => team.name === currentPlayerTeamName) || null;
+}
+
+function buildPlayerCardMarkup(team, player, index) {
+  const leagueLogo = LEAGUE_LOGO_EMBED || LEAGUE_LOGO_URL;
+  return `
+    <article class="player-card-shell" data-player-index="${index}">
+      <div class="player-card-top">
+        <div class="player-card-chip">${index === 0 ? 'CAPITAN' : `ROSTER ${index + 1}`}</div>
+        <img class="player-card-league-logo" src="${leagueLogo}" alt="VCL">
+      </div>
+      ${team.logoBase64 ? `<img class="player-card-watermark" src="${team.logoBase64}" alt="">` : ''}
+      <div class="player-card-main">
+        <div class="player-card-role">${escapeHtml(player.role || 'Jugador')}</div>
+        <div class="player-card-player">${escapeHtml(player.name)}</div>
+        <div class="player-card-teamline">${escapeHtml(team.name)} / VCL SUMMER SERIES</div>
+      </div>
+      <div class="player-card-divider"></div>
+      <div class="player-card-bottom">
+        ${team.logoBase64
+          ? `<img class="player-card-teamlogo" src="${team.logoBase64}" alt="${escapeHtml(team.name)}">`
+          : `<div class="player-card-teamlogo">TV</div>`}
+        <div class="player-card-footer">
+          <div class="player-card-index">${String(index + 1).padStart(2, '0')}</div>
+          <div class="player-card-meta">${index === 0 ? 'LIDER DEL ROSTER' : 'JUGADOR REGISTRADO'}</div>
+        </div>
+      </div>
+      <div class="player-card-actions">
+        <button class="player-download-btn" onclick="downloadSelectedPlayerCard(${index})">DESCARGAR PNG</button>
+      </div>
+    </article>
+  `;
+}
+
+function setPlayerDownloadState(isBusy) {
+  currentPlayerDownloadBusy = isBusy;
+  document.querySelectorAll('.player-download-btn').forEach(button => {
+    button.disabled = isBusy;
+  });
+  const teamButton = document.getElementById('player-browser-download-all-btn');
+  if (teamButton) {
+    teamButton.disabled = isBusy;
+    teamButton.textContent = isBusy ? 'DESCARGANDO...' : 'DESCARGAR EQUIPO';
+  }
+}
+
+async function capturePlayerCard(cardElement, fileName) {
+  if (typeof window.html2canvas !== 'function') {
+    alert('No se ha cargado la libreria de descarga. Recarga la pagina e intentalo otra vez.');
+    return;
+  }
+  await preloadLeagueLogo();
+  const stage = document.createElement('div');
+  stage.style.position = 'fixed';
+  stage.style.left = '-10000px';
+  stage.style.top = '0';
+  stage.style.padding = '24px';
+  stage.style.background = 'transparent';
+
+  const clone = cardElement.cloneNode(true);
+  clone.classList.add('capture-shot');
+  clone.style.width = `${cardElement.offsetWidth || 340}px`;
+  clone.querySelectorAll('.player-card-league-logo').forEach(img => {
+    img.src = LEAGUE_LOGO_EMBED || LEAGUE_LOGO_URL;
+  });
+  stage.appendChild(clone);
+  document.body.appendChild(stage);
+
+  try {
+    const canvas = await window.html2canvas(clone, {
+      backgroundColor: null,
+      scale: 2,
+      useCORS: true,
+      logging: false
+    });
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } finally {
+    stage.remove();
+  }
+}
+
+async function downloadCardForTeam(team, index) {
+  const cardElement = document.querySelector(`#player-browser-cards [data-player-index="${index}"]`);
+  const player = team?.players?.[index];
+  if (!cardElement || !player) return;
+  const fileName = `${slugifyFilePart(team.name)}-${slugifyFilePart(player.name)}-vcl-card.png`;
+  await capturePlayerCard(cardElement, fileName);
+}
+
+async function downloadSelectedPlayerCard(index) {
+  const team = getSelectedPlayerTeam();
+  if (!team || currentPlayerDownloadBusy) return;
+  setPlayerDownloadState(true);
+  try {
+    await downloadCardForTeam(team, index);
+  } finally {
+    setPlayerDownloadState(false);
+  }
+}
+window.downloadSelectedPlayerCard = downloadSelectedPlayerCard;
+
+async function downloadCurrentTeamCards() {
+  const team = getSelectedPlayerTeam();
+  if (!team || currentPlayerDownloadBusy) return;
+  setPlayerDownloadState(true);
+  try {
+    for (let index = 0; index < (team.players || []).length; index++) {
+      await downloadCardForTeam(team, index);
+      await wait(180);
+    }
+  } finally {
+    setPlayerDownloadState(false);
+  }
+}
+window.downloadCurrentTeamCards = downloadCurrentTeamCards;
+
+function openPlayerBrowser() {
+  if (!getPlayerCardTeams().length) return;
+  document.getElementById('playerBrowser')?.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  preloadLeagueLogo();
+  renderPlayerCards();
+}
+window.openPlayerBrowser = openPlayerBrowser;
+
+function closePlayerBrowser() {
+  document.getElementById('playerBrowser')?.classList.remove('open');
+  document.body.style.overflow = '';
+  currentPlayerTeamName = null;
+  renderPlayerCards();
+}
+window.closePlayerBrowser = closePlayerBrowser;
+
+function selectPlayerTeam(teamName) {
+  currentPlayerTeamName = teamName;
+  renderPlayerCards();
+}
+window.selectPlayerTeam = selectPlayerTeam;
+
+function backToPlayerTeams() {
+  currentPlayerTeamName = null;
+  renderPlayerCards();
+}
+window.backToPlayerTeams = backToPlayerTeams;
+
+function renderPlayerCards() {
+  const empty = document.getElementById('player-cards-empty');
+  const openButton = document.getElementById('open-player-browser');
+  const teamView = document.getElementById('player-browser-team-view');
+  const cardView = document.getElementById('player-browser-card-view');
+  const teamsGrid = document.getElementById('player-browser-teams');
+  const cardsGrid = document.getElementById('player-browser-cards');
+  const backButton = document.getElementById('player-browser-back-btn');
+  const downloadAllButton = document.getElementById('player-browser-download-all-btn');
+  const title = document.getElementById('player-browser-team-title');
+  const copyline = document.getElementById('player-browser-team-copyline');
+  const teamActions = document.getElementById('player-browser-team-actions');
+  const headDesc = document.getElementById('player-browser-head-desc');
+  if (!empty || !openButton || !teamView || !cardView || !teamsGrid || !cardsGrid) return;
+
+  const teams = getPlayerCardTeams();
+  if (!teams.some(team => team.name === currentPlayerTeamName)) currentPlayerTeamName = null;
+
+  if (!teams.length) {
+    empty.style.display = 'block';
+    openButton.disabled = true;
+    teamView.style.display = 'block';
+    cardView.style.display = 'none';
+    teamsGrid.innerHTML = '<div class="player-browser-empty">Todavia no hay equipos con jugadores para abrir las tarjetas.</div>';
+    if (backButton) backButton.style.display = 'none';
+    if (downloadAllButton) downloadAllButton.style.display = 'none';
+    if (headDesc) headDesc.textContent = 'Cuando entren rosters podras abrir aqui las tarjetas de jugador.';
+    return;
+  }
+
+  empty.style.display = 'none';
+  openButton.disabled = false;
+  teamsGrid.innerHTML = teams.map(team => `
+    <button type="button" class="player-browser-team" onclick="selectPlayerTeam('${team.name.replace(/'/g, "\\'")}')">
+      ${team.logoBase64
+        ? `<img class="player-browser-team-logo" src="${team.logoBase64}" alt="${escapeHtml(team.name)}">`
+        : `<div class="player-browser-team-badge">TV</div>`}
+      <div class="player-browser-team-copy">
+        <div class="player-browser-team-kicker">EQUIPO</div>
+        <div class="player-browser-team-name">${escapeHtml(team.name)}</div>
+        <div class="player-browser-team-meta">${(team.players || []).length} jugadores${team.captain ? ` / CAP: ${escapeHtml(team.captain)}` : ''}</div>
+      </div>
+      <div class="player-browser-team-cta">VER TARJETAS</div>
+    </button>
+  `).join('');
+
+  const selectedTeam = getSelectedPlayerTeam();
+  if (!selectedTeam) {
+    teamView.style.display = 'block';
+    cardView.style.display = 'none';
+    if (backButton) backButton.style.display = 'none';
+    if (downloadAllButton) downloadAllButton.style.display = 'none';
+    if (headDesc) headDesc.textContent = 'Abre el roster, elige equipo y descarga cada tarjeta con un clic.';
+    return;
+  }
+
+  teamView.style.display = 'none';
+  cardView.style.display = 'block';
+  if (backButton) backButton.style.display = 'inline-flex';
+  if (downloadAllButton) downloadAllButton.style.display = 'inline-flex';
+  if (headDesc) headDesc.textContent = 'Estas viendo solo el roster del equipo seleccionado.';
+  if (title) title.textContent = selectedTeam.name;
+  if (copyline) copyline.textContent = `${(selectedTeam.players || []).length} jugadores listos para descargar.`;
+  if (teamActions) {
+    teamActions.innerHTML = `<div class="player-browser-intro-text">${selectedTeam.captain ? `CAPITAN: ${escapeHtml(selectedTeam.captain)}` : 'ROSTER ACTIVO'}</div>`;
+  }
+  cardsGrid.innerHTML = (selectedTeam.players || []).map((player, index) => buildPlayerCardMarkup(selectedTeam, player, index)).join('');
+  setPlayerDownloadState(currentPlayerDownloadBusy);
+}
+
+const playerBrowserOverlay = document.getElementById('playerBrowser');
+if (playerBrowserOverlay) {
+  playerBrowserOverlay.addEventListener('click', event => {
+    if (event.target === playerBrowserOverlay) closePlayerBrowser();
+  });
+}
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closePlayerBrowser();
+});
+
 // ── BUILD LIGA TABLE ──
 function buildLigaTable() {
   const tbody = document.getElementById('liga-tbody');
+  if (!tbody) return;
   tbody.innerHTML = '';
   const teams = getAllTeams();
   if (teams.length === 0) {
@@ -1309,6 +2173,9 @@ window.closeModal = closeModal;
 // Initial render
 buildTeamsGrid();
 buildLigaTable();
+renderBracket();
+renderPlayerCards();
+updateDynamicStats();
 loadInscripcionesStatus();
 
 // Scroll reveal
@@ -1356,6 +2223,90 @@ function handleLogoChange(e) {
   reader.readAsDataURL(file);
 }
 window.handleLogoChange = handleLogoChange;
+
+let adminLogoBase64 = null;
+function handleAdminLogoChange(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) { alert('Máximo 2MB.'); return; }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    adminLogoBase64 = ev.target.result;
+    document.getElementById('admin-logo-preview').src = adminLogoBase64;
+    document.getElementById('admin-logo-preview-wrap').style.display = 'block';
+    document.getElementById('admin-logo-placeholder').style.display = 'none';
+    document.getElementById('admin-logo-name').style.display = 'block';
+    document.getElementById('admin-logo-name').textContent = '✓ ' + file.name;
+    document.getElementById('admin-logo-drop').style.borderColor = 'rgba(255,107,0,0.6)';
+  };
+  reader.readAsDataURL(file);
+}
+window.handleAdminLogoChange = handleAdminLogoChange;
+
+function createTeamEntry(team, captain, players, desc, logo) {
+  return {
+    team,
+    captain,
+    players: players.filter(Boolean),
+    desc: desc.trim(),
+    logoBase64: logo || null,
+    date: new Date().toLocaleString('es-ES')
+  };
+}
+
+function resetPublicTeamForm() {
+  ['f-team','f-captain','p1','p2','p3','p4','p5','p6','f-desc'].forEach(id => document.getElementById(id).value = '');
+  logoBase64 = null;
+  document.getElementById('logo-preview-wrap').style.display = 'none';
+  document.getElementById('logo-placeholder').style.display = 'block';
+  document.getElementById('logo-name').style.display = 'none';
+  document.getElementById('logo-drop').style.borderColor = '';
+  document.getElementById('desc-count').textContent = '0';
+  document.getElementById('f-logo').value = '';
+}
+
+function resetAdminTeamForm() {
+  ['admin-f-team','admin-f-captain','admin-p1','admin-p2','admin-p3','admin-p4','admin-p5','admin-p6','admin-f-desc'].forEach(id => document.getElementById(id).value = '');
+  adminLogoBase64 = null;
+  document.getElementById('admin-logo-preview-wrap').style.display = 'none';
+  document.getElementById('admin-logo-placeholder').style.display = 'block';
+  document.getElementById('admin-logo-name').style.display = 'none';
+  document.getElementById('admin-logo-drop').style.borderColor = '';
+  document.getElementById('admin-f-logo').value = '';
+}
+
+async function adminAddTeam() {
+  const team = document.getElementById('admin-f-team').value.trim();
+  const captain = document.getElementById('admin-f-captain').value.trim();
+  const players = ['admin-p1','admin-p2','admin-p3','admin-p4','admin-p5','admin-p6'].map(id => document.getElementById(id).value.trim());
+  const desc = document.getElementById('admin-f-desc').value.trim();
+  const msg = document.getElementById('admin-form-msg');
+
+  if (!team || !captain || players.slice(0, 5).some(p => !p)) {
+    msg.style.cssText = 'display:block;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
+    msg.textContent = '⚠ COMPLETA EQUIPO, CAPITÁN Y LOS 5 TITULARES';
+    return;
+  }
+  if (ALL_TEAMS.some(t => t.team.toLowerCase() === team.toLowerCase())) {
+    msg.style.cssText = 'display:block;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
+    msg.textContent = '⚠ YA EXISTE UN EQUIPO CON ESE NOMBRE';
+    return;
+  }
+
+  try {
+    const entry = createTeamEntry(team, captain, players, desc, adminLogoBase64);
+    await dbPush('vcl_teams', entry);
+    sendDiscordNotification(entry);
+    msg.style.cssText = 'display:block;background:rgba(0,200,80,0.08);border:1px solid rgba(0,200,80,0.3);color:#00c850;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
+    msg.textContent = '✅ EQUIPO INSCRITO MANUALMENTE';
+    resetAdminTeamForm();
+    setTimeout(() => { msg.style.display = 'none'; }, 2200);
+  } catch (e) {
+    msg.style.cssText = 'display:block;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
+    msg.textContent = '❌ NO SE PUDO INSCRIBIR EL EQUIPO';
+  }
+}
+window.adminAddTeam = adminAddTeam;
 
 document.getElementById('f-desc').addEventListener('input', function() {
   document.getElementById('desc-count').textContent = this.value.length;
@@ -1435,27 +2386,14 @@ async function submitTeam() {
     return;
   }
 
-  const entry = {
-    team, captain,
-    players: [p1,p2,p3,p4,p5,p6].filter(Boolean),
-    desc: document.getElementById('f-desc').value.trim(),
-    logoBase64: logoBase64 || null,
-    date: new Date().toLocaleString('es-ES')
-  };
+  const entry = createTeamEntry(team, captain, [p1,p2,p3,p4,p5,p6], document.getElementById('f-desc').value.trim(), logoBase64);
 
   try {
     await dbPush('vcl_teams', entry);
     sendDiscordNotification(entry);
     msg.style.cssText = 'display:block;background:rgba(0,200,80,0.08);border:1px solid rgba(0,200,80,0.3);color:#00c850;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
     msg.textContent = '✅ INSCRIPCIÓN ENVIADA — ¡BUENA SUERTE!';
-    ['f-team','f-captain','p1','p2','p3','p4','p5','p6','f-desc'].forEach(id => document.getElementById(id).value = '');
-    logoBase64 = null;
-    document.getElementById('logo-preview-wrap').style.display = 'none';
-    document.getElementById('logo-placeholder').style.display = 'block';
-    document.getElementById('logo-name').style.display = 'none';
-    document.getElementById('logo-drop').style.borderColor = '';
-    document.getElementById('desc-count').textContent = '0';
-    document.getElementById('f-logo').value = '';
+    resetPublicTeamForm();
   } catch(e) {
     msg.style.cssText = 'display:block;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
     msg.textContent = '❌ ERROR AL ENVIAR. INTÉNTALO DE NUEVO.';
@@ -1553,7 +2491,12 @@ function updateControlStats() {
   if (ne) ne.textContent = ALL_TEAMS.length;
   if (nj) nj.textContent = ALL_JORNADAS.length;
   let jugados = 0, pendientes = 0;
-  ALL_JORNADAS.forEach(j => { (j.partidos||[]).forEach(p => { if (p.winner) jugados++; else pendientes++; }); });
+  ALL_JORNADAS.forEach(j => {
+    (j.partidos || []).forEach(p => {
+      if (p.local && p.visitante && p.winner) jugados++;
+      else if (p.local && p.visitante && !p.winner) pendientes++;
+    });
+  });
   if (np) np.textContent = jugados;
   if (npend) npend.textContent = pendientes;
 }
@@ -1652,6 +2595,10 @@ async function clearAll() {
   await dbRemove('vcl_teams');
   await dbRemove('vcl_stats');
   await dbRemove('vcl_jornadas');
+  await dbRemove('vcl_predicciones');
+  await dbRemove('vcl_pred_config');
+  await dbRemove('vcl_votos_jornada');
+  await dbRemove('vcl_vote_config');
 }
 window.clearAll = clearAll;
 
@@ -1669,111 +2616,258 @@ function exportCSV() {
 }
 window.exportCSV = exportCSV;
 
-// ── JORNADAS ──
-async function crearJornada() {
-  const nombre = document.getElementById('jornada-nombre').value.trim();
-  if (!nombre) { alert('Escribe un nombre para la jornada.'); return; }
-  if (ALL_TEAMS.length < 2) { alert('Necesitas al menos 2 equipos.'); return; }
-  const nombres = ALL_TEAMS.map(t => t.team);
-  const partidos = [];
-  for (let i = 0; i < nombres.length; i++)
-    for (let j = i + 1; j < nombres.length; j++)
-      partidos.push({ local: nombres[i], visitante: nombres[j], winner: null, mvp: null, played: false });
-  await dbPush('vcl_jornadas', { nombre, status: 'pendiente', partidos });
-  document.getElementById('jornada-nombre').value = '';
+function roundsToObject(rounds) {
+  const out = {};
+  rounds.forEach((round, index) => {
+    out[`round_${String(index + 1).padStart(2, '0')}`] = round;
+  });
+  return out;
 }
-window.crearJornada = crearJornada;
+
+function normalizeBracketRounds(rounds) {
+  const next = cloneData(rounds || []);
+
+  for (let roundIndex = 0; roundIndex < next.length; roundIndex++) {
+    const round = next[roundIndex];
+    (round.partidos || []).forEach(match => {
+      const prevLocal = match.local || null;
+      const prevVisitante = match.visitante || null;
+
+      if (roundIndex > 0) {
+        if (match.sourceLocal) {
+          match.local = next[match.sourceLocal.round]?.partidos?.[match.sourceLocal.match]?.winner || null;
+        }
+        if (match.sourceVisitante) {
+          match.visitante = next[match.sourceVisitante.round]?.partidos?.[match.sourceVisitante.match]?.winner || null;
+        }
+      }
+
+      const changedParticipants = prevLocal !== (match.local || null) || prevVisitante !== (match.visitante || null);
+      const hasLocal = !!match.local;
+      const hasVisitante = !!match.visitante;
+
+      if (!hasLocal && !hasVisitante) {
+        match.winner = null;
+        match.scoreL = null;
+        match.scoreV = null;
+        match.played = false;
+        match.autoAdvance = false;
+        match.mvp = null;
+        return;
+      }
+
+      if ((hasLocal && !hasVisitante) || (!hasLocal && hasVisitante)) {
+        match.winner = null;
+        match.scoreL = null;
+        match.scoreV = null;
+        match.played = false;
+        match.autoAdvance = false;
+        match.mvp = null;
+        return;
+      }
+
+      match.autoAdvance = false;
+      if (changedParticipants) {
+        match.scoreL = null;
+        match.scoreV = null;
+        match.played = false;
+        match.mvp = null;
+        if (match.winner !== match.local && match.winner !== match.visitante) {
+          match.winner = null;
+        }
+      }
+
+      if (match.winner && match.winner !== match.local && match.winner !== match.visitante) {
+        match.winner = null;
+        match.scoreL = null;
+        match.scoreV = null;
+        match.played = false;
+        match.mvp = null;
+      }
+    });
+  }
+
+  let firstLiveRound = next.findIndex(round => (round.partidos || []).some(match => match.local && match.visitante && !match.winner));
+  if (firstLiveRound === -1 && next.length) firstLiveRound = next.length;
+
+  next.forEach((round, roundIndex) => {
+    const realMatches = (round.partidos || []).filter(match => match.local && match.visitante);
+    if (!realMatches.length) {
+      round.status = roundIndex < firstLiveRound ? 'finalizada' : (roundIndex === firstLiveRound ? 'activa' : 'pendiente');
+      return;
+    }
+    if (realMatches.every(match => match.winner)) round.status = 'finalizada';
+    else if (roundIndex === firstLiveRound) round.status = 'activa';
+    else if (roundIndex < firstLiveRound) round.status = 'finalizada';
+    else round.status = 'pendiente';
+  });
+
+  return next;
+}
+
+async function saveBracketRounds(rounds) {
+  await dbSet('vcl_jornadas', roundsToObject(rounds));
+}
+
+async function crearBracket() {
+  if (ALL_TEAMS.length < 2) { alert('Necesitas al menos 2 equipos para crear el bracket.'); return; }
+  if (ALL_JORNADAS.length && !confirm('Ya existe un bracket. Si continúas se reemplazará entero.')) return;
+
+  const teamNames = ALL_TEAMS.map(t => t.team);
+  const bracketSize = nextPowerOfTwo(teamNames.length);
+  const slots = Array.from({ length: bracketSize }, (_, index) => teamNames[index] || null);
+  const totalRounds = Math.log2(bracketSize);
+  const rounds = [];
+
+  let currentSlots = slots;
+  for (let roundIndex = 0; roundIndex < totalRounds; roundIndex++) {
+    const matchCount = currentSlots.length / 2;
+    const round = {
+      nombre: getRoundName(matchCount, roundIndex),
+      status: roundIndex === 0 ? 'activa' : 'pendiente',
+      partidos: []
+    };
+
+    for (let matchIndex = 0; matchIndex < matchCount; matchIndex++) {
+      if (roundIndex === 0) {
+        round.partidos.push({
+          local: currentSlots[matchIndex * 2] || null,
+          visitante: currentSlots[matchIndex * 2 + 1] || null,
+          winner: null,
+          scoreL: null,
+          scoreV: null,
+          played: false,
+          autoAdvance: false,
+          mvp: null
+        });
+      } else {
+        round.partidos.push({
+          local: null,
+          visitante: null,
+          winner: null,
+          scoreL: null,
+          scoreV: null,
+          played: false,
+          autoAdvance: false,
+          mvp: null,
+          sourceLocal: { round: roundIndex - 1, match: matchIndex * 2 },
+          sourceVisitante: { round: roundIndex - 1, match: matchIndex * 2 + 1 }
+        });
+      }
+    }
+
+    rounds.push(round);
+    currentSlots = Array(matchCount).fill(null);
+  }
+
+  const normalized = normalizeBracketRounds(rounds);
+  await dbRemove('vcl_predicciones');
+  await dbRemove('vcl_pred_config');
+  await dbRemove('vcl_votos_jornada');
+  await dbRemove('vcl_vote_config');
+  await dbRemove('vcl_stats');
+  await saveBracketRounds(normalized);
+}
+window.crearBracket = crearBracket;
+
+async function borrarBracket() {
+  if (!ALL_JORNADAS.length) { alert('No hay bracket creado.'); return; }
+  if (!confirm('¿Borrar el bracket completo? También se limpiarán predicciones y votos de las rondas.')) return;
+  await dbRemove('vcl_jornadas');
+  await dbRemove('vcl_predicciones');
+  await dbRemove('vcl_pred_config');
+  await dbRemove('vcl_votos_jornada');
+  await dbRemove('vcl_vote_config');
+  await dbRemove('vcl_stats');
+}
+window.borrarBracket = borrarBracket;
 
 function renderJornadas() {
   const container = document.getElementById('jornadas-list');
+  const meta = document.getElementById('admin-bracket-meta');
   if (!container) return;
-  if (ALL_JORNADAS.length === 0) {
-    container.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:40px">SIN JORNADAS — CREA LA PRIMERA</div>';
+
+  if (meta) {
+    const totalMatches = ALL_JORNADAS.reduce((sum, round) => sum + (round.partidos || []).length, 0);
+    const solvedMatches = ALL_JORNADAS.reduce((sum, round) => sum + (round.partidos || []).filter(match => match.winner).length, 0);
+    const chips = [
+      `EQUIPOS: ${ALL_TEAMS.length}`,
+      `RONDAS: ${ALL_JORNADAS.length}`,
+      `CRUCES: ${totalMatches}`,
+      `RESUELTOS: ${solvedMatches}`
+    ];
+    meta.innerHTML = chips.map(chip => `<span style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;padding:6px 12px;border:1px solid rgba(255,107,0,0.18);color:#777;background:rgba(255,107,0,0.04)">${chip}</span>`).join('');
+  }
+
+  if (!ALL_JORNADAS.length) {
+    container.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:40px">SIN BRACKET TODAVÍA — CREA EL PRIMERO</div>';
     return;
   }
-  container.innerHTML = ALL_JORNADAS.map((j, ji) => `
+
+  container.innerHTML = ALL_JORNADAS.map((round, roundIndex) => `
     <div class="jornada-card">
       <div class="jornada-header">
-        <div class="jornada-title">📅 ${j.nombre}</div>
+        <div class="jornada-title">🏁 ${round.nombre}</div>
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-          <span class="jornada-status status-${j.status}">${j.status.toUpperCase()}</span>
-          <select onchange="cambiarStatusJornada(${ji}, this.value)" style="background:#111;border:1px solid rgba(255,107,0,0.2);color:#aaa;padding:6px 10px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;outline:none;cursor:pointer">
-            <option value="pendiente" ${j.status==='pendiente'?'selected':''}>PENDIENTE</option>
-            <option value="activa" ${j.status==='activa'?'selected':''}>ACTIVA</option>
-            <option value="finalizada" ${j.status==='finalizada'?'selected':''}>FINALIZADA</option>
-          </select>
-          <button onclick="eliminarJornada(${ji})" style="background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.2);color:#e8192c;padding:6px 14px;font-family:Orbitron,monospace;font-size:9px;letter-spacing:1px;cursor:pointer">✕</button>
+          <span class="jornada-status status-${round.status}">${(round.status || 'pendiente').toUpperCase()}</span>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        ${(j.partidos||[]).map((p, pi) => `
-          <div class="partido-row">
-            <div class="partido-equipo local" style="color:${p.winner===p.local?'var(--or)':p.winner?'#333':'var(--wh)'}">${p.local}</div>
-            <div style="text-align:center">
-              <div class="partido-score">
-                <input type="number" min="0" max="99" value="${p.scoreL??''}" placeholder="0" onchange="guardarResultado(${ji},${pi},'scoreL',this.value)">
-                <span style="color:#444;font-size:20px;padding:0 4px">—</span>
-                <input type="number" min="0" max="99" value="${p.scoreV??''}" placeholder="0" onchange="guardarResultado(${ji},${pi},'scoreV',this.value)">
+        ${(round.partidos || []).map((match, matchIndex) => {
+          const canScore = !!(match.local && match.visitante);
+          const localName = match.local || '?';
+          const visitName = match.visitante || '?';
+          const resultLabel = match.winner ? `OK ${match.winner}` : (match.local && match.visitante ? 'SIN RESULTADO' : 'HUECO PENDIENTE');
+          return `
+            <div class="partido-row">
+              <div class="partido-equipo local" style="color:${match.winner===match.local?'var(--or)':match.winner?'#333':'var(--wh)'}">${escapeHtml(localName)}</div>
+              <div style="text-align:center">
+                <div class="partido-score">
+                  <input type="number" min="0" max="99" value="${canScore && match.scoreL !== null ? match.scoreL : ''}" placeholder="0" ${canScore ? '' : 'disabled'} onchange="guardarResultado(${roundIndex},${matchIndex},'scoreL',this.value)">
+                  <span style="color:#444;font-size:20px;padding:0 4px">—</span>
+                  <input type="number" min="0" max="99" value="${canScore && match.scoreV !== null ? match.scoreV : ''}" placeholder="0" ${canScore ? '' : 'disabled'} onchange="guardarResultado(${roundIndex},${matchIndex},'scoreV',this.value)">
+                </div>
+                <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:${match.winner ? '#00c850' : '#555'};margin-top:4px">${escapeHtml(resultLabel)}</div>
+                <div style="margin-top:8px;display:flex;align-items:center;gap:6px;justify-content:center">
+                  <span style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#555">⭐ MVP</span>
+                  <input type="text" value="${escapeHtml(match.mvp || '')}" placeholder="Riot ID" ${canScore ? '' : 'disabled'} onchange="updateMVP(${roundIndex},${matchIndex},this.value)" style="background:#111;border:1px solid rgba(255,220,0,0.2);color:#ffdc00;font-family:'Orbitron',monospace;font-size:9px;padding:4px 8px;outline:none;width:130px">
+                </div>
               </div>
-              ${p.winner ? `<div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:#00c850;margin-top:4px">✓ ${p.winner}</div>` : ''}
-              <div style="margin-top:8px;display:flex;align-items:center;gap:6px;justify-content:center">
-                <span style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#555">⭐ MVP</span>
-                <input type="text" value="${p.mvp||''}" placeholder="Riot ID" onchange="updateMVP(${ji},${pi},this.value)" style="background:#111;border:1px solid rgba(255,220,0,0.2);color:#ffdc00;font-family:'Orbitron',monospace;font-size:9px;padding:4px 8px;outline:none;width:130px">
-              </div>
-            </div>
-            <div class="partido-equipo visitante" style="color:${p.winner===p.visitante?'var(--or)':p.winner?'#333':'var(--wh)'}">${p.visitante}</div>
-          </div>`).join('')}
+              <div class="partido-equipo visitante" style="color:${match.winner===match.visitante?'var(--or)':match.winner?'#333':'var(--wh)'}">${escapeHtml(visitName)}</div>
+            </div>`;
+        }).join('')}
       </div>
     </div>`).join('');
 }
 
-async function guardarResultado(ji, pi, field, val) {
-  const key = ALL_JORNADAS_KEYS[ji];
-  if (!key) return;
-  const snap = await get(ref(db, `vcl_jornadas/${key}/partidos/${pi}`));
-  if (!snap.exists()) return;
-  const partido = snap.val();
-  partido[field] = parseInt(val) || 0;
-  const sL = parseInt(partido.scoreL) || 0;
-  const sV = parseInt(partido.scoreV) || 0;
-  if (partido.scoreL !== undefined && partido.scoreV !== undefined && partido.scoreL !== null && partido.scoreV !== null) {
-    if (sL > sV) partido.winner = partido.local;
-    else if (sV > sL) partido.winner = partido.visitante;
-    else partido.winner = null;
-    partido.played = sL > 0 || sV > 0;
-    // Actualizar stats
-    if (partido.winner) {
-      const statsSnap = await get(ref(db, 'vcl_stats'));
-      const stats = statsSnap.exists() ? statsSnap.val() : {};
-      const loser = partido.winner === partido.local ? partido.visitante : partido.local;
-      if (!stats[partido.winner]) stats[partido.winner] = { wins:0, losses:0, pts:0 };
-      if (!stats[loser]) stats[loser] = { wins:0, losses:0, pts:0 };
-      stats[partido.winner].wins = (stats[partido.winner].wins||0) + 1;
-      stats[partido.winner].pts = (stats[partido.winner].pts||0) + 3;
-      stats[loser].losses = (stats[loser].losses||0) + 1;
-      await dbSet('vcl_stats', stats);
-    }
+async function guardarResultado(roundIndex, matchIndex, field, value) {
+  const rounds = cloneData(ALL_JORNADAS);
+  const match = rounds[roundIndex]?.partidos?.[matchIndex];
+  if (!match || !match.local || !match.visitante) return;
+
+  match[field] = value === '' ? null : Math.max(0, parseInt(value, 10) || 0);
+  const scoreL = typeof match.scoreL === 'number' ? match.scoreL : null;
+  const scoreV = typeof match.scoreV === 'number' ? match.scoreV : null;
+
+  if (scoreL === null || scoreV === null || scoreL === scoreV) {
+    match.winner = null;
+    match.played = false;
+  } else {
+    match.winner = scoreL > scoreV ? match.local : match.visitante;
+    match.played = true;
   }
-  await dbSet(`vcl_jornadas/${key}/partidos/${pi}`, partido);
+
+  const normalized = normalizeBracketRounds(rounds);
+  await saveBracketRounds(normalized);
 }
 window.guardarResultado = guardarResultado;
 
-async function cambiarStatusJornada(ji, status) {
-  const key = ALL_JORNADAS_KEYS[ji];
-  if (key) await dbSet(`vcl_jornadas/${key}/status`, status);
-}
-window.cambiarStatusJornada = cambiarStatusJornada;
-
-async function eliminarJornada(ji) {
-  if (!confirm('¿Eliminar esta jornada?')) return;
-  const key = ALL_JORNADAS_KEYS[ji];
-  if (key) await dbRemove(`vcl_jornadas/${key}`);
-}
-window.eliminarJornada = eliminarJornada;
-
-async function updateMVP(ji, pi, val) {
-  const key = ALL_JORNADAS_KEYS[ji];
-  if (key) await dbSet(`vcl_jornadas/${key}/partidos/${pi}/mvp`, val.trim());
+async function updateMVP(roundIndex, matchIndex, value) {
+  const rounds = cloneData(ALL_JORNADAS);
+  const match = rounds[roundIndex]?.partidos?.[matchIndex];
+  if (!match) return;
+  match.mvp = value.trim();
+  await saveBracketRounds(normalizeBracketRounds(rounds));
 }
 window.updateMVP = updateMVP;
 
@@ -1782,7 +2876,7 @@ function getMatchHistory(teamName) {
   const matches = [];
   ALL_JORNADAS.forEach(j => {
     (j.partidos||[]).forEach(p => {
-      if ((p.local === teamName || p.visitante === teamName) && p.winner) {
+      if (p.local && p.visitante && (p.local === teamName || p.visitante === teamName) && p.winner) {
         matches.push({ jornada: j.nombre, rival: p.local === teamName ? p.visitante : p.local, won: p.winner === teamName });
       }
     });
@@ -1878,7 +2972,7 @@ function loadContador(data) {
   const el = document.getElementById('hero-countdown');
   const lbl = document.getElementById('cnt-hero-label');
   if (!el || !lbl) return;
-  lbl.textContent = data.label || 'INICIO DE LA LIGA';
+  lbl.textContent = !data.label || data.label === 'INICIO DE LA LIGA' ? 'INICIO DEL TORNEO' : data.label;
   el.style.display = 'block';
   if (window._cntI) clearInterval(window._cntI);
   let prevS = -1;
@@ -1993,7 +3087,7 @@ async function setPredConfig(jKey, updates) {
 window.setPredConfig = setPredConfig;
 
 // ════════════════════════════════════════════
-// 🗳️  VOTACIÓN MEJOR EQUIPO DE LA JORNADA
+// 🗳️  VOTACIÓN MEJOR EQUIPO DE LA RONDA
 // ════════════════════════════════════════════
 
 async function votarEquipo(jKey, teamName) {
@@ -2054,9 +3148,9 @@ function renderVotacionJornada(jKey) {
   const votes = ALL_VOTOS_JORNADA[jKey] || {};
   const myV = votes[vid] || null;
   const total = Object.keys(votes).length;
-  // equipos en la jornada
+  // equipos en la ronda
   const teams = [...new Set((j.partidos || []).flatMap(p => [p.local, p.visitante].filter(Boolean)))];
-  if (!teams.length) { c.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:3px;color:#333;text-align:center;padding:40px">SIN EQUIPOS EN ESTA JORNADA</div>'; return; }
+  if (!teams.length) { c.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:3px;color:#333;text-align:center;padding:40px">SIN EQUIPOS EN ESTA RONDA</div>'; return; }
   const byTeam = {};
   teams.forEach(t => byTeam[t] = 0);
   Object.values(votes).forEach(v => { if (byTeam[v] !== undefined) byTeam[v]++; });
@@ -2074,7 +3168,7 @@ function renderVotacionJornada(jKey) {
       html += `<div class="vote-winner-badge">
         ${logo}
         <div>
-          <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:4px;color:var(--or);margin-bottom:6px">🏆 MEJOR EQUIPO DE LA JORNADA</div>
+          <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:4px;color:var(--or);margin-bottom:6px">🏆 MEJOR EQUIPO DE LA RONDA</div>
           <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:3px;color:#fff;line-height:1">${winner}</div>
           <div style="font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:#555;margin-top:4px">${Math.round((byTeam[winner]||0)/total*100)}% de los votos</div>
         </div>
@@ -2108,7 +3202,7 @@ async function setVoteConfig(jKey, updates) {
 window.setVoteConfig = setVoteConfig;
 
 async function clearVotos(jKey) {
-  if (!confirm('¿Borrar todos los votos de esta jornada?')) return;
+  if (!confirm('¿Borrar todos los votos de esta ronda?')) return;
   await dbRemove(`vcl_votos_jornada/${jKey}`);
 }
 window.clearVotos = clearVotos;
@@ -2117,7 +3211,7 @@ function renderAdminVotacion() {
   const vl = document.getElementById('admin-vote-list');
   const pl = document.getElementById('admin-pred-list');
   if (!vl || !pl) return;
-  const empty = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:32px">SIN JORNADAS AÚN</div>';
+  const empty = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:32px">SIN RONDAS AÚN</div>';
   if (!ALL_JORNADAS.length) { vl.innerHTML = empty; pl.innerHTML = empty; return; }
   const btnS = (on, colorRgb) => `style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:8px 16px;cursor:pointer;border:1px solid;background:${on?`rgba(${colorRgb},0.12)`:'transparent'};color:${on?`rgb(${colorRgb})`:'#555'};border-color:${on?`rgba(${colorRgb},0.5)`:'rgba(100,100,100,0.2)'};transition:all 0.2s"`;
   vl.innerHTML = ALL_JORNADAS.map((j, ji) => {
@@ -2172,6 +3266,61 @@ async function clearContador() {
   if (el) el.style.display = 'none';
 }
 window.clearContador = clearContador;
+
+function initRealtimeBindings() {
+  if (window.__vclRealtimeReady) return;
+  window.__vclRealtimeReady = true;
+  dbListen('vcl_teams', val => {
+    ALL_TEAMS = val ? Object.values(val) : [];
+    buildTeamsGrid();
+    buildLigaTable();
+    renderRegisteredTeams();
+    renderPlayerCards();
+    renderBracket();
+    updateDynamicStats();
+    if (document.getElementById('admin-panel').style.display !== 'none') {
+      renderAdmin();
+      renderJornadas();
+    }
+  });
+  dbListen('vcl_stats', val => {
+    ALL_STATS = val || {};
+  });
+  dbListen('vcl_jornadas', val => {
+    const entries = val ? Object.entries(val).sort(([a], [b]) => a.localeCompare(b)) : [];
+    ALL_JORNADAS = entries.map(([, round]) => round);
+    ALL_JORNADAS_KEYS = entries.map(([key]) => key);
+    renderBracket();
+    updateDynamicStats();
+    if (document.getElementById('admin-panel').style.display !== 'none') renderJornadas();
+    renderMVPs();
+    renderPredicciones();
+    renderVotacion();
+  });
+  dbListen('vcl_noticias', val => {
+    renderNoticiasPublic(val ? Object.values(val).reverse() : null);
+  });
+  dbListen('vcl_contador', val => {
+    loadContador(val);
+  });
+  dbListen('vcl_predicciones', val => {
+    ALL_PREDICCIONES = val || {};
+    renderPredicciones();
+  });
+  dbListen('vcl_pred_config', val => {
+    ALL_PRED_CONFIG = val || {};
+    renderPredicciones();
+  });
+  dbListen('vcl_votos_jornada', val => {
+    ALL_VOTOS_JORNADA = val || {};
+    if (currentVoteJKey) renderVotacionJornada(currentVoteJKey);
+  });
+  dbListen('vcl_vote_config', val => {
+    ALL_VOTE_CONFIG = val || {};
+    renderVotacion();
+  });
+}
+initRealtimeBindings();
 
 // ── MOBILE MENU ──
 function toggleMobileMenu() {
