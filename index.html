@@ -1557,42 +1557,59 @@ function blobToDataURL(blob) {
   });
 }
 
+// Convierte cualquier URL de imagen a base64, sorteando CORS con múltiples estrategias
+async function fetchImageAsBase64(url) {
+  if (!url || url.startsWith('data:')) return url;
+
+  // Intento 1: fetch directo con CORS
+  try {
+    const res = await fetch(url, { mode: 'cors' });
+    if (res.ok) {
+      const blob = await res.blob();
+      const dataURL = await blobToDataURL(blob);
+      if (dataURL) return dataURL;
+    }
+  } catch (_) {}
+
+  // Intento 2: proxy allorigins (resuelve CORS para cualquier URL pública)
+  try {
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+    const res = await fetch(proxyUrl);
+    if (res.ok) {
+      const blob = await res.blob();
+      const dataURL = await blobToDataURL(blob);
+      if (dataURL) return dataURL;
+    }
+  } catch (_) {}
+
+  // Intento 3: img crossOrigin + canvas
+  try {
+    const dataURL = await new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        try {
+          const c = document.createElement('canvas');
+          c.width = img.naturalWidth; c.height = img.naturalHeight;
+          c.getContext('2d').drawImage(img, 0, 0);
+          resolve(c.toDataURL('image/png'));
+        } catch(e) { reject(e); }
+      };
+      img.onerror = reject;
+      img.src = url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now();
+    });
+    if (dataURL) return dataURL;
+  } catch (_) {}
+
+  // Fallback: devolver URL original
+  return url;
+}
+
 async function preloadLeagueLogo() {
   if (leagueLogoDataPromise) return leagueLogoDataPromise;
-  // Intentar cargar con fetch; si falla (URL expirada de Discord u otro error CORS),
-  // intentar con un <img> crossOrigin y canvas, y si tampoco, usar la URL directa.
   leagueLogoDataPromise = (async () => {
-    // Intento 1: fetch normal
-    try {
-      const res = await fetch(LEAGUE_LOGO_URL, { mode: 'cors' });
-      if (res.ok) {
-        const blob = await res.blob();
-        const dataURL = await blobToDataURL(blob);
-        if (dataURL) { LEAGUE_LOGO_EMBED = dataURL; return LEAGUE_LOGO_EMBED; }
-      }
-    } catch (_) {}
-
-    // Intento 2: cargar como <img> con crossOrigin y dibujar en canvas
-    try {
-      const dataURL = await new Promise((resolve, reject) => {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => {
-          try {
-            const c = document.createElement('canvas');
-            c.width = img.naturalWidth; c.height = img.naturalHeight;
-            c.getContext('2d').drawImage(img, 0, 0);
-            resolve(c.toDataURL('image/png'));
-          } catch(e) { reject(e); }
-        };
-        img.onerror = reject;
-        img.src = LEAGUE_LOGO_URL + (LEAGUE_LOGO_URL.includes('?') ? '&' : '?') + '_t=' + Date.now();
-      });
-      if (dataURL) { LEAGUE_LOGO_EMBED = dataURL; return LEAGUE_LOGO_EMBED; }
-    } catch (_) {}
-
-    // Fallback: usar la URL directa (html2canvas intentará cargarla con useCORS)
-    LEAGUE_LOGO_EMBED = LEAGUE_LOGO_URL;
+    const dataURL = await fetchImageAsBase64(LEAGUE_LOGO_URL);
+    LEAGUE_LOGO_EMBED = dataURL;
     return LEAGUE_LOGO_EMBED;
   })();
   return leagueLogoDataPromise;
@@ -2071,18 +2088,8 @@ async function capturePlayerCard(cardElement, fileName) {
   await Promise.all(Array.from(teamImgs).map(async img => {
     const src = img.getAttribute('src');
     if (!src || src.startsWith('data:')) return;
-    try {
-      const res = await fetch(src, { mode: 'cors' });
-      if (res.ok) { const blob = await res.blob(); imgDataMap.set(src, await blobToDataURL(blob)); return; }
-    } catch(_) {}
-    try {
-      const dataURL = await new Promise((resolve, reject) => {
-        const i = new Image(); i.crossOrigin = 'anonymous';
-        i.onload = () => { try { const c = document.createElement('canvas'); c.width=i.naturalWidth; c.height=i.naturalHeight; c.getContext('2d').drawImage(i,0,0); resolve(c.toDataURL('image/png')); } catch(e){reject(e);} };
-        i.onerror = reject; i.src = src;
-      });
-      imgDataMap.set(src, dataURL);
-    } catch(_2) {}
+    const dataURL = await fetchImageAsBase64(src);
+    if (dataURL && dataURL !== src) imgDataMap.set(src, dataURL);
   }));
 
   const stage = document.createElement('div');
@@ -2110,7 +2117,7 @@ async function capturePlayerCard(cardElement, fileName) {
       backgroundColor: null,
       scale: 2,
       useCORS: true,
-      allowTaint: false,
+      allowTaint: true,
       logging: false
     });
     const link = document.createElement('a');
