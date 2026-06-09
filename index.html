@@ -1008,7 +1008,7 @@ footer{background:#08090b;border-top:1px solid rgba(255,107,0,0.12)}
         <label class="form-label">NOMBRE DEL CAPITÁN</label>
         <input type="text" id="f-captain" class="form-input" placeholder="Tu nombre de usuario" maxlength="30">
       </div>
-      <div class="form-label" style="margin-bottom:14px;margin-top:8px">RIOT IDs DE LOS 5 JUGADORES + HASTA 2 SUPLENTES</div>
+      <div class="form-label" style="margin-bottom:14px;margin-top:8px">RIOT IDs DE LOS 5 JUGADORES + HASTA 4 SUPLENTES</div>
       <div class="players-grid">
         <div class="form-group">
           <label class="form-label-small">JUGADOR 1 (Capitán)</label>
@@ -1031,12 +1031,20 @@ footer{background:#08090b;border-top:1px solid rgba(255,107,0,0.12)}
           <input type="text" id="p5" class="form-input" placeholder="Nombre#TAG">
         </div>
         <div class="form-group">
-          <label class="form-label-small">SUPLENTE (opcional)</label>
+          <label class="form-label-small">SUPLENTE 1 (opcional)</label>
           <input type="text" id="p6" class="form-input" placeholder="Nombre#TAG">
         </div>
         <div class="form-group">
           <label class="form-label-small">SUPLENTE 2 (opcional)</label>
           <input type="text" id="p7" class="form-input" placeholder="Nombre#TAG">
+        </div>
+        <div class="form-group">
+          <label class="form-label-small">SUPLENTE 3 (opcional)</label>
+          <input type="text" id="p8" class="form-input" placeholder="Nombre#TAG">
+        </div>
+        <div class="form-group">
+          <label class="form-label-small">SUPLENTE 4 (opcional)</label>
+          <input type="text" id="p9" class="form-input" placeholder="Nombre#TAG">
         </div>
       </div>
       <div class="form-group" style="margin-top:8px">
@@ -1272,6 +1280,8 @@ footer{background:#08090b;border-top:1px solid rgba(255,107,0,0.12)}
         <div class="form-group"><label class="form-label-small">JUGADOR 5</label><input type="text" id="admin-p5" class="form-input" placeholder="Nombre#TAG"></div>
         <div class="form-group"><label class="form-label-small">SUPLENTE 1</label><input type="text" id="admin-p6" class="form-input" placeholder="Nombre#TAG"></div>
         <div class="form-group"><label class="form-label-small">SUPLENTE 2</label><input type="text" id="admin-p7" class="form-input" placeholder="Nombre#TAG"></div>
+        <div class="form-group"><label class="form-label-small">SUPLENTE 3</label><input type="text" id="admin-p8" class="form-input" placeholder="Nombre#TAG"></div>
+        <div class="form-group"><label class="form-label-small">SUPLENTE 4</label><input type="text" id="admin-p9" class="form-input" placeholder="Nombre#TAG"></div>
       </div>
       <div class="admin-manual-bottom" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:16px;align-items:start">
         <div>
@@ -1307,7 +1317,7 @@ footer{background:#08090b;border-top:1px solid rgba(255,107,0,0.12)}
   <div id="admin-equipos" style="display:none">
     <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:28px">
       <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:14px">EDITAR EQUIPOS</div>
-      <div style="font-size:13px;color:#555;line-height:1.7">Corrige nombres, capitan, jugadores, suplentes, descripcion o logo si alguien se equivoca al inscribirse. Los 5 primeros jugadores son obligatorios; los 2 suplentes son opcionales.</div>
+      <div style="font-size:13px;color:#555;line-height:1.7">Corrige nombres, capitan, jugadores, suplentes, descripcion o logo si alguien se equivoca al inscribirse. Los 5 primeros jugadores son obligatorios; los 4 suplentes son opcionales.</div>
     </div>
     <div id="admin-teams-editor" style="display:flex;flex-direction:column;gap:18px"></div>
   </div>
@@ -2459,7 +2469,7 @@ function createTeamEntry(team, captain, players, desc, logo) {
 }
 
 function resetPublicTeamForm() {
-  ['f-team','f-captain','p1','p2','p3','p4','p5','p6','p7','f-desc'].forEach(id => document.getElementById(id).value = '');
+  ['f-team','f-captain','p1','p2','p3','p4','p5','p6','p7','p8','p9','f-desc'].forEach(id => document.getElementById(id).value = '');
   logoBase64 = null;
   document.getElementById('logo-preview-wrap').style.display = 'none';
   document.getElementById('logo-placeholder').style.display = 'block';
@@ -2470,7 +2480,7 @@ function resetPublicTeamForm() {
 }
 
 function resetAdminTeamForm() {
-  ['admin-f-team','admin-f-captain','admin-p1','admin-p2','admin-p3','admin-p4','admin-p5','admin-p6','admin-p7','admin-f-desc'].forEach(id => document.getElementById(id).value = '');
+  ['admin-f-team','admin-f-captain','admin-p1','admin-p2','admin-p3','admin-p4','admin-p5','admin-p6','admin-p7','admin-p8','admin-p9','admin-f-desc'].forEach(id => document.getElementById(id).value = '');
   adminLogoBase64 = null;
   document.getElementById('admin-logo-preview-wrap').style.display = 'none';
   document.getElementById('admin-logo-placeholder').style.display = 'block';
@@ -2482,7 +2492,7 @@ function resetAdminTeamForm() {
 async function adminAddTeam() {
   const team = document.getElementById('admin-f-team').value.trim();
   const captain = document.getElementById('admin-f-captain').value.trim();
-  const players = ['admin-p1','admin-p2','admin-p3','admin-p4','admin-p5','admin-p6','admin-p7'].map(id => document.getElementById(id).value.trim());
+  const players = ['admin-p1','admin-p2','admin-p3','admin-p4','admin-p5','admin-p6','admin-p7','admin-p8','admin-p9'].map(id => document.getElementById(id).value.trim());
   const desc = document.getElementById('admin-f-desc').value.trim();
   const msg = document.getElementById('admin-form-msg');
 
@@ -2578,6 +2588,8 @@ async function submitTeam() {
   const p5 = document.getElementById('p5').value.trim();
   const p6 = document.getElementById('p6').value.trim();
   const p7 = document.getElementById('p7').value.trim();
+  const p8 = document.getElementById('p8').value.trim();
+  const p9 = document.getElementById('p9').value.trim();
   const msg = document.getElementById('form-msg');
 
   if (!team || !captain || !p1 || !p2 || !p3 || !p4 || !p5) {
@@ -2591,7 +2603,7 @@ async function submitTeam() {
     return;
   }
 
-  const entry = createTeamEntry(team, captain, [p1,p2,p3,p4,p5,p6,p7], document.getElementById('f-desc').value.trim(), logoBase64);
+  const entry = createTeamEntry(team, captain, [p1,p2,p3,p4,p5,p6,p7,p8,p9], document.getElementById('f-desc').value.trim(), logoBase64);
 
   try {
     await dbPush('vcl_teams', entry);
@@ -2804,7 +2816,7 @@ function renderAdminTeamsEditor() {
   }
 
   container.innerHTML = ALL_TEAMS.map((t, i) => {
-    const players = [...(t.players || []), ...Array(7).fill('')].slice(0, 7);
+    const players = [...(t.players || []), ...Array(9).fill('')].slice(0, 9);
     const logo = editTeamLogoRemoved[i] ? null : (editTeamLogos[i] || t.logoBase64 || null);
     return `<div class="admin-entry" id="edit-team-card-${i}">
       <div class="admin-entry-header">
@@ -2934,7 +2946,7 @@ async function saveEditedTeam(i) {
 
   const team = document.getElementById(`edit-team-${i}`)?.value.trim();
   const captain = document.getElementById(`edit-captain-${i}`)?.value.trim();
-  const players = Array.from({ length: 7 }, (_, j) => document.getElementById(`edit-player-${i}-${j}`)?.value.trim() || '');
+  const players = Array.from({ length: 9 }, (_, j) => document.getElementById(`edit-player-${i}-${j}`)?.value.trim() || '');
   const desc = document.getElementById(`edit-desc-${i}`)?.value.trim() || '';
 
   if (!team || !captain || players.slice(0, 5).some(p => !p)) {
@@ -2992,9 +3004,9 @@ window.clearAll = clearAll;
 
 function exportCSV() {
   if (!ALL_TEAMS.length) return;
-  let csv = 'Equipo,Capitan,J1,J2,J3,J4,J5,Suplente 1,Suplente 2,Fecha\n';
+  let csv = 'Equipo,Capitan,J1,J2,J3,J4,J5,Suplente 1,Suplente 2,Suplente 3,Suplente 4,Fecha\n';
   ALL_TEAMS.forEach(t => {
-    const ps = [...(t.players||[]), ...Array(7).fill('')].slice(0,7);
+    const ps = [...(t.players||[]), ...Array(9).fill('')].slice(0,9);
     csv += `"${t.team}","${t.captain}",${ps.map(p=>`"${p}"`).join(',')},"${t.date}"\n`;
   });
   const a = document.createElement('a');
