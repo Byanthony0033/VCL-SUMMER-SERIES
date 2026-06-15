@@ -10,7 +10,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-6GZBE3C61P');
+  gtag('config', 'TU_GA_ID');
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1099,313 +1099,6 @@ footer{background:#08090b;border-top:1px solid rgba(255,107,0,0.12)}
   </div>
 </div>
 </div>
-<div id="admin-panel" class="sec" style="background:var(--bg);display:none">
-<div class="sec-inner">
-  <div class="sec-tag">ORGANIZADOR</div>
-  <h2 class="sec-title">PANEL DE ADMINISTRACIÓN</h2>
-  <p class="sec-sub">Solo visible para ti</p>
-
-  <!-- Admin tabs -->
-  <div style="display:flex;gap:0;margin-bottom:40px;border:1px solid rgba(255,107,0,0.2)">
-    <button onclick="adminTab('control')" id="tab-control" class="admin-tab active-tab">⚙️ CONTROL</button>
-    <button onclick="adminTab('inscripciones')" id="tab-inscripciones" class="admin-tab">📋 INSCRIPCIONES</button>
-    <button onclick="adminTab('equipos')" id="tab-equipos" class="admin-tab">🛠️ EQUIPOS</button>
-    <button onclick="adminTab('jornadas')" id="tab-jornadas" class="admin-tab">🏁 BRACKET</button>
-    <button onclick="adminTab('noticias')" id="tab-noticias" class="admin-tab">📰 NOTICIAS</button>
-    <button onclick="adminTab('votacion')" id="tab-votacion" class="admin-tab">🗳️ VOTACIÓN</button>
-    <button onclick="adminTab('contador')" id="tab-contador" class="admin-tab">⏱ CONTADOR</button>
-  </div>
-
-  <!-- Votacion admin panel -->
-  <div id="admin-votacion" style="display:none">
-    <div style="background:var(--card);border:1px solid rgba(255,220,0,0.2);padding:32px;margin-bottom:24px">
-      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:#ffdc00;margin-bottom:14px">MVP OFICIAL</div>
-      <div style="font-size:13px;color:#555;margin-bottom:20px;line-height:1.7">Destaca un MVP en la zona publica. Puedes escribirlo manualmente o publicarlo desde un partido del bracket con el boton "DESTACAR MVP".</div>
-      <div class="admin-field-grid" style="margin-bottom:16px">
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">JUGADOR MVP</label>
-          <input type="text" id="mvp-player" class="form-input" list="mvp-player-options" placeholder="Riot ID del jugador">
-          <datalist id="mvp-player-options"></datalist>
-        </div>
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">EQUIPO</label>
-          <input type="text" id="mvp-team" class="form-input" list="mvp-team-options" placeholder="Equipo del jugador">
-          <datalist id="mvp-team-options"></datalist>
-        </div>
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">TITULO</label>
-          <input type="text" id="mvp-title" class="form-input" placeholder="Ej: MVP de la final" maxlength="42">
-        </div>
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">CONTEXTO</label>
-          <input type="text" id="mvp-context" class="form-input" placeholder="Ej: Gran final / Jornada 1" maxlength="42">
-        </div>
-      </div>
-      <div style="margin-bottom:16px">
-        <label class="form-label" style="margin-bottom:8px;display:block">NOTA CORTA</label>
-        <textarea id="mvp-note" class="form-input" rows="2" maxlength="180" placeholder="Ej: Clutch decisivo, mejor lectura del partido..." style="resize:vertical;line-height:1.6;padding-top:12px"></textarea>
-      </div>
-      <div class="admin-action-row">
-        <button onclick="saveFeaturedMVP()" class="btn-main" style="clip-path:none;padding:14px 24px">GUARDAR MVP</button>
-        <button onclick="clearFeaturedMVP()" class="admin-mini-btn danger">QUITAR MVP</button>
-      </div>
-      <div id="featured-mvp-admin-preview" style="margin-top:18px"></div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:24px">
-      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:14px">CREAR VOTACION</div>
-      <div style="font-size:13px;color:#555;margin-bottom:20px;line-height:1.7">Crea votaciones de lo que quieras: MVP del publico, mejor jugada, partido mas esperado, equipo revelacion o decisiones rapidas de la comunidad.</div>
-      <div class="admin-field-grid" style="margin-bottom:16px">
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">PREGUNTA / TITULO</label>
-          <input type="text" id="poll-title" class="form-input" placeholder="Ej: Quien fue el MVP de la jornada?" maxlength="70">
-        </div>
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">CATEGORIA</label>
-          <select id="poll-badge" class="form-input" style="cursor:pointer">
-            <option value="VOTACION">VOTACION</option>
-            <option value="MVP PUBLICO">MVP PUBLICO</option>
-            <option value="MEJOR JUGADA">MEJOR JUGADA</option>
-            <option value="COMUNIDAD">COMUNIDAD</option>
-            <option value="FINAL">FINAL</option>
-          </select>
-        </div>
-      </div>
-      <div style="margin-bottom:16px">
-        <label class="form-label" style="margin-bottom:8px;display:block">DESCRIPCION</label>
-        <input type="text" id="poll-desc" class="form-input" placeholder="Texto opcional que explica la votacion" maxlength="160">
-      </div>
-      <div style="margin-bottom:16px">
-        <label class="form-label" style="margin-bottom:8px;display:block">OPCIONES</label>
-        <textarea id="poll-options" class="form-input" rows="5" placeholder="Una opcion por linea&#10;Jugador 1&#10;Jugador 2&#10;Jugador 3" style="resize:vertical;line-height:1.6;padding-top:12px"></textarea>
-      </div>
-      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:20px">
-        <label style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:#777;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="poll-active" checked> PUBLICAR AHORA</label>
-        <label style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:#777;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="poll-live-results" checked> RESULTADOS EN DIRECTO</label>
-      </div>
-      <div class="admin-action-row">
-        <button onclick="createCustomPoll()" class="btn-main" style="clip-path:none;padding:14px 24px">+ CREAR VOTACION</button>
-        <button onclick="prefillPollWithTeams()" class="admin-mini-btn">USAR EQUIPOS</button>
-        <button onclick="prefillPollWithPlayers()" class="admin-mini-btn">USAR JUGADORES</button>
-      </div>
-      <div id="poll-form-msg" style="display:none;margin-top:16px;padding:12px;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-align:center"></div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:24px">
-      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:14px">VOTACIONES CREADAS</div>
-      <div id="admin-polls-list" style="display:flex;flex-direction:column;gap:12px">
-        <div style="font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:32px">SIN VOTACIONES AUN</div>
-      </div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px">
-      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:14px">PREDICCIONES POR PARTIDO</div>
-      <div style="font-size:13px;color:#555;margin-bottom:20px;line-height:1.7">Activa las predicciones de una ronda para que los visitantes voten quien ganara cada cruce. Cierralas cuando se juegue para mostrar los resultados.</div>
-      <div id="admin-pred-list" style="display:flex;flex-direction:column;gap:12px">
-        <div style="font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:32px">SIN RONDAS AUN</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Control panel -->
-  <div id="admin-control">
-    <!-- Inscripciones abrir/cerrar -->
-    <div style="background:var(--card2);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:20px;position:relative">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px">
-        <div>
-          <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:8px">INSCRIPCIONES</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px" id="ctrl-insc-title">CARGANDO...</div>
-          <div style="font-size:13px;color:#555;margin-top:4px" id="ctrl-insc-sub">Estado actual de las inscripciones al torneo</div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <button onclick="setInscripciones(true)" id="btn-open-insc" class="btn-main" style="clip-path:none;padding:14px 28px;font-size:11px">🟢 ABRIR INSCRIPCIONES</button>
-          <button onclick="setInscripciones(false)" id="btn-close-insc" style="background:rgba(232,25,44,0.15);border:1px solid rgba(232,25,44,0.3);color:#e8192c;padding:14px 28px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;cursor:pointer">🔴 CERRAR INSCRIPCIONES</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Estado del torneo -->
-    <div style="background:var(--card2);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:20px">
-      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:16px">ESTADO DEL TORNEO</div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <button onclick="setTorneoStatus('proximas')" id="sts-proximas" class="sts-btn" style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;padding:10px 20px;cursor:pointer;border:1px solid;transition:all 0.2s">📢 PRÓXIMAMENTE</button>
-        <button onclick="setTorneoStatus('inscripciones')" id="sts-inscripciones" class="sts-btn" style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;padding:10px 20px;cursor:pointer;border:1px solid;transition:all 0.2s">📝 EN INSCRIPCIÓN</button>
-        <button onclick="setTorneoStatus('en_curso')" id="sts-en_curso" class="sts-btn" style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;padding:10px 20px;cursor:pointer;border:1px solid;transition:all 0.2s">🎮 EN CURSO</button>
-        <button onclick="setTorneoStatus('finalizado')" id="sts-finalizado" class="sts-btn" style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;padding:10px 20px;cursor:pointer;border:1px solid;transition:all 0.2s">🏆 FINALIZADO</button>
-      </div>
-      <div style="font-size:13px;color:#444;margin-top:14px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px">Estado visible en el banner del héroe y en la nav</div>
-    </div>
-
-    <!-- Resumen rápido -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(255,107,0,0.1);border:1px solid rgba(255,107,0,0.1)">
-      <div style="background:var(--card2);padding:24px;text-align:center">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--or)" id="ctrl-num-equipos">0</div>
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#444">EQUIPOS INSCRITOS</div>
-      </div>
-      <div style="background:var(--card2);padding:24px;text-align:center">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--or)" id="ctrl-num-jornadas">0</div>
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#444">RONDAS CREADAS</div>
-      </div>
-      <div style="background:var(--card2);padding:24px;text-align:center">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:#00c850" id="ctrl-num-jugados">0</div>
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#444">PARTIDOS JUGADOS</div>
-      </div>
-      <div style="background:var(--card2);padding:24px;text-align:center">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:#555" id="ctrl-num-pendientes">0</div>
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:#444">PENDIENTES</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Inscripciones panel -->
-  <div id="admin-inscripciones" style="display:none">
-    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:28px">
-      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:14px">ALTA MANUAL</div>
-      <div style="font-size:13px;color:#555;margin-bottom:20px;line-height:1.7">Desde aquí puedes inscribir equipos manualmente si a alguno no le deja entrar por el formulario público.</div>
-      <div class="admin-manual-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:16px">
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">NOMBRE DEL EQUIPO</label>
-          <input type="text" id="admin-f-team" class="form-input" placeholder="Ej: Phoenix Rising" maxlength="30">
-        </div>
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">CAPITÁN</label>
-          <input type="text" id="admin-f-captain" class="form-input" placeholder="Usuario del capitán" maxlength="30">
-        </div>
-      </div>
-      <div class="players-grid" style="margin-bottom:16px">
-        <div class="form-group"><label class="form-label-small">JUGADOR 1</label><input type="text" id="admin-p1" class="form-input" placeholder="Nombre#TAG"></div>
-        <div class="form-group"><label class="form-label-small">JUGADOR 2</label><input type="text" id="admin-p2" class="form-input" placeholder="Nombre#TAG"></div>
-        <div class="form-group"><label class="form-label-small">JUGADOR 3</label><input type="text" id="admin-p3" class="form-input" placeholder="Nombre#TAG"></div>
-        <div class="form-group"><label class="form-label-small">JUGADOR 4</label><input type="text" id="admin-p4" class="form-input" placeholder="Nombre#TAG"></div>
-        <div class="form-group"><label class="form-label-small">JUGADOR 5</label><input type="text" id="admin-p5" class="form-input" placeholder="Nombre#TAG"></div>
-        <div class="form-group"><label class="form-label-small">SUPLENTE 1</label><input type="text" id="admin-p6" class="form-input" placeholder="Nombre#TAG"></div>
-        <div class="form-group"><label class="form-label-small">SUPLENTE 2</label><input type="text" id="admin-p7" class="form-input" placeholder="Nombre#TAG"></div>
-        <div class="form-group"><label class="form-label-small">SUPLENTE 3</label><input type="text" id="admin-p8" class="form-input" placeholder="Nombre#TAG"></div>
-        <div class="form-group"><label class="form-label-small">SUPLENTE 4</label><input type="text" id="admin-p9" class="form-input" placeholder="Nombre#TAG"></div>
-      </div>
-      <div class="admin-manual-bottom" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:16px;align-items:start">
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">DESCRIPCIÓN</label>
-          <textarea id="admin-f-desc" class="form-input" rows="4" maxlength="400" placeholder="Historia breve, estilo de juego o cualquier detalle útil..." style="resize:vertical;line-height:1.6;padding-top:12px"></textarea>
-        </div>
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">LOGO DEL EQUIPO</label>
-          <div id="admin-logo-drop" style="border:1px dashed rgba(255,107,0,0.3);background:#0a0a0a;padding:20px;text-align:center;cursor:pointer;transition:border-color 0.2s" onclick="document.getElementById('admin-f-logo').click()">
-            <input type="file" id="admin-f-logo" accept="image/*" style="display:none" onchange="handleAdminLogoChange(event)">
-            <div id="admin-logo-preview-wrap" style="display:none;margin-bottom:10px">
-              <img id="admin-logo-preview" style="width:64px;height:64px;object-fit:contain;border-radius:50%;border:1px solid rgba(255,107,0,0.3)">
-            </div>
-            <div id="admin-logo-placeholder">
-              <div style="font-size:26px;margin-bottom:6px">🖼️</div>
-              <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#444">SUBIR LOGO</div>
-            </div>
-            <div id="admin-logo-name" style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--or);margin-top:8px;display:none"></div>
-          </div>
-        </div>
-      </div>
-      <div id="admin-form-msg" style="display:none;margin-top:16px;padding:14px 20px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;text-align:center"></div>
-      <button onclick="adminAddTeam()" class="btn-main" style="margin-top:20px;clip-path:none;padding:14px 28px">+ INSCRIBIR EQUIPO MANUALMENTE</button>
-    </div>
-    <div id="admin-list" style="display:flex;flex-direction:column;gap:16px"></div>
-    <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap">
-      <button onclick="exportCSV()" class="btn-ghost" style="clip-path:none">📥 EXPORTAR CSV</button>
-      <button onclick="clearAll()" style="background:rgba(232,25,44,0.15);border:1px solid rgba(232,25,44,0.3);color:#e8192c;padding:16px 32px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;cursor:pointer">🗑️ BORRAR TODO</button>
-    </div>
-  </div>
-
-  <!-- Equipos panel -->
-  <div id="admin-equipos" style="display:none">
-    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:28px">
-      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:14px">EDITAR EQUIPOS</div>
-      <div style="font-size:13px;color:#555;line-height:1.7">Corrige nombres, capitan, jugadores, suplentes, descripcion o logo si alguien se equivoca al inscribirse. Los 5 primeros jugadores son obligatorios; los 4 suplentes son opcionales.</div>
-    </div>
-    <div id="admin-teams-editor" style="display:flex;flex-direction:column;gap:18px"></div>
-  </div>
-
-  <!-- Jornadas panel -->
-  <div id="admin-jornadas" style="display:none">
-    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:28px">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
-        <div style="max-width:720px">
-          <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:5px;color:var(--or);margin-bottom:10px">GESTIÓN DEL BRACKET</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:2px;color:#fff;line-height:1">CREA EL CUADRO DEL TORNEO</div>
-          <div style="font-size:13px;color:#555;margin-top:10px;line-height:1.7">Pulsa crear bracket y se montara un cuadro clasico con los equipos actuales. Los huecos sin cerrar saldran con un signo de interrogacion para que no se repartan byes raros antes de tiempo.</div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <button onclick="crearBracket()" class="btn-main" style="clip-path:none;padding:14px 28px;white-space:nowrap">🏁 CREAR BRACKET</button>
-          <button onclick="borrarBracket()" style="background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;padding:14px 24px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;cursor:pointer">🗑 BORRAR BRACKET</button>
-        </div>
-      </div>
-      <div id="admin-bracket-meta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px"></div>
-    </div>
-    <div id="jornadas-list" style="display:flex;flex-direction:column;gap:24px"></div>
-  </div>
-
-  <!-- Noticias panel -->
-  <div id="admin-noticias" style="display:none">
-    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;margin-bottom:32px">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">TIPO DE BADGE</label>
-          <select id="n-badge" class="form-input" style="cursor:pointer">
-            <option value="badge-orange">ANUNCIO</option>
-            <option value="badge-blue">FORMATO</option>
-            <option value="badge-green">INSCRIPCIÓN</option>
-          </select>
-        </div>
-        <div>
-          <label class="form-label" style="margin-bottom:8px;display:block">FECHA</label>
-          <input type="text" id="n-date" class="form-input" placeholder="Ej: JUNIO 2026">
-        </div>
-      </div>
-      <div style="margin-bottom:16px">
-        <label class="form-label" style="margin-bottom:8px;display:block">TÍTULO</label>
-        <input type="text" id="n-title" class="form-input" placeholder="Título de la noticia" maxlength="60">
-      </div>
-      <div style="margin-bottom:20px">
-        <label class="form-label" style="margin-bottom:8px;display:block">TEXTO</label>
-        <textarea id="n-text" class="form-input" rows="3" placeholder="Texto de la noticia..." maxlength="300" style="resize:vertical;line-height:1.6;padding-top:12px"></textarea>
-      </div>
-      <button onclick="addNoticia()" class="btn-main" style="clip-path:none;padding:14px 28px">+ PUBLICAR NOTICIA</button>
-    </div>
-    <div id="noticias-admin-list" style="display:flex;flex-direction:column;gap:12px"></div>
-  </div>
-
-  <!-- Contador panel -->
-  <div id="admin-contador" style="display:none">
-    <div style="background:var(--card);border:1px solid rgba(255,107,0,0.15);padding:32px;max-width:500px">
-      <div class="form-group">
-        <label class="form-label" style="margin-bottom:8px;display:block">TEXTO DEL CONTADOR</label>
-        <input type="text" id="cnt-label" class="form-input" placeholder="Ej: INICIO DEL TORNEO" maxlength="40">
-      </div>
-      <div class="form-group">
-        <label class="form-label" style="margin-bottom:8px;display:block">FECHA Y HORA DE INICIO</label>
-        <input type="datetime-local" id="cnt-date" class="form-input">
-      </div>
-      <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">
-        <button onclick="saveContador()" class="btn-main" style="clip-path:none;padding:14px 28px">💾 GUARDAR</button>
-        <button onclick="clearContador()" style="background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;padding:14px 24px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:1px;cursor:pointer">🗑 QUITAR</button>
-      </div>
-      <div id="cnt-msg" style="display:none;margin-top:16px;padding:12px;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-align:center;background:rgba(0,200,80,0.08);border:1px solid rgba(0,200,80,0.3);color:#00c850">✅ GUARDADO</div>
-    </div>
-  </div>
-
-</div>
-</div>
-
-<!-- ── ADMIN LOGIN ── -->
-<div id="admin-login" style="position:fixed;bottom:20px;right:20px;z-index:600">
-  <button onclick="toggleAdmin()" style="background:rgba(8,8,8,0.9);border:1px solid rgba(255,107,0,0.2);color:#333;padding:10px 16px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;cursor:pointer;backdrop-filter:blur(10px)">⚙ ADMIN</button>
-</div>
-<div id="admin-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:700;display:none;align-items:center;justify-content:center">
-  <div style="background:var(--bg2);border:1px solid rgba(255,107,0,0.3);padding:48px;width:360px;text-align:center">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:3px;margin-bottom:24px">ACCESO ADMIN</div>
-    <input type="password" id="admin-pass" placeholder="Contraseña" style="width:100%;background:#111;border:1px solid rgba(255,107,0,0.2);color:#fff;padding:14px 18px;font-family:'Orbitron',monospace;font-size:12px;margin-bottom:16px;outline:none;box-sizing:border-box">
-    <button onclick="checkAdmin()" style="width:100%;background:var(--grad);border:none;color:#fff;padding:14px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;cursor:pointer">ENTRAR</button>
-    <button onclick="closeAdminModal()" style="margin-top:12px;background:none;border:none;color:#444;font-family:'Orbitron',monospace;font-size:10px;cursor:pointer;letter-spacing:1px">CANCELAR</button>
-  </div>
-</div>
-
 <footer>
 <div class="footer-inner">
   <div class="footer-top">
@@ -1470,7 +1163,8 @@ const firebaseConfig = {
   projectId: "vcl-summer-series",
   storageBucket: "vcl-summer-series.firebasestorage.app",
   messagingSenderId: "432858495293",
-  appId: "1:432858495293:web:4cc7edada59b6495d2ed54"
+  appId: "1:432858495293:web:4cc7edada59b6495d2ed54",
+  measurementId: "G-6GZBE3C61P"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -1625,34 +1319,8 @@ async function preloadLeagueLogo() {
   return leagueLogoDataPromise;
 }
 
-function nextPowerOfTwo(value) {
-  let size = 1;
-  const target = Math.max(2, value || 0);
-  while (size < target) size *= 2;
-  return size;
-}
 
-function buildSeedOrder(size) {
-  let order = [1, 2];
-  while (order.length < size) {
-    const sum = order.length * 2 + 1;
-    const next = [];
-    order.forEach(seed => {
-      next.push(seed, sum - seed);
-    });
-    order = next;
-  }
-  return order;
-}
 
-function getRoundName(matchCount, roundIndex) {
-  if (matchCount === 1) return 'Gran final';
-  if (matchCount === 2) return 'Semifinales';
-  if (matchCount === 4) return 'Cuartos de final';
-  if (matchCount === 8) return 'Octavos de final';
-  if (matchCount === 16) return 'Dieciseisavos';
-  return `Ronda ${roundIndex + 1}`;
-}
 
 function getStageShort(roundName) {
   const map = {
@@ -1726,61 +1394,6 @@ function getTournamentStats() {
   return stats;
 }
 
-// ── ESCUCHAR CAMBIOS EN TIEMPO REAL ──
-if (false) {
-dbListen('vcl_teams', val => {
-  const entries = val ? Object.entries(val) : [];
-  ALL_TEAM_KEYS = entries.map(([key]) => key);
-  ALL_TEAMS = entries.map(([, team]) => team);
-  buildTeamsGrid();
-  buildLigaTable();
-  renderRegisteredTeams();
-  renderPlayerCards();
-  renderBracket();
-  updateDynamicStats();
-  if (document.getElementById('admin-panel').style.display !== 'none') {
-    renderAdmin();
-    renderAdminTeamsEditor();
-    renderJornadas();
-  }
-});
-dbListen('vcl_stats', val => {
-  ALL_STATS = val || {};
-});
-dbListen('vcl_jornadas', val => {
-  const entries = val ? Object.entries(val).sort(([a], [b]) => a.localeCompare(b)) : [];
-  ALL_JORNADAS = entries.map(([, round]) => round);
-  ALL_JORNADAS_KEYS = entries.map(([key]) => key);
-  renderBracket();
-  updateDynamicStats();
-  if (document.getElementById('admin-panel').style.display !== 'none') renderJornadas();
-  renderMVPs();
-  renderPredicciones();
-  renderVotacion();
-});
-dbListen('vcl_noticias', val => {
-  renderNoticiasPublic(val ? Object.values(val).reverse() : null);
-});
-dbListen('vcl_contador', val => {
-  loadContador(val);
-});
-dbListen('vcl_predicciones', val => {
-  ALL_PREDICCIONES = val || {};
-  renderPredicciones();
-});
-dbListen('vcl_pred_config', val => {
-  ALL_PRED_CONFIG = val || {};
-  renderPredicciones();
-});
-dbListen('vcl_votos_jornada', val => {
-  ALL_VOTOS_JORNADA = val || {};
-  if (currentVoteJKey) renderVotacionJornada(currentVoteJKey);
-});
-dbListen('vcl_vote_config', val => {
-  ALL_VOTE_CONFIG = val || {};
-  renderVotacion();
-});
-}
 
 // ── GET ALL TEAMS ──
 function getAllTeams() {
@@ -2416,7 +2029,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ── CONTRASEÑA ADMIN ──
-const ADMIN_PASSWORD = 'vcl2026';
+// ── (panel admin eliminado: ahora se gestiona desde la web admin) ──
 
 // ── LOGO HANDLER ──
 let logoBase64 = null;
@@ -2439,23 +2052,6 @@ function handleLogoChange(e) {
 window.handleLogoChange = handleLogoChange;
 
 let adminLogoBase64 = null;
-function handleAdminLogoChange(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  if (file.size > 2 * 1024 * 1024) { alert('Máximo 2MB.'); return; }
-  const reader = new FileReader();
-  reader.onload = ev => {
-    adminLogoBase64 = ev.target.result;
-    document.getElementById('admin-logo-preview').src = adminLogoBase64;
-    document.getElementById('admin-logo-preview-wrap').style.display = 'block';
-    document.getElementById('admin-logo-placeholder').style.display = 'none';
-    document.getElementById('admin-logo-name').style.display = 'block';
-    document.getElementById('admin-logo-name').textContent = '✓ ' + file.name;
-    document.getElementById('admin-logo-drop').style.borderColor = 'rgba(255,107,0,0.6)';
-  };
-  reader.readAsDataURL(file);
-}
-window.handleAdminLogoChange = handleAdminLogoChange;
 
 function createTeamEntry(team, captain, players, desc, logo) {
   return {
@@ -2479,48 +2075,7 @@ function resetPublicTeamForm() {
   document.getElementById('f-logo').value = '';
 }
 
-function resetAdminTeamForm() {
-  ['admin-f-team','admin-f-captain','admin-p1','admin-p2','admin-p3','admin-p4','admin-p5','admin-p6','admin-p7','admin-p8','admin-p9','admin-f-desc'].forEach(id => document.getElementById(id).value = '');
-  adminLogoBase64 = null;
-  document.getElementById('admin-logo-preview-wrap').style.display = 'none';
-  document.getElementById('admin-logo-placeholder').style.display = 'block';
-  document.getElementById('admin-logo-name').style.display = 'none';
-  document.getElementById('admin-logo-drop').style.borderColor = '';
-  document.getElementById('admin-f-logo').value = '';
-}
 
-async function adminAddTeam() {
-  const team = document.getElementById('admin-f-team').value.trim();
-  const captain = document.getElementById('admin-f-captain').value.trim();
-  const players = ['admin-p1','admin-p2','admin-p3','admin-p4','admin-p5','admin-p6','admin-p7','admin-p8','admin-p9'].map(id => document.getElementById(id).value.trim());
-  const desc = document.getElementById('admin-f-desc').value.trim();
-  const msg = document.getElementById('admin-form-msg');
-
-  if (!team || !captain || players.slice(0, 5).some(p => !p)) {
-    msg.style.cssText = 'display:block;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
-    msg.textContent = '⚠ COMPLETA EQUIPO, CAPITÁN Y LOS 5 TITULARES';
-    return;
-  }
-  if (ALL_TEAMS.some(t => t.team.toLowerCase() === team.toLowerCase())) {
-    msg.style.cssText = 'display:block;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
-    msg.textContent = '⚠ YA EXISTE UN EQUIPO CON ESE NOMBRE';
-    return;
-  }
-
-  try {
-    const entry = createTeamEntry(team, captain, players, desc, adminLogoBase64);
-    await dbPush('vcl_teams', entry);
-    sendDiscordNotification(entry);
-    msg.style.cssText = 'display:block;background:rgba(0,200,80,0.08);border:1px solid rgba(0,200,80,0.3);color:#00c850;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
-    msg.textContent = '✅ EQUIPO INSCRITO MANUALMENTE';
-    resetAdminTeamForm();
-    setTimeout(() => { msg.style.display = 'none'; }, 2200);
-  } catch (e) {
-    msg.style.cssText = 'display:block;background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.3);color:#e8192c;margin-top:16px;padding:14px 20px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;text-align:center';
-    msg.textContent = '❌ NO SE PUDO INSCRIBIR EL EQUIPO';
-  }
-}
-window.adminAddTeam = adminAddTeam;
 
 document.getElementById('f-desc').addEventListener('input', function() {
   document.getElementById('desc-count').textContent = this.value.length;
@@ -2649,17 +2204,6 @@ function applyInscripcionesStatus(open) {
   if (btnClose) btnClose.style.opacity = open ? '1' : '0.4';
 }
 
-async function setInscripciones(open) {
-  try {
-    const current = await dbGet('vcl_config') || {};
-    await dbSet('vcl_config', { ...current, inscripcionesAbiertas: open });
-    applyInscripcionesStatus(open);
-    // Update nav CTA if closed
-    const navCta = document.querySelector('.nav-cta');
-    if (navCta) { navCta.textContent = open ? '🎮 UNIRSE' : '🔒 CERRADO'; }
-  } catch(e) { alert('Error al guardar.'); }
-}
-window.setInscripciones = setInscripciones;
 
 const TORNEO_STATUS_LABELS = {
   proximas: { label: 'PRÓXIMAMENTE', color: '#555', bg: 'rgba(100,100,100,0.1)', border: 'rgba(100,100,100,0.3)' },
@@ -2691,14 +2235,6 @@ function applyTorneoStatus(status) {
   });
 }
 
-async function setTorneoStatus(status) {
-  try {
-    const current = await dbGet('vcl_config') || {};
-    await dbSet('vcl_config', { ...current, torneoStatus: status });
-    applyTorneoStatus(status);
-  } catch(e) { alert('Error al guardar.'); }
-}
-window.setTorneoStatus = setTorneoStatus;
 
 function updateControlStats() {
   const ne = document.getElementById('ctrl-num-equipos');
@@ -2718,559 +2254,28 @@ function updateControlStats() {
   if (npend) npend.textContent = pendientes;
 }
 
-// ── CONTROL ──
-let adminOpen = false;
-function toggleAdmin() {
-  const modal = document.getElementById('admin-modal');
-  modal.style.display = adminOpen ? 'none' : 'flex';
-  adminOpen = !adminOpen;
-}
-function closeAdminModal() {
-  document.getElementById('admin-modal').style.display = 'none';
-  adminOpen = false;
-}
-function checkAdmin() {
-  const pass = document.getElementById('admin-pass').value;
-  if (pass === ADMIN_PASSWORD) {
-    document.getElementById('admin-modal').style.display = 'none';
-    adminOpen = false;
-    document.getElementById('admin-panel').style.display = 'block';
-    document.getElementById('admin-panel').scrollIntoView({behavior:'smooth'});
-    adminTab('control');
-    renderAdmin();
-    renderAdminTeamsEditor();
-    renderJornadas();
-  } else {
-    document.getElementById('admin-pass').style.borderColor = 'rgba(232,25,44,0.5)';
-    setTimeout(() => document.getElementById('admin-pass').style.borderColor = '', 1000);
-  }
-}
-window.toggleAdmin = toggleAdmin;
-window.closeAdminModal = closeAdminModal;
-window.checkAdmin = checkAdmin;
-document.getElementById('admin-pass').addEventListener('keydown', e => { if (e.key === 'Enter') checkAdmin(); });
 
-function adminTab(tab) {
-  ['control','inscripciones','equipos','jornadas','noticias','votacion','contador'].forEach(t => {
-    const el = document.getElementById('admin-' + t);
-    if (el) el.style.display = 'none';
-    const btn = document.getElementById('tab-' + t);
-    if (btn) btn.classList.remove('active-tab');
-  });
-  const panel = document.getElementById('admin-' + tab);
-  if (panel) panel.style.display = 'block';
-  const tabBtn = document.getElementById('tab-' + tab);
-  if (tabBtn) tabBtn.classList.add('active-tab');
-  if (tab === 'control') { loadInscripcionesStatus(); updateControlStats(); }
-  if (tab === 'equipos') renderAdminTeamsEditor();
-  if (tab === 'jornadas') renderJornadas();
-  if (tab === 'noticias') renderNoticiasAdmin();
-  if (tab === 'votacion') renderAdminVotacion();
-  if (tab === 'contador') {
-    dbGet('vcl_contador').then(val => {
-      if (val) {
-        if (document.getElementById('cnt-label')) document.getElementById('cnt-label').value = val.label || '';
-        if (document.getElementById('cnt-date')) document.getElementById('cnt-date').value = val.date || '';
-      }
-    });
-  }
-}
-window.adminTab = adminTab;
-
-function renderAdmin() {
-  const list = document.getElementById('admin-list');
-  if (ALL_TEAMS.length === 0) {
-    list.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:40px">SIN INSCRIPCIONES AÚN</div>';
-    return;
-  }
-  list.innerHTML = ALL_TEAMS.map((t, i) => `
-    <div class="admin-entry">
-      <div class="admin-entry-header">
-        <div style="display:flex;align-items:center;gap:16px">
-          ${t.logoBase64
-            ? `<img src="${t.logoBase64}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,107,0,0.3);flex-shrink:0">`
-            : `<div style="width:52px;height:52px;border-radius:50%;background:rgba(255,107,0,0.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🎮</div>`}
-          <div><div class="admin-team-name">${t.team}</div><div class="admin-captain">CAPITÁN: ${t.captain}</div></div>
-        </div>
-        <button onclick="deleteTeam(${i})" style="background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.2);color:#e8192c;padding:8px 16px;font-family:Orbitron,monospace;font-size:9px;letter-spacing:1px;cursor:pointer">✕ ELIMINAR</button>
-      </div>
-      <div class="admin-players">${(t.players||[]).map((p,j) => `<div class="admin-player-tag">${j===0?'⭐ ':''}${p}</div>`).join('')}</div>
-      ${t.desc ? `<div style="font-size:13px;color:#555;margin-top:10px;line-height:1.6;border-left:2px solid rgba(255,107,0,0.3);padding-left:12px">${t.desc}</div>` : ''}
-      <div class="admin-date">Inscrito: ${t.date}</div>
-    </div>`).join('');
-}
 
 let editTeamLogos = {};
 let editTeamLogoRemoved = {};
 
-function getTeamKeyByIndex(i) {
-  return ALL_TEAM_KEYS[i] || null;
-}
 
-function renderAdminTeamsEditor() {
-  const container = document.getElementById('admin-teams-editor');
-  if (!container) return;
-  if (!ALL_TEAMS.length) {
-    container.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:40px">SIN EQUIPOS PARA EDITAR</div>';
-    return;
-  }
 
-  container.innerHTML = ALL_TEAMS.map((t, i) => {
-    const players = [...(t.players || []), ...Array(9).fill('')].slice(0, 9);
-    const logo = editTeamLogoRemoved[i] ? null : (editTeamLogos[i] || t.logoBase64 || null);
-    return `<div class="admin-entry" id="edit-team-card-${i}">
-      <div class="admin-entry-header">
-        <div style="display:flex;align-items:center;gap:16px">
-          <div id="edit-logo-preview-${i}">
-            ${logo
-              ? `<img src="${logo}" style="width:58px;height:58px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,107,0,0.3);flex-shrink:0">`
-              : `<div style="width:58px;height:58px;border-radius:50%;background:rgba(255,107,0,0.1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">LOGO</div>`}
-          </div>
-          <div>
-            <div class="admin-team-name">${escapeHtml(t.team || 'Equipo')}</div>
-            <div class="admin-captain">EDITAR DATOS DEL EQUIPO</div>
-          </div>
-        </div>
-        <div class="admin-action-row">
-          <input type="file" id="edit-logo-file-${i}" accept="image/*" style="display:none" onchange="handleEditTeamLogoChange(event,${i})">
-          <button onclick="document.getElementById('edit-logo-file-${i}').click()" class="admin-mini-btn">CAMBIAR LOGO</button>
-          <button onclick="clearEditTeamLogo(${i})" class="admin-mini-btn danger">QUITAR LOGO</button>
-        </div>
-      </div>
-      <div class="admin-field-grid" style="margin-bottom:16px">
-        <div>
-          <label class="form-label-small">NOMBRE DEL EQUIPO</label>
-          <input type="text" id="edit-team-${i}" class="form-input" value="${escapeHtml(t.team || '')}" maxlength="30">
-        </div>
-        <div>
-          <label class="form-label-small">CAPITAN</label>
-          <input type="text" id="edit-captain-${i}" class="form-input" value="${escapeHtml(t.captain || '')}" maxlength="30">
-        </div>
-      </div>
-      <div class="players-grid" style="margin-bottom:16px">
-        ${players.map((player, j) => `<div class="form-group">
-          <label class="form-label-small">${j < 5 ? `JUGADOR ${j + 1}${j === 0 ? ' (CAPITAN)' : ''}` : `SUPLENTE ${j - 4}`}</label>
-          <input type="text" id="edit-player-${i}-${j}" class="form-input" value="${escapeHtml(player || '')}" placeholder="Nombre#TAG">
-        </div>`).join('')}
-      </div>
-      <div style="margin-bottom:16px">
-        <label class="form-label-small">DESCRIPCION</label>
-        <textarea id="edit-desc-${i}" class="form-input" rows="3" maxlength="400" style="resize:vertical;line-height:1.6;padding-top:12px">${escapeHtml(t.desc || '')}</textarea>
-      </div>
-      <div class="admin-action-row">
-        <button onclick="saveEditedTeam(${i})" class="btn-main" style="clip-path:none;padding:13px 22px;font-size:10px">GUARDAR CAMBIOS</button>
-        <button onclick="renderAdminTeamsEditor()" class="admin-mini-btn">DESCARTAR</button>
-        <button onclick="deleteTeam(${i})" class="admin-mini-btn danger">ELIMINAR EQUIPO</button>
-      </div>
-      <div id="edit-team-msg-${i}" style="display:none;margin-top:14px;padding:12px;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-align:center"></div>
-    </div>`;
-  }).join('');
-}
-window.renderAdminTeamsEditor = renderAdminTeamsEditor;
 
-function setEditTeamMessage(i, text, ok = true) {
-  const msg = document.getElementById(`edit-team-msg-${i}`);
-  if (!msg) return;
-  msg.style.display = 'block';
-  msg.style.background = ok ? 'rgba(0,200,80,0.08)' : 'rgba(232,25,44,0.08)';
-  msg.style.border = ok ? '1px solid rgba(0,200,80,0.3)' : '1px solid rgba(232,25,44,0.3)';
-  msg.style.color = ok ? '#00c850' : '#e8192c';
-  msg.textContent = text;
-}
 
-function handleEditTeamLogoChange(e, i) {
-  const file = e.target.files[0];
-  if (!file) return;
-  if (file.size > 2 * 1024 * 1024) { alert('Maximo 2MB.'); return; }
-  const reader = new FileReader();
-  reader.onload = ev => {
-    editTeamLogos[i] = ev.target.result;
-    editTeamLogoRemoved[i] = false;
-    const preview = document.getElementById(`edit-logo-preview-${i}`);
-    if (preview) preview.innerHTML = `<img src="${editTeamLogos[i]}" style="width:58px;height:58px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,107,0,0.3);flex-shrink:0">`;
-  };
-  reader.readAsDataURL(file);
-}
-window.handleEditTeamLogoChange = handleEditTeamLogoChange;
 
-function clearEditTeamLogo(i) {
-  delete editTeamLogos[i];
-  editTeamLogoRemoved[i] = true;
-  const preview = document.getElementById(`edit-logo-preview-${i}`);
-  if (preview) preview.innerHTML = '<div style="width:58px;height:58px;border-radius:50%;background:rgba(255,107,0,0.1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">LOGO</div>';
-}
-window.clearEditTeamLogo = clearEditTeamLogo;
 
-async function replaceTeamNameEverywhere(oldName, newName) {
-  if (!oldName || !newName || oldName === newName) return;
 
-  let bracketChanged = false;
-  const rounds = cloneData(ALL_JORNADAS || []);
-  rounds.forEach(round => (round.partidos || []).forEach(match => {
-    ['local','visitante','winner'].forEach(field => {
-      if (match[field] === oldName) { match[field] = newName; bracketChanged = true; }
-    });
-  }));
-  if (bracketChanged) await saveBracketRounds(normalizeBracketRounds(rounds));
 
-  let predChanged = false;
-  const pred = cloneData(ALL_PREDICCIONES || {});
-  Object.values(pred).forEach(matchVotes => {
-    Object.keys(matchVotes || {}).forEach(voterId => {
-      const vote = matchVotes[voterId];
-      if (vote === oldName) { matchVotes[voterId] = newName; predChanged = true; }
-      else if (vote && typeof vote === 'object' && vote.ganador === oldName) {
-        vote.ganador = newName;
-        predChanged = true;
-      }
-    });
-  });
-  if (predChanged) await dbSet('vcl_predicciones', pred);
 
-  let pollsChanged = false;
-  const polls = cloneData(ALL_CUSTOM_POLLS || {});
-  Object.values(polls).forEach(poll => (poll.options || []).forEach(opt => {
-    if (opt.text === oldName) { opt.text = newName; pollsChanged = true; }
-  }));
-  if (pollsChanged) await dbSet('vcl_custom_polls', polls);
 
-  if (FEATURED_MVP?.team === oldName) {
-    await dbSet('vcl_featured_mvp', { ...FEATURED_MVP, team: newName, updatedAt: Date.now() });
-  }
-}
 
-async function saveEditedTeam(i) {
-  const original = ALL_TEAMS[i];
-  const key = getTeamKeyByIndex(i);
-  if (!original || !key) { setEditTeamMessage(i, 'No se encontro la clave del equipo.', false); return; }
 
-  const team = document.getElementById(`edit-team-${i}`)?.value.trim();
-  const captain = document.getElementById(`edit-captain-${i}`)?.value.trim();
-  const players = Array.from({ length: 9 }, (_, j) => document.getElementById(`edit-player-${i}-${j}`)?.value.trim() || '');
-  const desc = document.getElementById(`edit-desc-${i}`)?.value.trim() || '';
 
-  if (!team || !captain || players.slice(0, 5).some(p => !p)) {
-    setEditTeamMessage(i, 'Completa nombre, capitan y los 5 titulares.', false);
-    return;
-  }
-  const duplicate = ALL_TEAMS.some((t, idx) => idx !== i && String(t.team || '').toLowerCase() === team.toLowerCase());
-  if (duplicate) { setEditTeamMessage(i, 'Ya existe otro equipo con ese nombre.', false); return; }
 
-  const payload = {
-    ...original,
-    team,
-    captain,
-    players: players.filter(Boolean),
-    desc,
-    logoBase64: editTeamLogoRemoved[i] ? null : (editTeamLogos[i] || original.logoBase64 || null),
-    updatedAt: new Date().toLocaleString('es-ES')
-  };
 
-  try {
-    await dbSet(`vcl_teams/${key}`, payload);
-    await replaceTeamNameEverywhere(original.team, team);
-    delete editTeamLogos[i];
-    delete editTeamLogoRemoved[i];
-    setEditTeamMessage(i, 'Cambios guardados.', true);
-  } catch (err) {
-    console.error('[VCL] Error editando equipo:', err);
-    setEditTeamMessage(i, 'No se pudo guardar el equipo.', false);
-  }
-}
-window.saveEditedTeam = saveEditedTeam;
 
-async function deleteTeam(i) {
-  if (!confirm('¿Eliminar este equipo?')) return;
-  const key = getTeamKeyByIndex(i);
-  if (!key) return;
-  await dbRemove('vcl_teams/' + key);
-}
-window.deleteTeam = deleteTeam;
 
-async function clearAll() {
-  if (!confirm('¿Borrar TODOS los datos?')) return;
-  await dbRemove('vcl_teams');
-  await dbRemove('vcl_stats');
-  await dbRemove('vcl_jornadas');
-  await dbRemove('vcl_predicciones');
-  await dbRemove('vcl_pred_config');
-  await dbRemove('vcl_votos_jornada');
-  await dbRemove('vcl_vote_config');
-  await dbRemove('vcl_custom_polls');
-  await dbRemove('vcl_custom_votes');
-  await dbRemove('vcl_featured_mvp');
-}
-window.clearAll = clearAll;
-
-function exportCSV() {
-  if (!ALL_TEAMS.length) return;
-  let csv = 'Equipo,Capitan,J1,J2,J3,J4,J5,Suplente 1,Suplente 2,Suplente 3,Suplente 4,Fecha\n';
-  ALL_TEAMS.forEach(t => {
-    const ps = [...(t.players||[]), ...Array(9).fill('')].slice(0,9);
-    csv += `"${t.team}","${t.captain}",${ps.map(p=>`"${p}"`).join(',')},"${t.date}"\n`;
-  });
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-  a.download = 'VCL_inscripciones.csv';
-  a.click();
-}
-window.exportCSV = exportCSV;
-
-function roundsToObject(rounds) {
-  const out = {};
-  rounds.forEach((round, index) => {
-    out[`round_${String(index + 1).padStart(2, '0')}`] = round;
-  });
-  return out;
-}
-
-function normalizeBracketRounds(rounds) {
-  const next = cloneData(rounds || []);
-
-  for (let roundIndex = 0; roundIndex < next.length; roundIndex++) {
-    const round = next[roundIndex];
-    (round.partidos || []).forEach(match => {
-      const prevLocal = match.local || null;
-      const prevVisitante = match.visitante || null;
-
-      if (roundIndex > 0) {
-        if (match.sourceLocal) {
-          match.local = next[match.sourceLocal.round]?.partidos?.[match.sourceLocal.match]?.winner || null;
-        }
-        if (match.sourceVisitante) {
-          match.visitante = next[match.sourceVisitante.round]?.partidos?.[match.sourceVisitante.match]?.winner || null;
-        }
-      }
-
-      const changedParticipants = prevLocal !== (match.local || null) || prevVisitante !== (match.visitante || null);
-      const hasLocal = !!match.local;
-      const hasVisitante = !!match.visitante;
-
-      if (!hasLocal && !hasVisitante) {
-        match.winner = null;
-        match.scoreL = null;
-        match.scoreV = null;
-        match.played = false;
-        match.autoAdvance = false;
-        match.mvp = null;
-        return;
-      }
-
-      if ((hasLocal && !hasVisitante) || (!hasLocal && hasVisitante)) {
-        match.winner = null;
-        match.scoreL = null;
-        match.scoreV = null;
-        match.played = false;
-        match.autoAdvance = false;
-        match.mvp = null;
-        return;
-      }
-
-      match.autoAdvance = false;
-      if (changedParticipants) {
-        match.scoreL = null;
-        match.scoreV = null;
-        match.played = false;
-        match.mvp = null;
-        if (match.winner !== match.local && match.winner !== match.visitante) {
-          match.winner = null;
-        }
-      }
-
-      if (match.winner && match.winner !== match.local && match.winner !== match.visitante) {
-        match.winner = null;
-        match.scoreL = null;
-        match.scoreV = null;
-        match.played = false;
-        match.mvp = null;
-      }
-    });
-  }
-
-  let firstLiveRound = next.findIndex(round => (round.partidos || []).some(match => match.local && match.visitante && !match.winner));
-  if (firstLiveRound === -1 && next.length) firstLiveRound = next.length;
-
-  next.forEach((round, roundIndex) => {
-    const realMatches = (round.partidos || []).filter(match => match.local && match.visitante);
-    if (!realMatches.length) {
-      round.status = roundIndex < firstLiveRound ? 'finalizada' : (roundIndex === firstLiveRound ? 'activa' : 'pendiente');
-      return;
-    }
-    if (realMatches.every(match => match.winner)) round.status = 'finalizada';
-    else if (roundIndex === firstLiveRound) round.status = 'activa';
-    else if (roundIndex < firstLiveRound) round.status = 'finalizada';
-    else round.status = 'pendiente';
-  });
-
-  return next;
-}
-
-async function saveBracketRounds(rounds) {
-  await dbSet('vcl_jornadas', roundsToObject(rounds));
-}
-
-async function crearBracket() {
-  if (ALL_TEAMS.length < 2) { alert('Necesitas al menos 2 equipos para crear el bracket.'); return; }
-  if (ALL_JORNADAS.length && !confirm('Ya existe un bracket. Si continúas se reemplazará entero.')) return;
-
-  const teamNames = ALL_TEAMS.map(t => t.team);
-  const bracketSize = nextPowerOfTwo(teamNames.length);
-  const slots = Array.from({ length: bracketSize }, (_, index) => teamNames[index] || null);
-  const totalRounds = Math.log2(bracketSize);
-  const rounds = [];
-
-  let currentSlots = slots;
-  for (let roundIndex = 0; roundIndex < totalRounds; roundIndex++) {
-    const matchCount = currentSlots.length / 2;
-    const round = {
-      nombre: getRoundName(matchCount, roundIndex),
-      status: roundIndex === 0 ? 'activa' : 'pendiente',
-      partidos: []
-    };
-
-    for (let matchIndex = 0; matchIndex < matchCount; matchIndex++) {
-      if (roundIndex === 0) {
-        round.partidos.push({
-          local: currentSlots[matchIndex * 2] || null,
-          visitante: currentSlots[matchIndex * 2 + 1] || null,
-          winner: null,
-          scoreL: null,
-          scoreV: null,
-          played: false,
-          autoAdvance: false,
-          mvp: null
-        });
-      } else {
-        round.partidos.push({
-          local: null,
-          visitante: null,
-          winner: null,
-          scoreL: null,
-          scoreV: null,
-          played: false,
-          autoAdvance: false,
-          mvp: null,
-          sourceLocal: { round: roundIndex - 1, match: matchIndex * 2 },
-          sourceVisitante: { round: roundIndex - 1, match: matchIndex * 2 + 1 }
-        });
-      }
-    }
-
-    rounds.push(round);
-    currentSlots = Array(matchCount).fill(null);
-  }
-
-  const normalized = normalizeBracketRounds(rounds);
-  await dbRemove('vcl_predicciones');
-  await dbRemove('vcl_pred_config');
-  await dbRemove('vcl_votos_jornada');
-  await dbRemove('vcl_vote_config');
-  await dbRemove('vcl_stats');
-  await saveBracketRounds(normalized);
-}
-window.crearBracket = crearBracket;
-
-async function borrarBracket() {
-  if (!ALL_JORNADAS.length) { alert('No hay bracket creado.'); return; }
-  if (!confirm('¿Borrar el bracket completo? También se limpiarán predicciones y votos de las rondas.')) return;
-  await dbRemove('vcl_jornadas');
-  await dbRemove('vcl_predicciones');
-  await dbRemove('vcl_pred_config');
-  await dbRemove('vcl_votos_jornada');
-  await dbRemove('vcl_vote_config');
-  await dbRemove('vcl_stats');
-}
-window.borrarBracket = borrarBracket;
-
-function renderJornadas() {
-  const container = document.getElementById('jornadas-list');
-  const meta = document.getElementById('admin-bracket-meta');
-  if (!container) return;
-
-  if (meta) {
-    const totalMatches = ALL_JORNADAS.reduce((sum, round) => sum + (round.partidos || []).length, 0);
-    const solvedMatches = ALL_JORNADAS.reduce((sum, round) => sum + (round.partidos || []).filter(match => match.winner).length, 0);
-    const chips = [
-      `EQUIPOS: ${ALL_TEAMS.length}`,
-      `RONDAS: ${ALL_JORNADAS.length}`,
-      `CRUCES: ${totalMatches}`,
-      `RESUELTOS: ${solvedMatches}`
-    ];
-    meta.innerHTML = chips.map(chip => `<span style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;padding:6px 12px;border:1px solid rgba(255,107,0,0.18);color:#777;background:rgba(255,107,0,0.04)">${chip}</span>`).join('');
-  }
-
-  if (!ALL_JORNADAS.length) {
-    container.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:40px">SIN BRACKET TODAVÍA — CREA EL PRIMERO</div>';
-    return;
-  }
-
-  container.innerHTML = ALL_JORNADAS.map((round, roundIndex) => `
-    <div class="jornada-card">
-      <div class="jornada-header">
-        <div class="jornada-title">🏁 ${round.nombre}</div>
-        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-          <span class="jornada-status status-${round.status}">${(round.status || 'pendiente').toUpperCase()}</span>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        ${(round.partidos || []).map((match, matchIndex) => {
-          const canScore = !!(match.local && match.visitante);
-          const localName = match.local || '?';
-          const visitName = match.visitante || '?';
-          const resultLabel = match.winner ? `OK ${match.winner}` : (match.local && match.visitante ? 'SIN RESULTADO' : 'HUECO PENDIENTE');
-          return `
-            <div class="partido-row">
-              <div class="partido-equipo local" style="color:${match.winner===match.local?'var(--or)':match.winner?'#333':'var(--wh)'}">${escapeHtml(localName)}</div>
-              <div style="text-align:center">
-                <div class="partido-score">
-                  <input type="number" min="0" max="99" value="${canScore && match.scoreL !== null ? match.scoreL : ''}" placeholder="0" ${canScore ? '' : 'disabled'} onchange="guardarResultado(${roundIndex},${matchIndex},'scoreL',this.value)">
-                  <span style="color:#444;font-size:20px;padding:0 4px">—</span>
-                  <input type="number" min="0" max="99" value="${canScore && match.scoreV !== null ? match.scoreV : ''}" placeholder="0" ${canScore ? '' : 'disabled'} onchange="guardarResultado(${roundIndex},${matchIndex},'scoreV',this.value)">
-                </div>
-                <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:${match.winner ? '#00c850' : '#555'};margin-top:4px">${escapeHtml(resultLabel)}</div>
-                <div style="margin-top:8px;display:flex;align-items:center;gap:6px;justify-content:center">
-                  <span style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#555">⭐ MVP</span>
-                  <input type="text" value="${escapeHtml(match.mvp || '')}" placeholder="Riot ID" ${canScore ? '' : 'disabled'} onchange="updateMVP(${roundIndex},${matchIndex},this.value)" style="background:#111;border:1px solid rgba(255,220,0,0.2);color:#ffdc00;font-family:'Orbitron',monospace;font-size:9px;padding:4px 8px;outline:none;width:130px">
-                  <button onclick="destacarMVPDesdePartido(${roundIndex},${matchIndex})" ${canScore ? '' : 'disabled'} style="background:rgba(255,220,0,0.1);border:1px solid rgba(255,220,0,0.25);color:#ffdc00;font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;padding:5px 8px;cursor:pointer">DESTACAR</button>
-                </div>
-              </div>
-              <div class="partido-equipo visitante" style="color:${match.winner===match.visitante?'var(--or)':match.winner?'#333':'var(--wh)'}">${escapeHtml(visitName)}</div>
-            </div>`;
-        }).join('')}
-      </div>
-    </div>`).join('');
-}
-
-async function guardarResultado(roundIndex, matchIndex, field, value) {
-  const rounds = cloneData(ALL_JORNADAS);
-  const match = rounds[roundIndex]?.partidos?.[matchIndex];
-  if (!match || !match.local || !match.visitante) return;
-
-  match[field] = value === '' ? null : Math.max(0, parseInt(value, 10) || 0);
-  const scoreL = typeof match.scoreL === 'number' ? match.scoreL : null;
-  const scoreV = typeof match.scoreV === 'number' ? match.scoreV : null;
-
-  if (scoreL === null || scoreV === null || scoreL === scoreV) {
-    match.winner = null;
-    match.played = false;
-  } else {
-    match.winner = scoreL > scoreV ? match.local : match.visitante;
-    match.played = true;
-  }
-
-  const normalized = normalizeBracketRounds(rounds);
-  await saveBracketRounds(normalized);
-}
-window.guardarResultado = guardarResultado;
-
-async function updateMVP(roundIndex, matchIndex, value) {
-  const rounds = cloneData(ALL_JORNADAS);
-  const match = rounds[roundIndex]?.partidos?.[matchIndex];
-  if (!match) return;
-  match.mvp = value.trim();
-  await saveBracketRounds(normalizeBracketRounds(rounds));
-}
-window.updateMVP = updateMVP;
 
 // ── HISTORIAL POR EQUIPO ──
 function getMatchHistory(teamName) {
@@ -3323,48 +2328,8 @@ function renderNoticiasPublic(noticias) {
     </div>`).join('');
 }
 
-function renderNoticiasAdmin() {
-  const snap_noticias = [];
-  dbGet('vcl_noticias').then(val => {
-    const list = document.getElementById('noticias-admin-list');
-    if (!list) return;
-    const noticias = val ? Object.entries(val) : [];
-    if (noticias.length === 0) {
-      list.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:40px">SIN NOTICIAS AÚN</div>';
-      return;
-    }
-    list.innerHTML = noticias.reverse().map(([key, n]) => `
-      <div style="background:var(--card2);border:1px solid rgba(255,107,0,0.1);padding:20px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
-        <div>
-          <span class="news-badge ${n.badge}" style="display:inline-block;margin-bottom:8px">${BADGE_LABELS[n.badge]}</span>
-          <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#555;margin-bottom:4px">${n.date}</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px">${n.title}</div>
-          <div style="font-size:13px;color:#555;margin-top:4px">${n.text}</div>
-        </div>
-        <button onclick="deleteNoticia('${key}')" style="background:rgba(232,25,44,0.1);border:1px solid rgba(232,25,44,0.2);color:#e8192c;padding:6px 14px;font-family:Orbitron,monospace;font-size:9px;letter-spacing:1px;cursor:pointer;flex-shrink:0">✕</button>
-      </div>`).join('');
-  });
-}
 
-async function addNoticia() {
-  const badge = document.getElementById('n-badge').value;
-  const date = document.getElementById('n-date').value.trim();
-  const title = document.getElementById('n-title').value.trim();
-  const text = document.getElementById('n-text').value.trim();
-  if (!title || !text) { alert('Rellena título y texto.'); return; }
-  await dbPush('vcl_noticias', { badge, date: date || new Date().toLocaleDateString('es-ES',{month:'long',year:'numeric'}).toUpperCase(), title, text, ts: Date.now() });
-  document.getElementById('n-title').value = '';
-  document.getElementById('n-text').value = '';
-  document.getElementById('n-date').value = '';
-  renderNoticiasAdmin();
-}
-window.addNoticia = addNoticia;
 
-async function deleteNoticia(key) {
-  await dbRemove('vcl_noticias/' + key);
-  renderNoticiasAdmin();
-}
-window.deleteNoticia = deleteNoticia;
 
 // ── CONTADOR ──
 function loadContador(data) {
@@ -3601,14 +2566,6 @@ function renderPrediccionesJornada(jKey) {
   c.innerHTML = html;
 }
 
-async function setPredConfig(jKey, updates) {
-  const cur = ALL_PRED_CONFIG[jKey] || {};
-  ALL_PRED_CONFIG[jKey] = { ...cur, ...updates };
-  renderAdminVotacion();
-  renderPredicciones();
-  await dbSet(`vcl_pred_config/${jKey}`, { ...cur, ...updates });
-}
-window.setPredConfig = setPredConfig;
 
 function getCustomPollEntries() {
   return Object.entries(ALL_CUSTOM_POLLS || {}).sort(([, a], [, b]) => (b.createdAt || 0) - (a.createdAt || 0));
@@ -3741,224 +2698,28 @@ function buildFeaturedMVPMarkup() {
 function renderFeaturedMVP() {
   const publicBox = document.getElementById('featured-mvp-public');
   if (publicBox) publicBox.innerHTML = buildFeaturedMVPMarkup();
-  const preview = document.getElementById('featured-mvp-admin-preview');
-  if (preview) preview.innerHTML = FEATURED_MVP?.player
-    ? buildFeaturedMVPMarkup()
-    : '<div style="font-family:Orbitron,monospace;font-size:10px;letter-spacing:2px;color:#444;padding:18px;border:1px dashed rgba(255,220,0,0.18)">NO HAY MVP DESTACADO</div>';
 }
 
-function fillMVPDatalists() {
-  const playerList = document.getElementById('mvp-player-options');
-  const teamList = document.getElementById('mvp-team-options');
-  if (playerList) {
-    const names = [...new Set(ALL_TEAMS.flatMap(t => (t.players || []).filter(Boolean)))];
-    playerList.innerHTML = names.map(name => `<option value="${escapeHtml(name)}"></option>`).join('');
-  }
-  if (teamList) {
-    teamList.innerHTML = ALL_TEAMS.map(t => `<option value="${escapeHtml(t.team)}"></option>`).join('');
-  }
-}
 
-function fillFeaturedMVPForm() {
-  const editingIds = ['mvp-player','mvp-team','mvp-title','mvp-context','mvp-note'];
-  if (editingIds.includes(document.activeElement?.id)) return;
-  const setVal = (id, value) => { const el = document.getElementById(id); if (el) el.value = value || ''; };
-  setVal('mvp-player', FEATURED_MVP?.player || '');
-  setVal('mvp-team', FEATURED_MVP?.team || '');
-  setVal('mvp-title', FEATURED_MVP?.title || '');
-  setVal('mvp-context', FEATURED_MVP?.context || '');
-  setVal('mvp-note', FEATURED_MVP?.note || '');
-}
 
-async function saveFeaturedMVP() {
-  const player = document.getElementById('mvp-player')?.value.trim();
-  if (!player) { alert('Escribe el jugador MVP.'); return; }
-  let team = document.getElementById('mvp-team')?.value.trim() || '';
-  if (!team) {
-    const found = ALL_TEAMS.find(t => (t.players || []).some(p => String(p).toLowerCase() === player.toLowerCase()));
-    team = found?.team || '';
-  }
-  const payload = {
-    player,
-    team,
-    title: document.getElementById('mvp-title')?.value.trim() || 'MVP OFICIAL',
-    context: document.getElementById('mvp-context')?.value.trim() || '',
-    note: document.getElementById('mvp-note')?.value.trim() || '',
-    updatedAt: Date.now()
-  };
-  FEATURED_MVP = payload;
-  renderFeaturedMVP();
-  await dbSet('vcl_featured_mvp', payload);
-}
-window.saveFeaturedMVP = saveFeaturedMVP;
 
-async function clearFeaturedMVP() {
-  if (!FEATURED_MVP?.player || confirm('Quitar el MVP destacado?')) {
-    FEATURED_MVP = null;
-    fillFeaturedMVPForm();
-    renderFeaturedMVP();
-    await dbRemove('vcl_featured_mvp');
-  }
-}
-window.clearFeaturedMVP = clearFeaturedMVP;
 
-async function destacarMVPDesdePartido(roundIndex, matchIndex) {
-  const round = ALL_JORNADAS[roundIndex];
-  const match = round?.partidos?.[matchIndex];
-  if (!match) return;
-  let player = (match.mvp || '').trim();
-  if (!player) {
-    player = prompt('Riot ID del MVP de este partido:')?.trim() || '';
-    if (!player) return;
-    await updateMVP(roundIndex, matchIndex, player);
-  }
-  const foundTeam = ALL_TEAMS.find(t => (t.players || []).some(p => String(p).toLowerCase() === player.toLowerCase()));
-  const payload = {
-    player,
-    team: foundTeam?.team || match.winner || '',
-    title: 'MVP DEL PARTIDO',
-    context: round.nombre || '',
-    note: match.winner ? `Partido ganado por ${match.winner}` : '',
-    updatedAt: Date.now()
-  };
-  FEATURED_MVP = payload;
-  await dbSet('vcl_featured_mvp', payload);
-  renderFeaturedMVP();
-  if (document.getElementById('admin-panel').style.display !== 'none') renderAdminVotacion();
-}
-window.destacarMVPDesdePartido = destacarMVPDesdePartido;
 
-function showPollFormMsg(text, ok = true) {
-  const msg = document.getElementById('poll-form-msg');
-  if (!msg) return;
-  msg.textContent = text;
-  msg.style.display = 'block';
-  msg.style.background = ok ? 'rgba(0,200,80,0.08)' : 'rgba(232,25,44,0.08)';
-  msg.style.border = ok ? '1px solid rgba(0,200,80,0.3)' : '1px solid rgba(232,25,44,0.3)';
-  msg.style.color = ok ? '#00c850' : '#e8192c';
-  setTimeout(() => { msg.style.display = 'none'; }, 2600);
-}
 
-function resetCustomPollForm() {
-  ['poll-title','poll-desc','poll-options'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-  const badge = document.getElementById('poll-badge');
-  if (badge) badge.value = 'VOTACION';
-  const active = document.getElementById('poll-active');
-  if (active) active.checked = true;
-  const live = document.getElementById('poll-live-results');
-  if (live) live.checked = true;
-}
 
-async function createCustomPoll() {
-  const title = document.getElementById('poll-title')?.value.trim();
-  const rawOptions = document.getElementById('poll-options')?.value || '';
-  const options = [...new Set(rawOptions.split(/\r?\n/).map(v => v.trim()).filter(Boolean))].slice(0, 16);
-  if (!title) { showPollFormMsg('Falta el titulo de la votacion.', false); return; }
-  if (options.length < 2) { showPollFormMsg('Pon al menos 2 opciones.', false); return; }
-  const id = makeSafeId('poll');
-  const poll = {
-    title,
-    desc: document.getElementById('poll-desc')?.value.trim() || '',
-    badge: document.getElementById('poll-badge')?.value || 'VOTACION',
-    options: options.map((text, index) => ({ id: `op_${index}_${slugifyFilePart(text).slice(0, 18) || index}`, text })),
-    active: !!document.getElementById('poll-active')?.checked,
-    closed: false,
-    showResults: !!document.getElementById('poll-live-results')?.checked,
-    createdAt: Date.now()
-  };
-  ALL_CUSTOM_POLLS[id] = poll;
-  renderCustomPolls();
-  renderAdminVotacion();
-  resetCustomPollForm();
-  showPollFormMsg('Votacion creada.');
-  await dbSet(`vcl_custom_polls/${id}`, poll);
-}
-window.createCustomPoll = createCustomPoll;
 
-function prefillPollWithTeams() {
-  const title = document.getElementById('poll-title');
-  const options = document.getElementById('poll-options');
-  if (title && !title.value) title.value = 'Equipo favorito de la comunidad';
-  if (options) options.value = ALL_TEAMS.map(t => t.team).join('\n');
-}
-window.prefillPollWithTeams = prefillPollWithTeams;
 
-function prefillPollWithPlayers() {
-  const title = document.getElementById('poll-title');
-  const badge = document.getElementById('poll-badge');
-  const options = document.getElementById('poll-options');
-  if (title && !title.value) title.value = 'MVP del publico';
-  if (badge) badge.value = 'MVP PUBLICO';
-  if (options) options.value = [...new Set(ALL_TEAMS.flatMap(t => (t.players || []).filter(Boolean)))].join('\n');
-}
-window.prefillPollWithPlayers = prefillPollWithPlayers;
 
-async function setCustomPollConfig(pollId, updates) {
-  const cur = ALL_CUSTOM_POLLS[pollId];
-  if (!cur) return;
-  ALL_CUSTOM_POLLS[pollId] = { ...cur, ...updates };
-  renderCustomPolls();
-  renderAdminVotacion();
-  await dbSet(`vcl_custom_polls/${pollId}`, ALL_CUSTOM_POLLS[pollId]);
-}
-window.setCustomPollConfig = setCustomPollConfig;
 
-async function clearCustomPollVotes(pollId) {
-  if (!confirm('Borrar los votos de esta votacion?')) return;
-  if (ALL_CUSTOM_VOTES[pollId]) delete ALL_CUSTOM_VOTES[pollId];
-  renderCustomPolls();
-  renderAdminVotacion();
-  await dbRemove(`vcl_custom_votes/${pollId}`);
-}
-window.clearCustomPollVotes = clearCustomPollVotes;
 
-async function deleteCustomPoll(pollId) {
-  if (!confirm('Eliminar esta votacion completa?')) return;
-  delete ALL_CUSTOM_POLLS[pollId];
-  if (ALL_CUSTOM_VOTES[pollId]) delete ALL_CUSTOM_VOTES[pollId];
-  renderCustomPolls();
-  renderAdminVotacion();
-  await Promise.all([dbRemove(`vcl_custom_polls/${pollId}`), dbRemove(`vcl_custom_votes/${pollId}`)]);
-}
-window.deleteCustomPoll = deleteCustomPoll;
 
-function exportPollCSV(pollId) {
-  const poll = ALL_CUSTOM_POLLS[pollId];
-  if (!poll) return;
-  const { options, counts, total } = getPollStats(pollId, poll);
-  let csv = 'Votacion,Opcion,Votos,Porcentaje\n';
-  options.forEach(opt => {
-    const count = counts[opt.id] || 0;
-    const pct = total ? Math.round((count / total) * 100) : 0;
-    csv += `"${poll.title.replace(/"/g,'""')}","${opt.text.replace(/"/g,'""')}",${count},${pct}%\n`;
-  });
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-  a.download = `VCL_votacion_${slugifyFilePart(poll.title)}.csv`;
-  a.click();
-}
-window.exportPollCSV = exportPollCSV;
 
 function renderVotacion() {
   renderFeaturedMVP();
   renderCustomPolls();
 }
 
-async function setVoteConfig(jKey, updates) {
-  const cur = ALL_VOTE_CONFIG[jKey] || {};
-  ALL_VOTE_CONFIG[jKey] = { ...cur, ...updates };
-  renderAdminVotacion();
-  await dbSet(`vcl_vote_config/${jKey}`, { ...cur, ...updates });
-}
-window.setVoteConfig = setVoteConfig;
 
-async function clearVotos(jKey) {
-  if (!confirm('Borrar todos los votos y predicciones de esta ronda?')) return;
-  const keys = Object.keys(ALL_PREDICCIONES).filter(k => k.startsWith(jKey + '_'));
-  await Promise.all(keys.map(k => dbRemove(`vcl_predicciones/${k}`)));
-  await dbRemove(`vcl_votos_jornada/${jKey}`);
-}
-window.clearVotos = clearVotos;
 
 async function downloadMVPCard(teamName, playerName, playerIndex, jornada, jKey) {
   const team = getAllTeams().find(t => t.name === teamName);
@@ -3988,127 +2749,10 @@ async function downloadMVPCard(teamName, playerName, playerIndex, jornada, jKey)
 }
 window.downloadMVPCard = downloadMVPCard;
 
-function renderAdminVotacionV2() {
-  fillMVPDatalists();
-  fillFeaturedMVPForm();
-  renderFeaturedMVP();
-  const pollList = document.getElementById('admin-polls-list');
-  const pl = document.getElementById('admin-pred-list');
-  const btnS = (on, colorRgb) => `style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:8px 16px;cursor:pointer;border:1px solid;background:${on?`rgba(${colorRgb},0.12)`:'transparent'};color:${on?`rgb(${colorRgb})`:'#555'};border-color:${on?`rgba(${colorRgb},0.5)`:'rgba(100,100,100,0.2)'};transition:all 0.2s"`;
-
-  if (pollList) {
-    const entries = getCustomPollEntries();
-    pollList.innerHTML = entries.length ? entries.map(([pollId, poll]) => {
-      const { options, counts, total, topId } = getPollStats(pollId, poll);
-      const topOpt = options.find(opt => opt.id === topId);
-      return `<div style="background:var(--card2);border:1px solid rgba(255,107,0,0.1);padding:18px 22px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap">
-          <div style="min-width:240px;flex:1">
-            <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:var(--or);margin-bottom:5px">${escapeHtml(poll.badge || 'VOTACION')}</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:#fff">${escapeHtml(poll.title || 'Votacion')}</div>
-            <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#555;margin-top:4px">${total} votos · ${poll.active?'VISIBLE':'OCULTA'} · ${poll.closed?'CERRADA':'ABIERTA'} · ${poll.showResults?'RESULTADOS LIVE':'RESULTADOS AL CIERRE'}</div>
-            ${topOpt && total ? `<div style="font-size:12px;color:#777;margin-top:8px">Lidera: <span style="color:var(--or)">${escapeHtml(topOpt.text)}</span> (${counts[topOpt.id]} votos)</div>` : ''}
-          </div>
-          <div class="admin-action-row">
-            <button onclick="setCustomPollConfig(${inlineJsString(pollId)},{active:${!poll.active}})" ${btnS(poll.active,'0,200,80')}>${poll.active?'VISIBLE':'MOSTRAR'}</button>
-            <button onclick="setCustomPollConfig(${inlineJsString(pollId)},{closed:${!poll.closed}})" ${btnS(poll.closed,'232,25,44')}>${poll.closed?'REABRIR':'CERRAR'}</button>
-            <button onclick="setCustomPollConfig(${inlineJsString(pollId)},{showResults:${!poll.showResults}})" ${btnS(poll.showResults,'255,220,0')}>${poll.showResults?'LIVE ON':'LIVE OFF'}</button>
-            <button onclick="exportPollCSV(${inlineJsString(pollId)})" class="admin-mini-btn">CSV</button>
-            <button onclick="clearCustomPollVotes(${inlineJsString(pollId)})" class="admin-mini-btn danger">BORRAR VOTOS</button>
-            <button onclick="deleteCustomPoll(${inlineJsString(pollId)})" class="admin-mini-btn danger">ELIMINAR</button>
-          </div>
-        </div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px">
-          ${options.map(opt => `<span style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;color:#777;border:1px solid rgba(255,107,0,0.12);padding:5px 8px">${escapeHtml(opt.text)}: ${counts[opt.id] || 0}</span>`).join('')}
-        </div>
-      </div>`;
-    }).join('') : '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:32px">SIN VOTACIONES AUN</div>';
-  }
-
-  if (!pl) return;
-  if (!ALL_JORNADAS.length) {
-    pl.innerHTML = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:32px">SIN RONDAS AUN</div>';
-    return;
-  }
-  pl.innerHTML = ALL_JORNADAS.map((j, ji) => {
-    const k = ALL_JORNADAS_KEYS[ji];
-    const cfg = ALL_PRED_CONFIG[k] || {};
-    const totalP = Object.keys(ALL_PREDICCIONES).filter(kk => kk.startsWith(k+'_')).reduce((s, kk) => s + Object.keys(ALL_PREDICCIONES[kk]||{}).length, 0);
-    return `<div style="background:var(--card2);border:1px solid rgba(255,107,0,0.1);padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px">${escapeHtml(j.nombre)}</div>
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#444;margin-top:3px">${totalP} predicciones · ${cfg.activa?'ACTIVA':'INACTIVA'} · ${cfg.cerrada?'CERRADAS':'ABIERTAS'}</div>
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button onclick="setPredConfig(${inlineJsString(k)},{activa:${!cfg.activa}})" ${btnS(cfg.activa,'0,200,80')}>${cfg.activa?'ACTIVA':'ACTIVAR'}</button>
-        <button onclick="setPredConfig(${inlineJsString(k)},{cerrada:${!cfg.cerrada}})" ${btnS(cfg.cerrada,'232,25,44')}>${cfg.cerrada?'CERRADAS':'CERRAR'}</button>
-        <button onclick="clearVotos(${inlineJsString(k)})" class="admin-mini-btn danger">BORRAR</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function renderAdminVotacion() {
-  renderAdminVotacionV2();
-  return;
-  const vl = document.getElementById('admin-vote-list');
-  const pl = document.getElementById('admin-pred-list');
-  if (!vl || !pl) return;
-  const empty = '<div style="font-family:Orbitron,monospace;font-size:11px;letter-spacing:2px;color:#333;text-align:center;padding:32px">SIN RONDAS AÚN</div>';
-  if (!ALL_JORNADAS.length) { vl.innerHTML = empty; pl.innerHTML = empty; return; }
-  const btnS = (on, colorRgb) => `style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:8px 16px;cursor:pointer;border:1px solid;background:${on?`rgba(${colorRgb},0.12)`:'transparent'};color:${on?`rgb(${colorRgb})`:'#555'};border-color:${on?`rgba(${colorRgb},0.5)`:'rgba(100,100,100,0.2)'};transition:all 0.2s"`;
-  vl.innerHTML = ALL_JORNADAS.map((j, ji) => {
-    const k = ALL_JORNADAS_KEYS[ji];
-    const cfg = ALL_VOTE_CONFIG[k] || {};
-    const votos = ALL_VOTOS_JORNADA[k] || {};
-    const tot = Object.keys(votos).length;
-    return `<div style="background:var(--card2);border:1px solid rgba(255,107,0,0.1);padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px">${j.nombre}</div>
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#444;margin-top:3px">${tot} votos · ${cfg.activa?'ACTIVA':'INACTIVA'} · ${cfg.cerrada?'CERRADA':'ABIERTA'}</div>
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button onclick="setVoteConfig('${k}',{activa:${!cfg.activa}})" ${btnS(cfg.activa,'0,200,80')}>${cfg.activa?'✓ ACTIVA':'ACTIVAR'}</button>
-        <button onclick="setVoteConfig('${k}',{cerrada:${!cfg.cerrada}})" ${btnS(cfg.cerrada,'232,25,44')}>${cfg.cerrada?'🔒 CERRADA':'CERRAR'}</button>
-        <button onclick="clearVotos('${k}')" style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;padding:8px 14px;cursor:pointer;border:1px solid rgba(232,25,44,0.2);background:rgba(232,25,44,0.05);color:#e8192c">🗑 VOTOS</button>
-      </div>
-    </div>`;
-  }).join('');
-  pl.innerHTML = ALL_JORNADAS.map((j, ji) => {
-    const k = ALL_JORNADAS_KEYS[ji];
-    const cfg = ALL_PRED_CONFIG[k] || {};
-    const totalP = Object.keys(ALL_PREDICCIONES).filter(kk => kk.startsWith(k+'_')).reduce((s, kk) => s + Object.keys(ALL_PREDICCIONES[kk]||{}).length, 0);
-    return `<div style="background:var(--card2);border:1px solid rgba(255,107,0,0.1);padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px">${j.nombre}</div>
-        <div style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;color:#444;margin-top:3px">${totalP} predicciones · ${cfg.activa?'ACTIVA':'INACTIVA'} · ${cfg.cerrada?'CERRADAS':'ABIERTAS'}</div>
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button onclick="setPredConfig('${k}',{activa:${!cfg.activa}})" ${btnS(cfg.activa,'0,200,80')}>${cfg.activa?'✓ ACTIVA':'ACTIVAR'}</button>
-        <button onclick="setPredConfig('${k}',{cerrada:${!cfg.cerrada}})" ${btnS(cfg.cerrada,'232,25,44')}>${cfg.cerrada?'🔒 CERRADAS':'CERRAR'}</button>
-      </div>
-    </div>`;
-  }).join('');
-}
 
 
-async function saveContador() {
-  const label = document.getElementById('cnt-label').value.trim();
-  const date = document.getElementById('cnt-date').value;
-  if (!date) { alert('Elige una fecha.'); return; }
-  await dbSet('vcl_contador', { label, date });
-  const msg = document.getElementById('cnt-msg');
-  if (msg) { msg.style.display='block'; setTimeout(()=>msg.style.display='none',2000); }
-}
-window.saveContador = saveContador;
 
-async function clearContador() {
-  await dbRemove('vcl_contador');
-  if (window._cntI) clearInterval(window._cntI);
-  const el = document.getElementById('hero-countdown');
-  if (el) el.style.display = 'none';
-}
-window.clearContador = clearContador;
+
 
 function initRealtimeBindings() {
   if (window.__vclRealtimeReady) return;
@@ -4124,12 +2768,6 @@ function initRealtimeBindings() {
     renderBracket();
     renderFeaturedMVP();
     updateDynamicStats();
-    if (document.getElementById('admin-panel').style.display !== 'none') {
-      renderAdmin();
-      renderAdminTeamsEditor();
-      renderJornadas();
-      renderAdminVotacion();
-    }
   });
   dbListen('vcl_stats', val => {
     ALL_STATS = val || {};
@@ -4140,7 +2778,6 @@ function initRealtimeBindings() {
     ALL_JORNADAS_KEYS = entries.map(([key]) => key);
     renderBracket();
     updateDynamicStats();
-    if (document.getElementById('admin-panel').style.display !== 'none') renderJornadas();
     renderMVPs();
     renderPredicciones();
     renderVotacion();
@@ -4155,12 +2792,10 @@ function initRealtimeBindings() {
   dbListen('vcl_predicciones', val => {
     ALL_PREDICCIONES = val || {};
     renderPredicciones();
-    if (document.getElementById('admin-panel').style.display !== 'none') renderAdminVotacion();
   });
   dbListen('vcl_pred_config', val => {
     ALL_PRED_CONFIG = val || {};
     renderPredicciones();
-    if (document.getElementById('admin-panel').style.display !== 'none') renderAdminVotacion();
   });
   dbListen('vcl_votos_jornada', val => {
     ALL_VOTOS_JORNADA = val || {};
@@ -4168,22 +2803,18 @@ function initRealtimeBindings() {
   dbListen('vcl_vote_config', val => {
     ALL_VOTE_CONFIG = val || {};
     renderVotacion();
-    if (document.getElementById('admin-panel').style.display !== 'none') renderAdminVotacion();
   });
   dbListen('vcl_custom_polls', val => {
     ALL_CUSTOM_POLLS = val || {};
     renderCustomPolls();
-    if (document.getElementById('admin-panel').style.display !== 'none') renderAdminVotacion();
   });
   dbListen('vcl_custom_votes', val => {
     ALL_CUSTOM_VOTES = val || {};
     renderCustomPolls();
-    if (document.getElementById('admin-panel').style.display !== 'none') renderAdminVotacion();
   });
   dbListen('vcl_featured_mvp', val => {
     FEATURED_MVP = val || null;
     renderFeaturedMVP();
-    if (document.getElementById('admin-panel').style.display !== 'none') renderAdminVotacion();
   });
 }
 initRealtimeBindings();
